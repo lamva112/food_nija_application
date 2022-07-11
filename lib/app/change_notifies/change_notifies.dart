@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class User with ChangeNotifier {
-  String _user = '';
-  String get user => _user;
+class LanguageChangeProvider with ChangeNotifier {
+  Locale _currentLocale = const Locale('en');
 
-  set setUser(String name) {
-    _user = name;
+  Locale get currentLocale => _currentLocale;
+
+  void changeLocale(String locale) {
+    _currentLocale = Locale(locale);
     notifyListeners();
   }
 }

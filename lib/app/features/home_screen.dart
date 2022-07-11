@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 
+import '../core/values/languages/translations.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -8,9 +10,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Home Screen',
-          style: TextStyle(
+        title: Text(
+          Translations.of(context).text('title'),
+          style: const TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
