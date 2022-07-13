@@ -6,6 +6,7 @@ import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:provider/provider.dart';
 import 'app/core/utils/translations.dart';
+import 'dart:io';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +31,12 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale("en"),
-            Locale("vi"),
+            Locale('en'),
+            Locale('vi'),
           ],
           theme: AppColors().lightTheme,
           debugShowCheckedModeBanner: false,
-          home:  const SafeArea(
+          home: const SafeArea(
             child: OnBoarding(),
           ),
           onGenerateRoute: RouteManager.generateRoute,
