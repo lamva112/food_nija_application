@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'app/core/values/languages/translations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
