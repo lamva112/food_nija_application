@@ -15,6 +15,7 @@ class OnBoarding extends StatefulWidget {
 
 class _OnBoardingState extends State<OnBoarding> {
   final pageController = PageController();
+  var _selectedIndex = 0;
 
   @override
   void dispose() {
@@ -51,8 +52,13 @@ class _OnBoardingState extends State<OnBoarding> {
         child: Column(
           children: [
             Expanded(
-              flex: 5,
+              flex: 7,
               child: PageView.builder(
+                onPageChanged: (value) {
+                  setState((){
+                    _selectedIndex = value;
+                  });
+                },
                 itemCount: page.length,
                 itemBuilder: (BuildContext context, int index) {
                   return TweenAnimationBuilder(
@@ -77,6 +83,28 @@ class _OnBoardingState extends State<OnBoarding> {
             Expanded(
               flex: 1,
               child: Align(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ...List.generate( page.length,
+                          (index) => Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                            width: _selectedIndex == index ? 20 : 8,
+                            height: 8.0,
+                            decoration: BoxDecoration(
+                              color: _selectedIndex == index ? Colors.redAccent : Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Align(
                 alignment: Alignment.topCenter,
                 child: MaterialButton(
                   onPressed: () {
@@ -90,7 +118,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                      Translations.of(context).text('skip'),
+                    Translations.of(context).text('skip'),
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
