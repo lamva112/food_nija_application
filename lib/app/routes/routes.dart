@@ -5,7 +5,7 @@ import '../features/login_screen.dart';
 
 class RouteManager {
   static const String loginPage = '/loginPage';
-  static const String homePage = '/';
+  static const String homePage = '/homePage';
   static const String onBoarding = '/onBoarding';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
