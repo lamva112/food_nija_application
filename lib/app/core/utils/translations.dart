@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/core/values/languages/en-US.dart';
-import 'package:food_nija_application/app/core/values/languages/vi-VN.dart';
+import 'package:food_nija_application/app/core/values/languages/en_US.dart';
+import 'package:food_nija_application/app/core/values/languages/vi_VN.dart';
 
 class Translations {
   Translations(this.locale);
@@ -26,7 +26,7 @@ class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   const TranslationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'vi',].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['vi', 'en'].contains(locale.languageCode);
 
   @override
   Future<Translations> load(Locale locale) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-
-import '../core/values/languages/translations.dart';
+import '../core/utils/translations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
