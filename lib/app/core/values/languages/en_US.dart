@@ -5,4 +5,8 @@ final Map<String, String> en_US = {
   'desOB1' : 'You Can find many dishes for every different\ntaste and color. Enjoy!',
   'desOB2' : 'Enjoy a fast and smooth food delivery at\nyour doorstep',
   'skip' : 'Skip',
+  'Email': 'Email',
+  'Login To Your Screen' : 'Login To Your Screen',
+  'Password' : 'Password',
+  'or': 'Or Login with',
 };

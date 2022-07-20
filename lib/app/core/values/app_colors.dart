@@ -6,6 +6,7 @@ class AppColors {
   static const backgroundColor = Color(0xffffffff);
   static const textButtonColor = Color(0xffffffff);
   static const textColor = Colors.black;
+  static const textFormFieldColor = Color(0xFFF4F4F4);
 
   //==========================================================================//
   //LIGHT THEME

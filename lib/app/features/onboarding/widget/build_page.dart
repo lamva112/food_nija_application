@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/core/utils/size_config.dart';
 
 class BuildPage extends StatefulWidget {
   final String image;
@@ -43,10 +44,11 @@ class _BuildPageState extends State<BuildPage>
 
   @override
   Widget build(BuildContext context) {
+    CustomSize().init(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 40),
+        SizedBox(height: getHeight(40)),
         AnimatedBuilder(
           animation: animationController,
           builder: (BuildContext context, _) {
@@ -57,33 +59,29 @@ class _BuildPageState extends State<BuildPage>
           },
           child: Image.asset(
             widget.image,
-            height: 400,
+            height: getHeight(400),
             width: MediaQuery.of(context).size.width,
           ),
         ),
-        const SizedBox(
-          height: 40,
-        ),
+        SizedBox(height: getHeight(40)),
         AnimatedBuilder(
           animation: animationController,
           builder: (BuildContext context, _) {
             return Transform.translate(
-              offset: Offset(animationController.value * 500 , 0),
+              offset: Offset(animationController.value * 500, 0),
               child: _,
             );
           },
           child: Text(
             widget.title,
-            style: const TextStyle(
-              fontSize: 23,
+            style: TextStyle(
+              fontSize: getFont(25),
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(
-          height: 30,
-        ),
+        SizedBox(height: getHeight(28)),
         AnimatedBuilder(
           animation: animationController,
           builder: (BuildContext context, _) {
@@ -94,8 +92,8 @@ class _BuildPageState extends State<BuildPage>
           },
           child: Text(
             widget.description,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: getFont(18),
               fontWeight: FontWeight.w300,
             ),
             textAlign: TextAlign.center,
