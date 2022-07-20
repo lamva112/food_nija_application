@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
 import '../features/home_screen.dart';
-import '../features/login_screen.dart';
+import '../features/login/login_screen.dart';
 
 class RouteManager {
   static const String loginPage = '/loginPage';
