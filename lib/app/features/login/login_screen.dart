@@ -4,7 +4,6 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,16 +12,17 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CustomSize().init(context);
     return Scaffold(
+      backgroundColor: AppColors.backgroundLoginColor,
       body: Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/bg_login.png'),
+            image: AssetImage(AppColors.backgroundImage),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: getHeight(310)),
+          padding: EdgeInsets.only(top: getHeight(290)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: getHeight(80),
+                height: getHeight(60),
                 child: Center(
                   child: Text(
                     Translations.of(context).text('or'),
@@ -73,21 +73,54 @@ class LoginScreen extends StatelessWidget {
                     LoginItem(
                       title: 'Facebook',
                       image: 'assets/images/facebook.png',
-                      width: getWidth(155),
-                      height: getHeight(60),
+                      width: getWidth(140),
+                      height: getHeight(55),
                       color: AppColors.textFormFieldColor,
+                      iconRadius: getWidth(15),
                     ),
                     LoginItem(
                       title: 'Google',
                       image: 'assets/images/google.png',
-                      width: getWidth(155),
-                      height: getHeight(60),
+                      width: getWidth(140),
+                      height: getHeight(55),
                       color: AppColors.textFormFieldColor,
+                      iconRadius: getWidth(15),
                     ),
                   ],
                 ),
-              )
-
+              ),
+              SizedBox(
+                height: getHeight(60),
+                child: Center(
+                  child: Text(
+                    Translations.of(context).text('Forgot password'),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getFont(15),
+                      color: AppColors.primaryColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: getHeight(15)),
+              MaterialButton(
+                onPressed: () {},
+                height: getHeight(55),
+                minWidth: getWidth(160),
+                color: AppColors.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  Translations.of(context).text('Login'),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: getFont(20),
+                    color: AppColors.textButtonColor,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

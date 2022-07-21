@@ -9,4 +9,6 @@ final Map<String, String> en_US = {
   'Login To Your Screen' : 'Login To Your Screen',
   'Password' : 'Password',
   'or': 'Or Login with',
+  'Forgot password' : 'Forgot Your Password?',
+  'Login': 'Login',
 };

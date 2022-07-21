@@ -9,4 +9,6 @@ final Map<String, String> vi_VN = {
   'Login To Your Screen': 'Đăng Nhập Vào Tài Khoản Của Bạn',
   'Password' : 'Mật khẩu',
   'or' : 'Hoặc đăng nhập với',
+  'Forgot password' : 'Quên mật khẩu?',
+  'Login' : 'Đăng nhập',
 };

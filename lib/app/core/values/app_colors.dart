@@ -4,9 +4,11 @@ class AppColors {
   static const primaryColor = Color.fromARGB(255, 99, 199, 131);
   static const secondaryColor = Color.fromRGBO(179, 178, 178, 1.0);
   static const backgroundColor = Color(0xffffffff);
+  static const backgroundLoginColor = Color(0xFFF4F4F4);
   static const textButtonColor = Color(0xffffffff);
   static const textColor = Colors.black;
-  static const textFormFieldColor = Color(0xFFF4F4F4);
+  static const textFormFieldColor = Colors.white;
+  static const backgroundImage = 'assets/images/bg_login_white.png';
 
   //==========================================================================//
   //LIGHT THEME

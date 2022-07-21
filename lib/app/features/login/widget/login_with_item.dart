@@ -6,7 +6,16 @@ class LoginItem extends StatelessWidget {
   final double width;
   final double height;
   final Color? color;
-  const LoginItem({Key? key, required this.title, required this.image, required this.width, required this.height, this.color}) : super(key: key);
+  final double? iconRadius;
+  const LoginItem({
+    Key? key,
+    required this.title,
+    required this.image,
+    required this.width,
+    required this.height,
+    this.color,
+    this.iconRadius,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +27,15 @@ class LoginItem extends StatelessWidget {
         color: color,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
             backgroundImage: AssetImage(image),
+            radius: iconRadius,
           ),
-          Text(title, style: TextStyle(fontWeight: FontWeight.bold),)
+          SizedBox(width: width / 15),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.bold),)
         ],
       ),
     );
