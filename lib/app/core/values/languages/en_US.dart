@@ -11,4 +11,5 @@ final Map<String, String> en_US = {
   'or': 'Or Login with',
   'Forgot password' : 'Forgot Your Password?',
   'Login': 'Login',
+  'Sign up' : 'Sign up?',
 };

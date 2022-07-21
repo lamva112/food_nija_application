@@ -11,4 +11,5 @@ final Map<String, String> vi_VN = {
   'or' : 'Hoặc đăng nhập với',
   'Forgot password' : 'Quên mật khẩu?',
   'Login' : 'Đăng nhập',
+  'Sign up' : 'Đăng ký?',
 };

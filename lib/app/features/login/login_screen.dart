@@ -121,6 +121,20 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: getHeight(50),
+                child: Center(
+                  child: Text(
+                    Translations.of(context).text('Sign up'),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getFont(15),
+                      color: AppColors.primaryColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
