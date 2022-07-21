@@ -12,4 +12,9 @@ final Map<String, String> vi_VN = {
   'Forgot password' : 'Quên mật khẩu?',
   'Login' : 'Đăng nhập',
   'Sign up' : 'Đăng ký?',
+  'Sign up free' : ' Đăng ký miễn phí',
+  'person' : 'HaiPhong204...',
+  'Keep login' : 'Giữ trạng thái đăng nhập',
+  'Email me something' : 'Gửi cho tôi những thông tin giá đặc biệt',
+  'Creat account' : 'Tạo tài khoản',
 };

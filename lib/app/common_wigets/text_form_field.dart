@@ -6,15 +6,11 @@ class TextInputWidget extends StatelessWidget {
   final String? hintText;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
-  final Color? prefixIconColor;
-  final Color? suffixIconColor;
   const TextInputWidget({
     Key? key,
     this.hintText,
     this.prefixIcon,
     this.suffixIcon,
-    this.prefixIconColor,
-    this.suffixIconColor
   }) : super(key: key);
 
   @override
@@ -26,8 +22,6 @@ class TextInputWidget extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(vertical: getHeight(15)),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        prefixIconColor: prefixIconColor,
-        suffixIconColor: suffixIconColor,
         fillColor: AppColors.textFormFieldColor,
         enabledBorder: OutlineInputBorder(
           borderSide:

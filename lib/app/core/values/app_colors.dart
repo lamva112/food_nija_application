@@ -15,6 +15,7 @@ class AppColors {
   ThemeData lightTheme = ThemeData.light().copyWith(
     textTheme: ThemeData.light().textTheme.apply(
       fontFamily: "PoppinsRegular",
+      bodyColor: textColor,
     ),
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
@@ -32,6 +33,7 @@ class AppColors {
   ThemeData darkTheme = ThemeData.dark().copyWith(
     textTheme: ThemeData.dark().textTheme.apply(
       fontFamily: "PoppinsRegular",
+      bodyColor: textColor,
     ),
     scaffoldBackgroundColor: Colors.black,
     colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),

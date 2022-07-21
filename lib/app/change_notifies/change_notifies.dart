@@ -10,3 +10,18 @@ class LanguageChangeProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class UserProvider with ChangeNotifier {
+  bool _keepLogin = false;
+  bool get keepLogin => _keepLogin;
+  bool _emailMe = false;
+  bool get emailMe => _emailMe;
+  set keepLogin(bool value) {
+    _keepLogin = value;
+    notifyListeners();
+  }
+  set emailMe(bool value) {
+    _emailMe = value;
+    notifyListeners();
+  }
+}

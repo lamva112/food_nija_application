@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
               primary: Colors.blue,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed(RouteManager.loginPage);
+              Navigator.of(context).pushNamed(RouteManager.loginScreen);
             },
             child: const Text(
               'Go Login Screen',

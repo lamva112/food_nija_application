@@ -12,4 +12,9 @@ final Map<String, String> en_US = {
   'Forgot password' : 'Forgot Your Password?',
   'Login': 'Login',
   'Sign up' : 'Sign up?',
+  'Sign up free' : 'Sign Up For Free',
+  'person' : 'HaiPhong204...',
+  'Keep login' : 'Keep Me Logged in',
+  'Email me something' : 'Email Me About Special Pricing',
+  'Creat account' : 'Creat Account'
 };

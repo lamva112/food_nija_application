@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -57,7 +58,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 flex: 8,
                 child: PageView.builder(
                   onPageChanged: (value) {
-                    setState((){
+                    setState(() {
                       _selectedIndex = value;
                     });
                   },
@@ -89,16 +90,22 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ...List.generate( page.length,
-                            (index) => Container(
-                              margin: EdgeInsets.symmetric(horizontal: getWidth(5), vertical: getHeight(10)),
-                              width: _selectedIndex == index ? getWidth(20) : getWidth(8),
-                              height: 8.0,
-                              decoration: BoxDecoration(
-                                color: _selectedIndex == index ? Colors.redAccent : Colors.grey[200],
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
+                      ...List.generate(
+                        page.length,
+                        (index) => Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: getWidth(5), vertical: getHeight(10)),
+                          width: _selectedIndex == index
+                              ? getWidth(20)
+                              : getWidth(8),
+                          height: 8.0,
+                          decoration: BoxDecoration(
+                            color: _selectedIndex == index
+                                ? Colors.redAccent
+                                : Colors.grey[200],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -108,25 +115,18 @@ class _OnBoardingState extends State<OnBoarding> {
                 flex: 1,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child: MaterialButton(
+                  child: CustomButton(
+                    title: Translations.of(context).text('skip'),
                     onPressed: () {
                       _storeOnboardInfo();
-                      Navigator.pushReplacementNamed(context, RouteManager.loginPage);
+                      Navigator.pushReplacementNamed(
+                          context, RouteManager.loginScreen);
                     },
                     height: getHeight(55),
-                    minWidth: getWidth(160),
-                    color: AppColors.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text(
-                      Translations.of(context).text('skip'),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: getFont(20),
-                        color: AppColors.textButtonColor,
-                      ),
-                    ),
+                    witdh: getWidth(160),
+                    backgroundColor: AppColors.primaryColor,
+                    fontSize: getFont(20),
+                    textColor: AppColors.textButtonColor,
                   ),
                 ),
               ),

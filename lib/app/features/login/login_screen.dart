@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
+import 'package:food_nija_application/app/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -104,26 +106,21 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: getHeight(15)),
-              MaterialButton(
+              CustomButton(
+                title: Translations.of(context).text('Login'),
                 onPressed: () {},
                 height: getHeight(55),
-                minWidth: getWidth(160),
-                color: AppColors.primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Text(
-                  Translations.of(context).text('Login'),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: getFont(20),
-                    color: AppColors.textButtonColor,
-                  ),
-                ),
+                witdh: getWidth(160),
+                backgroundColor: AppColors.primaryColor,
+                fontSize: getFont(20),
+                textColor: AppColors.textButtonColor,
               ),
               SizedBox(
                 height: getHeight(50),
-                child: Center(
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RouteManager.signupScreen);
+                    },
                   child: Text(
                     Translations.of(context).text('Sign up'),
                     style: TextStyle(
@@ -132,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                       color: AppColors.primaryColor,
                       decoration: TextDecoration.underline,
                     ),
-                  ),
+                  )
                 ),
               ),
             ],

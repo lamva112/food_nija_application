@@ -32,6 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageChangeProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       builder: (context, child) {
         return MaterialApp(
