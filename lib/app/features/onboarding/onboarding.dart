@@ -3,7 +3,6 @@ import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/home_screen.dart';
 import 'package:food_nija_application/app/features/onboarding/widget/build_page.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';

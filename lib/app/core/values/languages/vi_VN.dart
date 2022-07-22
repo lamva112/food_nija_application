@@ -5,6 +5,7 @@ final Map<String, String> vi_VN = {
   'desOB1' : 'Ở đây bạn sẽ tìm thấy rất nhiều món ăn cho mọi\nhương vị và màu sắc khác nhau. \nTận hưởng nào!',
   'desOB2' : 'Tận hưởng giao thức ăn nhanh chóng và suôn sẻ ngay trước cửa nhà bạn',
   'skip' : 'Bỏ qua',
+  'Next' : 'Tiếp tục',
   'Email' : 'Nhập email',
   'Login To Your Screen': 'Đăng Nhập Vào Tài Khoản Của Bạn',
   'Password' : 'Mật khẩu',
@@ -17,4 +18,10 @@ final Map<String, String> vi_VN = {
   'Keep login' : 'Giữ trạng thái đăng nhập',
   'Email me something' : 'Gửi cho tôi những thông tin giá đặc biệt',
   'Creat account' : 'Tạo tài khoản',
+  'Fill information' : 'Điền thông tin của bạn để\nbắt đầu',
+  'Data security' : 'Dữ liệu này sẽ được hiển thị trong hồ sơ\ntài khoản của bạn để bảo mật',
+  'First name' : 'Tên',
+  'Last name' : 'Họ',
+  'Mobile number' : 'Số điện thoại',
+  'Payment method' : 'Phương thức thanh toán',
 };

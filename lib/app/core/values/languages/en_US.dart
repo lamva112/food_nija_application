@@ -5,6 +5,7 @@ final Map<String, String> en_US = {
   'desOB1' : 'You Can find many dishes for every different\ntaste and color. Enjoy!',
   'desOB2' : 'Enjoy a fast and smooth food delivery at\nyour doorstep',
   'skip' : 'Skip',
+  'Next' : 'Next',
   'Email': 'Email',
   'Login To Your Screen' : 'Login To Your Screen',
   'Password' : 'Password',
@@ -16,5 +17,11 @@ final Map<String, String> en_US = {
   'person' : 'HaiPhong204...',
   'Keep login' : 'Keep Me Logged in',
   'Email me something' : 'Email Me About Special Pricing',
-  'Creat account' : 'Creat Account'
+  'Creat account' : 'Creat Account',
+  'Fill information' : 'Fill in your bio to get\nstarted',
+  'Data security' : 'This data will be displayed in your account\nprofile for security',
+  'First name' : 'First name',
+  'Last name' : 'Last name',
+  'Mobile number' : 'Mobile number',
+  'Payment method' : 'Payment Method',
 };

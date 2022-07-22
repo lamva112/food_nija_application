@@ -19,18 +19,21 @@ class TextInputWidget extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         hintText: hintText,
-        contentPadding: EdgeInsets.symmetric(vertical: getHeight(15)),
+        contentPadding: prefixIcon != null
+            ? EdgeInsets.symmetric(vertical: getHeight(15))
+            : EdgeInsets.symmetric(
+                vertical: getHeight(15), horizontal: getWidth(20)),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         fillColor: AppColors.textFormFieldColor,
         enabledBorder: OutlineInputBorder(
           borderSide:
-          const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
+              const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
           borderRadius: BorderRadius.circular(15.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:
-          const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
+              const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
