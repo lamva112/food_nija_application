@@ -8,13 +8,13 @@ class AppColors {
   static const textButtonColor = Color(0xffffffff);
   static const textColor = Colors.black;
   static const textFormFieldColor = Colors.white;
-  static const backgroundImage = 'assets/images/bg_login_white.png';
+  static Color bgButtonBack = const Color(0xffF9A84D).withOpacity(0.15);
+  static const iconButtonBack = Color(0xffDA6317);
 
   //==========================================================================//
   //LIGHT THEME
   ThemeData lightTheme = ThemeData.light().copyWith(
     textTheme: ThemeData.light().textTheme.apply(
-      fontFamily: "PoppinsRegular",
       bodyColor: textColor,
     ),
     scaffoldBackgroundColor: backgroundColor,
@@ -32,7 +32,6 @@ class AppColors {
   //DARK THEME
   ThemeData darkTheme = ThemeData.dark().copyWith(
     textTheme: ThemeData.dark().textTheme.apply(
-      fontFamily: "PoppinsRegular",
       bodyColor: textColor,
     ),
     scaffoldBackgroundColor: Colors.black,

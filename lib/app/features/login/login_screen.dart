@@ -15,126 +15,156 @@ class LoginScreen extends StatelessWidget {
     CustomSize().init(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppColors.backgroundImage),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: getHeight(290)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
             children: [
-              Text(
-                Translations.of(context).text('Login To Your Screen'),
-                style: TextStyle(
-                  fontSize: getFont(25),
-                  fontWeight: FontWeight.bold,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: getHeight(325),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/bg_app.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              SizedBox(height: getHeight(45)),
-              Form(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: getWidth(20)),
+              Center(
+                  heightFactor: getHeight(1.5),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextInputWidget(
-                        hintText: Translations.of(context).text('Email'),
-                        prefixIcon: const Icon(Icons.mail),
+                      Image.asset(
+                        'assets/images/logo_app.png',
+                        fit: BoxFit.cover,
+                        width: getWidth(175),
+                        height: getHeight(140),
                       ),
-                      SizedBox(height: getHeight(20)),
-                      TextInputWidget(
-                        hintText: Translations.of(context).text('Password'),
-                        prefixIcon: const Icon(Icons.lock),
+                      Text(
+                        'FoodNinja',
+                        style: TextStyle(
+                          fontSize: getFont(40),
+                          fontFamily: 'Viga',
+                          color: AppColors.primaryColor,
+                        ),
                       ),
+                      Text(
+                        'Deliever Favorite Food',
+                        style: TextStyle(
+                          fontSize: getFont(16),
+                          fontFamily: 'Viga',
+                          color: AppColors.textColor,
+                        ),
+                      )
                     ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: getHeight(60),
-                child: Center(
-                  child: Text(
-                    Translations.of(context).text('or'),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: getFont(15),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    LoginItem(
-                      title: 'Facebook',
-                      image: 'assets/images/facebook.png',
-                      width: getWidth(140),
-                      height: getHeight(55),
-                      color: AppColors.textFormFieldColor,
-                      iconRadius: getWidth(15),
-                    ),
-                    LoginItem(
-                      title: 'Google',
-                      image: 'assets/images/google.png',
-                      width: getWidth(140),
-                      height: getHeight(55),
-                      color: AppColors.textFormFieldColor,
-                      iconRadius: getWidth(15),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: getHeight(60),
-                child: Center(
-                  child: Text(
-                    Translations.of(context).text('Forgot password'),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: getFont(15),
-                      color: AppColors.primaryColor,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: getHeight(15)),
-              CustomButton(
-                title: Translations.of(context).text('Login'),
-                onPressed: () {},
-                height: getHeight(55),
-                witdh: getWidth(160),
-                backgroundColor: AppColors.primaryColor,
-                fontSize: getFont(20),
-                textColor: AppColors.textButtonColor,
-              ),
-              SizedBox(
-                height: getHeight(50),
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, RouteManager.signupScreen);
-                    },
-                  child: Text(
-                    Translations.of(context).text('Sign up'),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: getFont(15),
-                      color: AppColors.primaryColor,
-                      decoration: TextDecoration.underline,
-                    ),
-                  )
-                ),
-              ),
+                  )),
             ],
           ),
-        ),
+          Text(
+            Translations.of(context).text('Login To Your Screen'),
+            style: TextStyle(
+              fontSize: getFont(25),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: getHeight(37)),
+          Form(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: getWidth(20)),
+              child: Column(
+                children: [
+                  TextInputWidget(
+                    hintText: Translations.of(context).text('Email'),
+                    prefixIcon: const Icon(Icons.mail),
+                  ),
+                  SizedBox(height: getHeight(20)),
+                  TextInputWidget(
+                    hintText: Translations.of(context).text('Password'),
+                    prefixIcon: const Icon(Icons.lock),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: getHeight(60),
+            child: Center(
+              child: Text(
+                Translations.of(context).text('or'),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: getFont(15),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                LoginItem(
+                  title: 'Facebook',
+                  image: 'assets/images/facebook.png',
+                  width: getWidth(140),
+                  height: getHeight(55),
+                  color: AppColors.textFormFieldColor,
+                  iconRadius: getWidth(15),
+                ),
+                LoginItem(
+                  title: 'Google',
+                  image: 'assets/images/google.png',
+                  width: getWidth(140),
+                  height: getHeight(55),
+                  color: AppColors.textFormFieldColor,
+                  iconRadius: getWidth(15),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: getHeight(50),
+            child: Center(
+              child: Text(
+                Translations.of(context).text('Forgot password'),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: getFont(15),
+                  color: AppColors.primaryColor,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: getHeight(10)),
+          CustomButton(
+            title: Translations.of(context).text('Login'),
+            onPressed: () {},
+            height: getHeight(55),
+            witdh: getWidth(160),
+            backgroundColor: AppColors.primaryColor,
+            fontSize: getFont(20),
+            textColor: AppColors.textButtonColor,
+          ),
+          SizedBox(
+            height: getHeight(40),
+            child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RouteManager.signupScreen);
+                },
+                child: Text(
+                  Translations.of(context).text('Sign up'),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getFont(15),
+                    color: AppColors.primaryColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
+          ),
+        ],
       ),
     );
   }

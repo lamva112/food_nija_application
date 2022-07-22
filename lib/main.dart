@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_nija_application/app/change_notifies/change_notifies.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/home_screen.dart';
 import 'package:food_nija_application/app/features/login/login_screen.dart';
 import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
 import 'package:food_nija_application/app/routes/routes.dart';

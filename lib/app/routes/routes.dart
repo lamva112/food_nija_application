@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
+import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
+import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 import '../features/home_screen.dart';
 import '../features/login/login_screen.dart';
 
 class RouteManager {
-  static const String loginScreen = '/loginPage';
-  static const String homeScreen = '/homePage';
+  static const String loginScreen = '/loginScreen';
+  static const String homeScreen = '/homeScreen';
   static const String onBoarding = '/onBoarding';
   static const String signupScreen = '/signupScreen';
+  static const String infoSignupScreen = '/infoSignupScreen';
+  static const String paymentScreen = '/paymentScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case loginScreen:
         return MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const SafeArea(child: LoginScreen()),
         );
       case homeScreen:
         return MaterialPageRoute(
@@ -27,6 +31,14 @@ class RouteManager {
       case signupScreen:
         return MaterialPageRoute(
           builder: (context) => const SafeArea(child: SignupScreen()),
+        );
+      case infoSignupScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SafeArea(child: InfoSignup()),
+        );
+      case paymentScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SafeArea(child: PaymentScreen()),
         );
       default:
         throw const FormatException('Route not found! Check routes again!');
