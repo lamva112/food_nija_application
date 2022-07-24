@@ -1,21 +1,15 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/button_image.dart';
 import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:image_picker/image_picker.dart';
 
-class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
-}
-
-class _PaymentScreenState extends State<PaymentScreen> {
-  int _index = -1;
+class UploadPhotoProfile extends StatelessWidget {
+  final XFile? imageFile;
+  const UploadPhotoProfile({Key? key, this.imageFile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +35,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   const ButtonBack(),
                   SizedBox(height: getHeight(20)),
                   Text(
-                    Translations.of(context).text('Payment method'),
+                    Translations.of(context).text('Upload photo'),
                     style: TextStyle(
                       fontSize: getFont(25),
                       fontWeight: FontWeight.bold,
@@ -55,35 +49,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: getHeight(20)),
-                  ListView.separated(
-                    itemBuilder: (context, index) {
-                      return ButtonImage(
-                        borderColor: _index == index
-                            ? Colors.redAccent
-                            : Colors.transparent,
-                        child: Center(
-                          child: SizedBox(
-                              width: getWidth(65),
-                              height: getWidth(65),
-                              child: Image.asset(listPaymentImages[index])),
-                        ),
-                        onTap: () => setState(() {
-                          _index = index;
-                        }),
-                      );
-                    },
-                    itemCount: listPaymentImages.length,
-                    shrinkWrap: true,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        SizedBox(height: getHeight(20)),
+                  Container(
+                    height: getHeight(260),
+                    width: getWidth(250),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                        image: imageFile == null
+                            ? const AssetImage('assets/images/bg_app.png')
+                            : FileImage(File(imageFile!.path)) as ImageProvider,
+                      ),
+                    ),
                   ),
                   SizedBox(height: getHeight(220)),
                   Center(
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, RouteManager.uploadPhotoWay);
-                      },
+                      onPressed: () {},
                       height: getHeight(55),
                       witdh: getWidth(160),
                       backgroundColor: AppColors.primaryColor,
@@ -100,9 +82,3 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 }
-
-List<String> listPaymentImages = [
-  'assets/images/paypal.png',
-  'assets/images/visa.png',
-  'assets/images/payoneer.png',
-];

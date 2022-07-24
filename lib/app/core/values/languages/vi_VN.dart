@@ -24,4 +24,6 @@ final Map<String, String> vi_VN = {
   'Last name' : 'Họ',
   'Mobile number' : 'Số điện thoại',
   'Payment method' : 'Phương thức thanh toán',
+  'Upload photo' : 'Tải lên ảnh đại diện của bạn',
+  'From gallery' : 'Thư viện',
 };

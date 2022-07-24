@@ -9,12 +9,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/core/utils/translations.dart';
 
-int? isviewed;
+int? isViewed;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  isviewed = prefs.getInt('onBoard');
+  isViewed = prefs.getInt('onBoard');
   runApp(const MyApp());
 }
 
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           theme: AppColors().lightTheme,
           debugShowCheckedModeBanner: false,
           home: SafeArea(
-            child: isviewed != 0 ? const OnBoarding() : const LoginScreen(),
+            child: isViewed != 0 ? const OnBoarding() : const LoginScreen(),
           ),
           onGenerateRoute: RouteManager.generateRoute,
           locale: Provider.of<LanguageChangeProvider>(context, listen: true)
