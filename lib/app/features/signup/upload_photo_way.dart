@@ -118,7 +118,7 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(height: getHeight(20)),
                   ),
-                  SizedBox(height: getHeight(220)),
+                  SizedBox(height: getHeight(200)),
                   Center(
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),

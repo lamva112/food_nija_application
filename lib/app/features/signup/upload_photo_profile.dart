@@ -5,6 +5,7 @@ import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadPhotoProfile extends StatelessWidget {
@@ -65,7 +66,9 @@ class UploadPhotoProfile extends StatelessWidget {
                   Center(
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, RouteManager.signupSuccessful);
+                      },
                       height: getHeight(55),
                       witdh: getWidth(160),
                       backgroundColor: AppColors.primaryColor,
