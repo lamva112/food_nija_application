@@ -64,7 +64,7 @@ class InfoSignup extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: getHeight(220)),
+                  SizedBox(height: getHeight(260)),
                   Center(
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),

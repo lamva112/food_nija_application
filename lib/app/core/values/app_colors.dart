@@ -10,6 +10,8 @@ class AppColors {
   static const textFormFieldColor = Colors.white;
   static Color bgButtonBack = const Color(0xffF9A84D).withOpacity(0.15);
   static const iconButtonBack = Color(0xffDA6317);
+  static const bgLocationIcon = Color(0XFFFFE14D);
+  static const bgLocationButton = Color(0XFFF6F6F6);
 
   //==========================================================================//
   //LIGHT THEME

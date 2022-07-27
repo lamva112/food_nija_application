@@ -24,4 +24,11 @@ final Map<String, String> en_US = {
   'Last name' : 'Last name',
   'Mobile number' : 'Mobile number',
   'Payment method' : 'Payment Method',
+  'Upload photo' : 'Upload Your Photo Profile',
+  'From gallery' : 'From gallery',
+  'Set Your Location' : 'Set Your Location',
+  'Your Location' : 'Your Location',
+  'Set Location' : 'Set Location',
+  'Congrats' : 'Congrats',
+  'Your Account Is Ready To Use' : 'Your Account Is Ready To Use',
 };
