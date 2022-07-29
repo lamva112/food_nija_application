@@ -174,7 +174,7 @@ class SignupScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: getHeight(50)),
+          SizedBox(height: getHeight(30)),
           CustomButton(
             title: Translations.of(context).text('Creat account'),
             onPressed: () {

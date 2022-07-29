@@ -6,13 +6,23 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool onTapLogin = false;
 
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: Column(
@@ -88,41 +98,57 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: getHeight(60),
-            child: Center(
-              child: Text(
-                Translations.of(context).text('or'),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: getFont(15),
-                ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+            child: Align(
+              widthFactor: getHeight(35),
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RouteManager.signupScreen);
+                  },
+                  child: Text(
+                    Translations.of(context).text('Sign up'),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getFont(15),
+                      color: AppColors.primaryColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  )),
+            ),
+          ),
+          Center(
+            child: Text(
+              Translations.of(context).text('or'),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: getFont(15),
               ),
             ),
           ),
-          SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                LoginItem(
-                  title: 'Facebook',
-                  image: 'assets/images/facebook.png',
-                  width: getWidth(140),
-                  height: getHeight(55),
-                  color: AppColors.textFormFieldColor,
-                  iconRadius: getWidth(15),
-                ),
-                LoginItem(
-                  title: 'Google',
-                  image: 'assets/images/google.png',
-                  width: getWidth(140),
-                  height: getHeight(55),
-                  color: AppColors.textFormFieldColor,
-                  iconRadius: getWidth(15),
-                ),
-              ],
-            ),
+          SizedBox(height: getHeight(25),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LoginItem(
+                title: 'Facebook',
+                image: 'assets/images/facebook.png',
+                width: getWidth(140),
+                height: getHeight(55),
+                color: AppColors.textFormFieldColor,
+                iconRadius: getWidth(15),
+              ),
+              LoginItem(
+                title: 'Google',
+                image: 'assets/images/google.png',
+                width: getWidth(140),
+                height: getHeight(55),
+                color: AppColors.textFormFieldColor,
+                iconRadius: getWidth(15),
+              ),
+            ],
           ),
           SizedBox(
             height: getHeight(50),
@@ -139,30 +165,23 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: getHeight(10)),
-          CustomButton(
+          onTapLogin ? const CircularProgressIndicator()
+          : CustomButton(
             title: Translations.of(context).text('Login'),
-            onPressed: () {},
+            onPressed: () async {
+              setState(() {
+                onTapLogin = !onTapLogin;
+              });
+              await authService.signInAnonymous();
+              setState(() {
+                onTapLogin = !onTapLogin;
+              });
+            },
             height: getHeight(55),
             witdh: getWidth(160),
             backgroundColor: AppColors.primaryColor,
             fontSize: getFont(20),
             textColor: AppColors.textButtonColor,
-          ),
-          SizedBox(
-            height: getHeight(40),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RouteManager.signupScreen);
-                },
-                child: Text(
-                  Translations.of(context).text('Sign up'),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: getFont(15),
-                    color: AppColors.primaryColor,
-                    decoration: TextDecoration.underline,
-                  ),
-                )),
           ),
         ],
       ),

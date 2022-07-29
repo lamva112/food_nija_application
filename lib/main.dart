@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_nija_application/app/change_notifies/change_notifies.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/features/home_screen.dart';
 import 'package:food_nija_application/app/features/login/login_screen.dart';
 import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
 import 'package:food_nija_application/firebase_options.dart';
+import 'package:food_nija_application/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/core/utils/translations.dart';
@@ -37,6 +41,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageChangeProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        Provider<AuthService>(create: (_) => AuthService()),
       ],
       builder: (context, child) {
         return MaterialApp(
@@ -53,7 +58,9 @@ class _MyAppState extends State<MyApp> {
           theme: AppColors().lightTheme,
           debugShowCheckedModeBanner: false,
           home: SafeArea(
-            child: isViewed != 0 ? const OnBoarding() : const LoginScreen(),
+            child: isViewed != 0
+                ? const OnBoarding()
+                : const Wrapper(),
           ),
           onGenerateRoute: RouteManager.generateRoute,
           locale: Provider.of<LanguageChangeProvider>(context, listen: true)

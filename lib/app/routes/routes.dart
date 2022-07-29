@@ -13,7 +13,6 @@ import '../features/login/login_screen.dart';
 class RouteManager {
   static const String loginScreen = '/loginScreen';
   static const String homeScreen = '/homeScreen';
-  static const String onBoarding = '/onBoarding';
   static const String signupScreen = '/signupScreen';
   static const String infoSignupScreen = '/infoSignupScreen';
   static const String paymentScreen = '/paymentScreen';
@@ -31,10 +30,6 @@ class RouteManager {
       case homeScreen:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
-        );
-      case onBoarding:
-        return MaterialPageRoute(
-          builder: (context) => const OnBoarding(),
         );
       case signupScreen:
         return MaterialPageRoute(

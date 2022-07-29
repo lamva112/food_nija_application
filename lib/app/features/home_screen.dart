@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
+import 'package:provider/provider.dart';
 import '../core/utils/translations.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,6 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,8 +26,8 @@ class HomeScreen extends StatelessWidget {
               ),
               primary: Colors.blue,
             ),
-            onPressed: () {
-              Navigator.of(context).pushNamed(RouteManager.loginScreen);
+            onPressed: () async {
+              await authService.signOut();
             },
             child: const Text(
               'Go Login Screen',
