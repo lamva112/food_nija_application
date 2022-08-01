@@ -5,11 +5,14 @@ import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/models/user.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadPhotoWay extends StatefulWidget {
-  const UploadPhotoWay({Key? key}) : super(key: key);
+  final User user;
+  const UploadPhotoWay({Key? key, required this.user}) : super(key: key);
 
   @override
   State<UploadPhotoWay> createState() => _UploadPhotoWayState();
@@ -28,7 +31,8 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
             source: ImageSource.gallery,
           );
           if (!mounted) return;
-          Navigator.of(context).pushNamed(RouteManager.uploadPhotoProfile, arguments: pickedFile);
+          UploadPhotoScreen obj = UploadPhotoScreen(user: widget.user, image: pickedFile);
+          Navigator.pushNamed(context, RouteManager.uploadPhotoProfile, arguments: obj);
         }
         break;
       case 1:
@@ -37,7 +41,8 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
             source: ImageSource.camera,
           );
           if (!mounted) return;
-          Navigator.of(context).pushNamed(RouteManager.uploadPhotoProfile, arguments: pickedFile);
+          UploadPhotoScreen obj = UploadPhotoScreen(user: widget.user, image: pickedFile);
+          Navigator.of(context).pushNamed(RouteManager.uploadPhotoProfile, arguments: obj);
         }
         break;
       default:

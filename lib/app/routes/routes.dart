@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/features/onboarding/onboarding.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_succesfull.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:food_nija_application/app/routes/parameters_routes.dart';
+import 'package:food_nija_application/data/models/user.dart';
 import '../features/home_screen.dart';
 import '../features/login/login_screen.dart';
 
@@ -36,21 +36,24 @@ class RouteManager {
           builder: (context) => const SafeArea(child: SignupScreen()),
         );
       case infoSignupScreen:
+        User user = args as User;
         return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: InfoSignup()),
+          builder: (context) => SafeArea(child: InfoSignup(user: user,)),
         );
       case paymentScreen:
+        User user = args as User;
         return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: PaymentScreen()),
+          builder: (context) => SafeArea(child: PaymentScreen(user: user,)),
         );
       case uploadPhotoWay:
+        User user = args as User;
         return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: UploadPhotoWay()),
+          builder: (context) => SafeArea(child: UploadPhotoWay(user: user,)),
         );
       case uploadPhotoProfile:
-        XFile? image = args as XFile?;
+        UploadPhotoScreen obj = args as UploadPhotoScreen;
         return MaterialPageRoute(
-          builder: (_) => SafeArea(child: UploadPhotoProfile(imageFile: image,)),
+          builder: (_) => SafeArea(child: UploadPhotoProfile(imageFile: obj.image, user: obj.user,)),
         );
       case signupSuccessful:
         return MaterialPageRoute(

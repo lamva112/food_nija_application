@@ -6,15 +6,29 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/models/user.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
-class UploadPhotoProfile extends StatelessWidget {
+class UploadPhotoProfile extends StatefulWidget {
   final XFile? imageFile;
-  const UploadPhotoProfile({Key? key, this.imageFile}) : super(key: key);
+  final User user;
+
+  const UploadPhotoProfile({Key? key, this.imageFile, required this.user})
+      : super(key: key);
+
+  @override
+  State<UploadPhotoProfile> createState() => _UploadPhotoProfileState();
+}
+
+class _UploadPhotoProfileState extends State<UploadPhotoProfile> {
+  bool onTapRegister = false;
 
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -56,18 +70,28 @@ class UploadPhotoProfile extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
-                        image: imageFile == null
+                        image: widget.imageFile == null
                             ? const AssetImage('assets/images/bg_app.png')
-                            : FileImage(File(imageFile!.path)) as ImageProvider,
+                            : FileImage(File(widget.imageFile!.path)) as ImageProvider,
                       ),
                     ),
                   ),
                   SizedBox(height: getHeight(220)),
                   Center(
-                    child: CustomButton(
+                    child: onTapRegister ? const CircularProgressIndicator() : CustomButton(
                       title: Translations.of(context).text('Next'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, RouteManager.signupSuccessful);
+                      onPressed: () async {
+                        setState(() {
+                          onTapRegister = !onTapRegister;
+                        });
+                        await authService.registerWithEmailAndPassword(
+                            email: widget.user.username!, password: widget.user.password!);
+                        if(!mounted) return;
+                        setState(() {
+                          onTapRegister = !onTapRegister;
+                        });
+                        Navigator.pushNamed(
+                            context, RouteManager.signupSuccessful);
                       },
                       height: getHeight(55),
                       witdh: getWidth(160),

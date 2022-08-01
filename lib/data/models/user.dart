@@ -5,8 +5,8 @@ class User {
   late String? alias;
   late String? firstName;
   late String? lastName;
-  late bool? statusLogin;
-  late bool? speciallyNotification;
+  bool statusLogin;
+  bool speciallyNotification;
   late String? phoneNumber;
   late String? image;
   late int? paymentType;
@@ -17,8 +17,8 @@ class User {
     this.alias,
     this.firstName,
     this.lastName,
-    this.statusLogin,
-    this.speciallyNotification,
+    this.statusLogin = false,
+    this.speciallyNotification = false,
     this.phoneNumber,
     this.image,
     this.paymentType,

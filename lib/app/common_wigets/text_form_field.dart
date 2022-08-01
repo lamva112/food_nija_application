@@ -6,25 +6,43 @@ class TextInputWidget extends StatelessWidget {
   final String? hintText;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
+  final String? validatorText;
+  final TextEditingController? textEditingController;
+  final bool obscureText;
+  final Function()? onTapSuffixIcon;
   const TextInputWidget({
     Key? key,
     this.hintText,
     this.prefixIcon,
     this.suffixIcon,
+    this.validatorText,
+    this.textEditingController,
+    this.obscureText = false,
+    this.onTapSuffixIcon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late String text;
     CustomSize().init(context);
     return TextFormField(
+      obscureText: obscureText,
+      initialValue: null,
+      controller: textEditingController,
       decoration: InputDecoration(
+        filled: true,
         hintText: hintText,
         contentPadding: prefixIcon != null
             ? EdgeInsets.symmetric(vertical: getHeight(15))
             : EdgeInsets.symmetric(
                 vertical: getHeight(15), horizontal: getWidth(20)),
         prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
+        suffixIcon: onTapSuffixIcon == null
+            ? suffixIcon
+            : GestureDetector(
+                onTap: onTapSuffixIcon,
+                child: suffixIcon,
+              ),
         fillColor: AppColors.textFormFieldColor,
         enabledBorder: OutlineInputBorder(
           borderSide:
@@ -36,7 +54,17 @@ class TextInputWidget extends StatelessWidget {
               const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
           borderRadius: BorderRadius.circular(15.0),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 0.0, color: Colors.redAccent),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 0.0, color: Colors.redAccent),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
       ),
+      onChanged: (value) => text = value,
+      validator: (value) => (value?.isEmpty ?? true) ? validatorText : null,
     );
   }
 }

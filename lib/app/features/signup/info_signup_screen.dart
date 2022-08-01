@@ -6,9 +6,16 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/models/user.dart';
 
 class InfoSignup extends StatelessWidget {
-  const InfoSignup({Key? key}) : super(key: key);
+  final User user;
+  InfoSignup({Key? key, required this.user}) : super(key: key);
+
+  final _firstName = TextEditingController();
+  final _lastName = TextEditingController();
+  final _phoneNumber = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +55,25 @@ class InfoSignup extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(20)),
                   Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         TextInputWidget(
                           hintText: Translations.of(context).text('Last name'),
+                          textEditingController: _lastName,
+                          validatorText: Translations.of(context).text('LastName Validator'),
                         ),
                         SizedBox(height: getHeight(20)),
                         TextInputWidget(
+                          textEditingController: _firstName,
                           hintText: Translations.of(context).text('First name'),
+                          validatorText: Translations.of(context).text('FirstName Validator'),
                         ),
                         SizedBox(height: getHeight(20)),
                         TextInputWidget(
+                          textEditingController: _phoneNumber,
                           hintText: Translations.of(context).text('Mobile number'),
+                          validatorText: Translations.of(context).text('PhoneNumber Validator'),
                         ),
                       ],
                     ),
@@ -69,7 +83,14 @@ class InfoSignup extends StatelessWidget {
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),
                       onPressed: () {
-                        Navigator.pushNamed(context, RouteManager.paymentScreen);
+                        if(_formKey.currentState?.validate() ?? false){
+                          user.lastName = _lastName.text;
+                          user.firstName = _firstName.text;
+                          user.phoneNumber = _phoneNumber.text;
+                          Navigator.pushNamed(context, RouteManager.paymentScreen, arguments: user);
+                        } else {
+                          _formKey.currentState?.validate();
+                        }
                       },
                       height: getHeight(55),
                       witdh: getWidth(160),

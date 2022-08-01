@@ -6,9 +6,11 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/models/user.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+  final User user;
+  const PaymentScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -82,7 +84,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: CustomButton(
                       title: Translations.of(context).text('Next'),
                       onPressed: () {
-                        Navigator.pushNamed(context, RouteManager.uploadPhotoWay);
+                        widget.user.paymentType = _index;
+                        Navigator.pushNamed(context, RouteManager.uploadPhotoWay, arguments: widget.user);
                       },
                       height: getHeight(55),
                       witdh: getWidth(160),

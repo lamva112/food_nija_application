@@ -3,6 +3,7 @@ import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/routes/routes.dart';
 
 class SignupSuccessful extends StatelessWidget {
   const SignupSuccessful({Key? key}) : super(key: key);
@@ -51,6 +52,7 @@ class SignupSuccessful extends StatelessWidget {
                   CustomButton(
                     title: Translations.of(context).text('Next'),
                     onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(context, RouteManager.loginScreen, (route) => false);
                     },
                     height: getHeight(55),
                     witdh: getWidth(160),
