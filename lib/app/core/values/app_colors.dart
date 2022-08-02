@@ -12,6 +12,9 @@ class AppColors {
   static const iconButtonBack = Color(0xffDA6317);
   static const bgLocationIcon = Color(0XFFFFE14D);
   static const bgLocationButton = Color(0XFFF6F6F6);
+  static const selectedNavBarColor = Color.fromRGBO(28, 185, 134, 1);
+  static const unselectedNavBarColor = Color.fromRGBO(179, 178, 178, 1.0);
+  static const itemChildColor = Colors.white;
 
   //==========================================================================//
   //LIGHT THEME

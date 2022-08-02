@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool onTapLogin = false;
-  bool obscureText = false;
+  bool obscureText = true;
 
   @override
   void dispose() {

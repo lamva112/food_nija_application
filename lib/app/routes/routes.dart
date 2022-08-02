@@ -12,7 +12,6 @@ import '../features/login/login_screen.dart';
 
 class RouteManager {
   static const String loginScreen = '/loginScreen';
-  static const String homeScreen = '/homeScreen';
   static const String signupScreen = '/signupScreen';
   static const String infoSignupScreen = '/infoSignupScreen';
   static const String paymentScreen = '/paymentScreen';
@@ -26,10 +25,6 @@ class RouteManager {
       case loginScreen:
         return MaterialPageRoute(
           builder: (context) => const SafeArea(child: LoginScreen()),
-        );
-      case homeScreen:
-        return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
         );
       case signupScreen:
         return MaterialPageRoute(

@@ -37,4 +37,7 @@ final Map<String, String> vi_VN = {
   'FirstName Validator' : 'Họ không được để trống',
   'LastName Validator' : 'Tên không được để trống',
   'PhoneNumber Validator' : 'Số điện thoại không được để trống',
+  'Home' : 'Trang chủ',
+  'Chat' : 'Trò chuyện',
+  'Profile' : 'Hồ sơ',
 };

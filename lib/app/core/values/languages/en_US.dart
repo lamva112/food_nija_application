@@ -37,4 +37,7 @@ final Map<String, String> en_US = {
   'FirstName Validator' : 'First name is required',
   'LastName Validator' : 'Last name is required',
   'PhoneNumber Validator' : 'Mobile number is required',
+  'Home' : 'Home',
+  'Chat' : 'Chat',
+  'Profile' : 'Profile',
 };
