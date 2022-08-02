@@ -40,4 +40,6 @@ final Map<String, String> vi_VN = {
   'Home' : 'Trang chủ',
   'Chat' : 'Trò chuyện',
   'Profile' : 'Hồ sơ',
+  'Find Favorite Food' : 'Tìm kiếm đồ ăn\nyêu thích của bạn',
+  'What do you want to order?' : 'Bạn muốn đặt đồ ăn gì?',
 };

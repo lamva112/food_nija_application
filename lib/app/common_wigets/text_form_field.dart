@@ -10,6 +10,7 @@ class TextInputWidget extends StatelessWidget {
   final TextEditingController? textEditingController;
   final bool obscureText;
   final Function()? onTapSuffixIcon;
+  final Color? fillColor;
   const TextInputWidget({
     Key? key,
     this.hintText,
@@ -19,6 +20,7 @@ class TextInputWidget extends StatelessWidget {
     this.textEditingController,
     this.obscureText = false,
     this.onTapSuffixIcon,
+    this.fillColor,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,10 @@ class TextInputWidget extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         hintText: hintText,
+        hintStyle: TextStyle(
+          color: fillColor?.withOpacity(0.6) ?? AppColors.textColor,
+          fontWeight: FontWeight.w400,
+        ),
         contentPadding: prefixIcon != null
             ? EdgeInsets.symmetric(vertical: getHeight(15))
             : EdgeInsets.symmetric(
@@ -43,7 +49,7 @@ class TextInputWidget extends StatelessWidget {
                 onTap: onTapSuffixIcon,
                 child: suffixIcon,
               ),
-        fillColor: AppColors.textFormFieldColor,
+        fillColor: fillColor ?? AppColors.textFormFieldColor,
         enabledBorder: OutlineInputBorder(
           borderSide:
               const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),

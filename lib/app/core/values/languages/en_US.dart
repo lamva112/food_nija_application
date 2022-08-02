@@ -40,4 +40,6 @@ final Map<String, String> en_US = {
   'Home' : 'Home',
   'Chat' : 'Chat',
   'Profile' : 'Profile',
+  'Find Favorite Food' : 'Find Your\nFavorite Food',
+  'What do you want to order?' : 'What do you want to order?',
 };
