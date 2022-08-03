@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/features/home_popular_screen/popular_screen.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
@@ -7,7 +8,6 @@ import 'package:food_nija_application/app/features/signup/upload_photo_profile.d
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
 import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/data/models/user.dart';
-import '../features/homescreen/home_screen.dart';
 import '../features/login/login_screen.dart';
 
 class RouteManager {
@@ -18,6 +18,7 @@ class RouteManager {
   static const String uploadPhotoWay = '/uploadPhotoWayScreen';
   static const String uploadPhotoProfile = '/uploadPhotoProfileScreen';
   static const String signupSuccessful = '/signupSuccessful';
+  static const String homePopularScreen = '/homePopularScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -53,6 +54,10 @@ class RouteManager {
       case signupSuccessful:
         return MaterialPageRoute(
           builder: (context) => const SafeArea(child: SignupSuccessful()),
+        );
+      case homePopularScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SafeArea(child: HomePopularScreen()),
         );
       default:
         throw const FormatException('Route not found! Check routes again!');

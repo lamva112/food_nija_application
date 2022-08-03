@@ -45,4 +45,5 @@ final Map<String, String> vi_VN = {
   'Nearest Restaurant' : 'Nhà hàng gần đây',
   'View more' : 'Xem thêm',
   'Popular Menu' : 'Món ăn phổ biến',
+  'Popular Restaurant' : 'Nhà hàng phổ biến',
 };

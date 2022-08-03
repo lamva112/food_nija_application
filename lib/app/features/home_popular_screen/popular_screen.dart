@@ -4,13 +4,10 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/nearest_restaurant.dart';
-import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
-import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/restaurant.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomePopularScreen extends StatelessWidget {
+  const HomePopularScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   vertical: getHeight(20), horizontal: getWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: getHeight(30)),
                   Row(
@@ -54,9 +51,9 @@ class HomeScreen extends StatelessWidget {
                         width: getWidth(45),
                         height: getHeight(45),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.backgroundColor,
-                        ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.backgroundColor,
+                            ),
                         child: const Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
@@ -94,82 +91,26 @@ class HomeScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: getHeight(20)),
-                  Image.asset('assets/images/advertising.png'),
-                  SizedBox(height: getHeight(10)),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        Translations.of(context).text('Nearest Restaurant'),
-                        style: TextStyle(
-                          fontSize: getFont(18),
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RouteManager.homePopularScreen);
-                        },
-                        child: Text(
-                          Translations.of(context).text('View more'),
-                          style: TextStyle(
-                            fontSize: getFont(15),
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.iconButtonBack,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getHeight(185),
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NearestRestaurant(
-                            restaurant: listRestaurant[index]);
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(width: getWidth(23)),
-                      itemCount: listRestaurant.length,
+                  SizedBox(height: getHeight(15)),
+                  Text(
+                    Translations.of(context).text('Popular Restaurant'),
+                    style: TextStyle(
+                      fontSize: getFont(18),
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
                     ),
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        Translations.of(context).text('Popular Menu'),
-                        style: TextStyle(
-                          fontSize: getFont(18),
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          Translations.of(context).text('View more'),
-                          style: TextStyle(
-                            fontSize: getFont(15),
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.iconButtonBack,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ListView.separated(
+                  SizedBox(height: getHeight(15)),
+                  GridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: getHeight(20),
+                    crossAxisSpacing: getWidth(20),
                     shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return PopularMenu(food: listFood[index]);
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        SizedBox(height: getHeight(20)),
-                    itemCount: listFood.length,
+                    children: List.generate(
+                      listRestaurant.length,
+                      (index) => NearestRestaurant(
+                          restaurant: listRestaurant[index]),
+                    ),
                   ),
                   SizedBox(height: getHeight(80)),
                 ],
