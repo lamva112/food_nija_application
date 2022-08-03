@@ -7,7 +7,7 @@ import 'package:food_nija_application/app/features/signup/upload_photo_profile.d
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
 import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/data/models/user.dart';
-import '../features/home_screen.dart';
+import '../features/homescreen/home_screen.dart';
 import '../features/login/login_screen.dart';
 
 class RouteManager {

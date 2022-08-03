@@ -42,4 +42,7 @@ final Map<String, String> en_US = {
   'Profile' : 'Profile',
   'Find Favorite Food' : 'Find Your\nFavorite Food',
   'What do you want to order?' : 'What do you want to order?',
+  'Nearest Restaurant' : 'Nearest Restaurant',
+  'View more' : 'View More',
+  'Popular Menu' : 'Popular Menu',
 };

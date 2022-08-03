@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/botttom_navigation%20bar/my_bottom_bar.dart';
-import 'package:food_nija_application/app/features/home_screen.dart';
 import 'package:food_nija_application/app/features/login/login_screen.dart';
 import 'package:food_nija_application/data/models/user.dart';
 import 'package:food_nija_application/data/services/auth_service.dart';
