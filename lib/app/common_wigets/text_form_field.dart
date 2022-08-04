@@ -35,7 +35,7 @@ class TextInputWidget extends StatelessWidget {
         filled: true,
         hintText: hintText,
         hintStyle: TextStyle(
-          color: fillColor?.withOpacity(0.6) ?? AppColors.textColor,
+          color: fillColor?.withOpacity(0.6),
           fontWeight: FontWeight.w400,
         ),
         contentPadding: prefixIcon != null

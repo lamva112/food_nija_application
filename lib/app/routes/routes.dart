@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/home_popular_screen/popular_screen.dart';
+import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
@@ -8,6 +9,7 @@ import 'package:food_nija_application/app/features/signup/upload_photo_profile.d
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
 import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/data/models/user.dart';
+import 'package:page_transition/page_transition.dart';
 import '../features/login/login_screen.dart';
 
 class RouteManager {
@@ -19,45 +21,92 @@ class RouteManager {
   static const String uploadPhotoProfile = '/uploadPhotoProfileScreen';
   static const String signupSuccessful = '/signupSuccessful';
   static const String homePopularScreen = '/homePopularScreen';
+  static const String filterScreen = '/filterScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case loginScreen:
-        return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: LoginScreen()),
+        return PageTransition(
+          child: const SafeArea(child: LoginScreen()),
+          type: PageTransitionType.fade,
         );
       case signupScreen:
-        return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: SignupScreen()),
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: SignupScreen())),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
         );
       case infoSignupScreen:
         User user = args as User;
-        return MaterialPageRoute(
-          builder: (context) => SafeArea(child: InfoSignup(user: user,)),
+        return PageTransition(
+          child: SafeArea(
+              child: SafeArea(
+                  child: InfoSignup(
+            user: user,
+          ))),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
         );
       case paymentScreen:
         User user = args as User;
-        return MaterialPageRoute(
-          builder: (context) => SafeArea(child: PaymentScreen(user: user,)),
+        return PageTransition(
+          child: SafeArea(
+              child: SafeArea(
+                  child: PaymentScreen(
+                    user: user,
+                  ))),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
         );
       case uploadPhotoWay:
         User user = args as User;
-        return MaterialPageRoute(
-          builder: (context) => SafeArea(child: UploadPhotoWay(user: user,)),
+        return PageTransition(
+          child: SafeArea(
+              child: SafeArea(
+                  child: UploadPhotoWay(
+                    user: user,
+                  ))),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
         );
       case uploadPhotoProfile:
         UploadPhotoScreen obj = args as UploadPhotoScreen;
-        return MaterialPageRoute(
-          builder: (_) => SafeArea(child: UploadPhotoProfile(imageFile: obj.image, user: obj.user,)),
+        return PageTransition(
+          child: SafeArea(
+              child: SafeArea(
+                  child: UploadPhotoProfile(
+                    imageFile: obj.image,
+                    user: obj.user,
+                  ))),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
         );
       case signupSuccessful:
-        return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: SignupSuccessful()),
+        return PageTransition(
+          child: const SafeArea(
+              child: SafeArea(
+                  child: SignupSuccessful())),
+          type: PageTransitionType.size,
+          duration: const Duration(milliseconds: 400),
+          alignment: Alignment.center,
         );
       case homePopularScreen:
-        return MaterialPageRoute(
-          builder: (context) => const SafeArea(child: HomePopularScreen()),
+        return PageTransition(
+          child: const SafeArea(
+              child: SafeArea(
+                  child: HomePopularScreen())),
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 400),
+        );
+      case filterScreen:
+        return PageTransition(
+          child: const SafeArea(
+              child: SafeArea(
+                  child: FilterScreen())),
+          type: PageTransitionType.scale,
+          duration: const Duration(milliseconds: 400),
+          alignment: Alignment.center,
         );
       default:
         throw const FormatException('Route not found! Check routes again!');

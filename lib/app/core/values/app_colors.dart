@@ -21,8 +21,8 @@ class AppColors {
   //LIGHT THEME
   ThemeData lightTheme = ThemeData.light().copyWith(
     textTheme: ThemeData.light().textTheme.apply(
-      bodyColor: textColor,
-    ),
+          bodyColor: textColor,
+        ),
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
     hintColor: secondaryColor,
@@ -30,16 +30,18 @@ class AppColors {
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.black),
     ),
-    inputDecorationTheme:
-    const InputDecorationTheme(fillColor: Colors.white, filled: true),
+    inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.white,
+        filled: true,
+        hintStyle: TextStyle(color: const Color(0xff3B3B3B).withOpacity(0.3))),
   );
 
   //==========================================================================//
   //DARK THEME
   ThemeData darkTheme = ThemeData.dark().copyWith(
     textTheme: ThemeData.dark().textTheme.apply(
-      bodyColor: textColor,
-    ),
+          bodyColor: textColor,
+        ),
     scaffoldBackgroundColor: Colors.black,
     colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
     hintColor: secondaryColor,
@@ -48,6 +50,6 @@ class AppColors {
       iconTheme: IconThemeData(color: Colors.black),
     ),
     inputDecorationTheme:
-    const InputDecorationTheme(fillColor: Color(0xff292a2a), filled: true),
+        const InputDecorationTheme(fillColor: Color(0xff292a2a), filled: true),
   );
 }

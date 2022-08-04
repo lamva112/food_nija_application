@@ -80,16 +80,21 @@ class HomeScreen extends StatelessWidget {
                           fillColor: AppColors.bgButtonBack,
                         ),
                       ),
-                      Container(
-                        width: getWidth(50),
-                        height: getHeight(50),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.bgButtonBack,
-                        ),
-                        child: const Icon(
-                          Icons.toc,
-                          color: AppColors.iconButtonBack,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteManager.filterScreen);
+                        },
+                        child: Container(
+                          width: getWidth(50),
+                          height: getHeight(50),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.bgButtonBack,
+                          ),
+                          child: const Icon(
+                            Icons.toc,
+                            color: AppColors.iconButtonBack,
+                          ),
                         ),
                       )
                     ],

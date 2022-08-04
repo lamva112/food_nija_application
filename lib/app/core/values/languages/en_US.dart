@@ -46,4 +46,8 @@ final Map<String, String> en_US = {
   'View more' : 'View More',
   'Popular Menu' : 'Popular Menu',
   'Popular Restaurant' : 'Popular Restaurant',
+  'Type' : 'Type',
+  'Location' : 'Location',
+  'Food' : 'Food',
+  'Search' : 'Search',
 };
