@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
+import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
+import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/features/botttom_navigation%20bar/my_bottom_bar.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/services/auth_service.dart';
@@ -101,17 +105,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextInputWidget(
                       textEditingController: _email,
                       hintText: Translations.of(context).text('Email'),
-                      prefixIcon: const Icon(Icons.mail,color: AppColors.primaryColor,),
-                      validatorText: Translations.of(context).text('Email Validator'),
+                      prefixIcon: const Icon(
+                        Icons.mail,
+                        color: AppColors.primaryColor,
+                      ),
+                      validatorText:
+                          Translations.of(context).text('Email Validator'),
                     ),
                     SizedBox(height: getHeight(20)),
                     TextInputWidget(
                       textEditingController: _password,
                       hintText: Translations.of(context).text('Password'),
-                      prefixIcon: const Icon(Icons.lock,color: AppColors.primaryColor,),
-                      validatorText: Translations.of(context).text('Password Validator'),
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: AppColors.primaryColor,
+                      ),
+                      validatorText:
+                          Translations.of(context).text('Password Validator'),
                       obscureText: obscureText,
-                      suffixIcon: obscureText ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                      suffixIcon: obscureText
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                       onTapSuffixIcon: () {
                         setState(() {
                           obscureText = !obscureText;
@@ -151,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: getHeight(25),),
+            SizedBox(
+              height: getHeight(25),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,31 +205,62 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: getHeight(10)),
-            onTapLogin ? const CircularProgressIndicator()
-            : CustomButton(
-              title: Translations.of(context).text('Login'),
-              onPressed: () async {
-                if (_formKey.currentState?.validate() ?? false) {
-                  setState(() {
-                    onTapLogin = !onTapLogin;
-                  });
-                  await authService.signInEmailandPassword(context: context,email: _email.text, password: _password.text);
-                  setState(() {
-                    onTapLogin = !onTapLogin;
-                  });
-                } else {
-                  _formKey.currentState?.validate();
-                }
-              },
-              height: getHeight(55),
-              witdh: getWidth(160),
-              backgroundColor: AppColors.primaryColor,
-              fontSize: getFont(20),
-              textColor: AppColors.textButtonColor,
-            ),
+            onTapLogin
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    title: Translations.of(context).text('Login'),
+                    onPressed: () async {
+                      _submitFormOnLogin();
+                    },
+                    height: getHeight(55),
+                    witdh: getWidth(160),
+                    backgroundColor: AppColors.primaryColor,
+                    fontSize: getFont(20),
+                    textColor: AppColors.textButtonColor,
+                  ),
+            SizedBox(height: getHeight(48)),
           ],
         ),
       ),
     );
+  }
+
+  void _submitFormOnLogin() async {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      setState(() {
+        onTapLogin = true;
+      });
+      try {
+        await authInstance.signInWithEmailAndPassword(
+            email: _email.text.toLowerCase().trim(),
+            password: _password.text.trim());
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => MyBottomBar(),
+          ),
+        );
+        print('Succefully logged in');
+      } on FirebaseException catch (error) {
+        GlobalMethods.errorDialog(
+            subtitle: '${error.message}', context: context);
+        setState(() {
+          onTapLogin = false;
+        });
+      } catch (error) {
+        GlobalMethods.errorDialog(subtitle: '$error', context: context);
+        setState(() {
+          onTapLogin = false;
+        });
+      } finally {
+        setState(() {
+          onTapLogin = false;
+        });
+      }
+    }
   }
 }
