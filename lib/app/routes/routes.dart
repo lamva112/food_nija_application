@@ -38,72 +38,50 @@ class RouteManager {
           duration: const Duration(milliseconds: 400),
         );
       case infoSignupScreen:
-        User user = args as User;
         return PageTransition(
-          child: SafeArea(
-              child: SafeArea(
-                  child: InfoSignup(
-            user: user,
-          ))),
+          child: SafeArea(child: SafeArea(child: InfoSignup())),
           type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 400),
         );
       case paymentScreen:
-        User user = args as User;
         return PageTransition(
-          child: SafeArea(
-              child: SafeArea(
-                  child: PaymentScreen(
-                    user: user,
-                  ))),
+          child: SafeArea(child: SafeArea(child: PaymentScreen())),
           type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 400),
         );
       case uploadPhotoWay:
-        User user = args as User;
         return PageTransition(
-          child: SafeArea(
-              child: SafeArea(
-                  child: UploadPhotoWay(
-                    user: user,
-                  ))),
+          child: SafeArea(child: SafeArea(child: UploadPhotoWay())),
           type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 400),
         );
-      case uploadPhotoProfile:
-        UploadPhotoScreen obj = args as UploadPhotoScreen;
-        return PageTransition(
-          child: SafeArea(
-              child: SafeArea(
-                  child: UploadPhotoProfile(
-                    imageFile: obj.image,
-                    user: obj.user,
-                  ))),
-          type: PageTransitionType.rightToLeft,
-          duration: const Duration(milliseconds: 400),
-        );
+      // case uploadPhotoProfile:
+      //   UploadPhotoScreen obj = args as UploadPhotoScreen;
+      //   return PageTransition(
+      //     child: SafeArea(
+      //         child: SafeArea(
+      //             child: UploadPhotoProfile(
+      //       imageFile: obj.image,
+      //     ))),
+      //     type: PageTransitionType.rightToLeft,
+      //     duration: const Duration(milliseconds: 400),
+      //   );
       case signupSuccessful:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: SignupSuccessful())),
+          child: const SafeArea(child: SafeArea(child: SignupSuccessful())),
           type: PageTransitionType.size,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
         );
       case homePopularScreen:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: HomePopularScreen())),
+          child: const SafeArea(child: SafeArea(child: HomePopularScreen())),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(milliseconds: 400),
         );
       case filterScreen:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: FilterScreen())),
+          child: const SafeArea(child: SafeArea(child: FilterScreen())),
           type: PageTransitionType.scale,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,

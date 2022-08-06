@@ -44,6 +44,13 @@ dependencies:
   firebase_core: ^1.20.0
   firebase_auth: ^3.6.0
   page_transition: ^2.0.9
+  cloud_firestore: ^3.4.3
+  firebase_storage: ^10.3.4
+  flutter_spinkit: ^5.1.0
+  fluttertoast: ^8.0.9
+  uuid: ^3.0.6
+  geolocator: ^9.0.1
+  geocoding: ^2.0.4
 
 flutter_native_splash:
   color: "#ffffff"

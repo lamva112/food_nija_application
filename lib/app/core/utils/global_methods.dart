@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_wigets/text_widget.dart';
+import 'package:image_picker/image_picker.dart';
 
 class GlobalMethods {
   static navigateTo({required BuildContext ctx, required String routeName}) {
@@ -95,4 +96,13 @@ class GlobalMethods {
           );
         });
   }
+}
+
+pickImage(ImageSource source) async {
+  final ImagePicker _imagePicker = ImagePicker();
+  XFile? _file = await _imagePicker.pickImage(source: source);
+  if (_file != null) {
+    return await _file.readAsBytes();
+  }
+  print('No Image Selected');
 }

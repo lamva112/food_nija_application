@@ -1,18 +1,21 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_wigets/button_back.dart';
 import 'package:food_nija_application/app/common_wigets/button_image.dart';
 import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
 import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/user.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadPhotoWay extends StatefulWidget {
-  final User user;
-  const UploadPhotoWay({Key? key, required this.user}) : super(key: key);
+  const UploadPhotoWay({Key? key}) : super(key: key);
 
   @override
   State<UploadPhotoWay> createState() => _UploadPhotoWayState();
@@ -20,33 +23,43 @@ class UploadPhotoWay extends StatefulWidget {
 
 class _UploadPhotoWayState extends State<UploadPhotoWay> {
   int _index = -1;
-  XFile? imageFile;
+  late Uint8List _file;
 
   void imageSelector(BuildContext context, int index) async {
-    XFile? pickedFile;
     switch (index) {
       case 0:
         {
-            pickedFile = await ImagePicker().pickImage(
-            source: ImageSource.gallery,
-          );
-          if (!mounted) return;
-          UploadPhotoScreen obj = UploadPhotoScreen(user: widget.user, image: pickedFile);
-          Navigator.pushNamed(context, RouteManager.uploadPhotoProfile, arguments: obj);
+          Uint8List file = await pickImage(ImageSource.gallery);
+          setState(() {
+            _file = file;
+          });
+
+          if (_file != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => UploadPhotoProfile(
+                  imageFile: _file,
+                ),
+              ),
+            );
+          }
         }
         break;
       case 1:
         {
-            pickedFile = await ImagePicker().pickImage(
-            source: ImageSource.camera,
-          );
-          if (!mounted) return;
-          UploadPhotoScreen obj = UploadPhotoScreen(user: widget.user, image: pickedFile);
-          Navigator.of(context).pushNamed(RouteManager.uploadPhotoProfile, arguments: obj);
+          Uint8List file = await pickImage(ImageSource.camera);
+          setState(() {
+            _file = file;
+          });
+
+          Navigator.of(context)
+              .pushNamed(RouteManager.uploadPhotoProfile, arguments: _file);
         }
         break;
       default:
-        Navigator.of(context).pushNamed(RouteManager.uploadPhotoProfile, arguments: pickedFile);
+        Navigator.of(context)
+            .pushNamed(RouteManager.uploadPhotoProfile, arguments: _file);
     }
   }
 
@@ -115,6 +128,7 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
                         ),
                         onTap: () => setState(() {
                           _index = index;
+                          print("tap tap");
                         }),
                       );
                     },
@@ -144,7 +158,6 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
         ),
       ),
     );
-
   }
 }
 
