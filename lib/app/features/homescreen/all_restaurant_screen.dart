@@ -4,10 +4,11 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/nearest_restaurant.dart';
+import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/restaurant.dart';
 
-class HomePopularScreen extends StatelessWidget {
-  const HomePopularScreen({Key? key}) : super(key: key);
+class HomeAllRestaurantScreen extends StatelessWidget {
+  const HomeAllRestaurantScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +52,9 @@ class HomePopularScreen extends StatelessWidget {
                         width: getWidth(45),
                         height: getHeight(45),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: AppColors.backgroundColor,
-                            ),
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.backgroundColor,
+                        ),
                         child: const Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
@@ -77,16 +78,24 @@ class HomePopularScreen extends StatelessWidget {
                           fillColor: AppColors.bgButtonBack,
                         ),
                       ),
-                      Container(
-                        width: getWidth(50),
-                        height: getHeight(50),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.bgButtonBack,
-                        ),
-                        child: const Icon(
-                          Icons.toc,
-                          color: AppColors.iconButtonBack,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            RouteManager.filterScreen,
+                          );
+                        },
+                        child: Container(
+                          width: getWidth(50),
+                          height: getHeight(50),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.bgButtonBack,
+                          ),
+                          child: const Icon(
+                            Icons.toc,
+                            color: AppColors.iconButtonBack,
+                          ),
                         ),
                       )
                     ],
@@ -108,8 +117,8 @@ class HomePopularScreen extends StatelessWidget {
                     shrinkWrap: true,
                     children: List.generate(
                       listRestaurant.length,
-                      (index) => NearestRestaurant(
-                          restaurant: listRestaurant[index]),
+                      (index) =>
+                          NearestRestaurant(restaurant: listRestaurant[index]),
                     ),
                   ),
                   SizedBox(height: getHeight(80)),

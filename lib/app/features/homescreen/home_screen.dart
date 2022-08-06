@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_wigets/filter_chip_custom.dart';
 import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
@@ -8,9 +9,19 @@ import 'package:food_nija_application/app/features/homescreen/widget/popular_men
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/restaurant.dart';
+import 'package:food_nija_application/data/models/type_food.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool viewMoreRes = true;
+  bool viewMoreFood = true;
+  late List<String> selectedItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                   vertical: getHeight(20), horizontal: getWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: getHeight(30)),
                   Row(
@@ -82,7 +93,25 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteManager.filterScreen);
+                          Navigator.pushNamed(
+                              context, RouteManager.filterScreen,
+                              arguments: (isCheck, value) {
+                            if (isCheck) {
+                              if (!selectedItems.contains(value)) {
+                                setState(() {
+                                  selectedItems.add(value);
+                                  listTypeFood.firstWhere((obj) => obj.name == value).isChecked = true;
+                                });
+                              }
+                            } else {
+                              if (selectedItems.contains(value)) {
+                                setState(() {
+                                  selectedItems.remove(value);
+                                  listTypeFood.firstWhere((obj) => obj.name == value).isChecked = false;
+                                });
+                              }
+                            }
+                          });
                         },
                         child: Container(
                           width: getWidth(50),
@@ -99,84 +128,114 @@ class HomeScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: getHeight(20)),
-                  Image.asset('assets/images/advertising.png'),
                   SizedBox(height: getHeight(10)),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        Translations.of(context).text('Nearest Restaurant'),
-                        style: TextStyle(
-                          fontSize: getFont(18),
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RouteManager.homePopularScreen);
-                        },
-                        child: Text(
-                          Translations.of(context).text('View more'),
-                          style: TextStyle(
-                            fontSize: getFont(15),
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.iconButtonBack,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getHeight(185),
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NearestRestaurant(
-                            restaurant: listRestaurant[index]);
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(width: getWidth(23)),
-                      itemCount: listRestaurant.length,
+                  Visibility(
+                    visible: selectedItems.isEmpty ? false : true,
+                    child: Wrap(
+                      spacing: getWidth(10),
+                      runSpacing: getHeight(5),
+                      children: selectedItems.map((e) {
+                        return FilterChipCustom(
+                          onSelected: (isChecked, value) {
+                            setState(() {
+                              listTypeFood.firstWhere((obj) => obj.name == value).isChecked = false;
+                              selectedItems.remove(value);
+                            });
+                          },
+                          title: e,
+                          bgColor: AppColors.bgButtonBack,
+                          textColor: AppColors.iconButtonBack,
+                          icon: const Icon(Icons.close, color: AppColors.iconButtonBack,),
+                        );
+                      }).toList(),
                     ),
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      Text(
-                        Translations.of(context).text('Popular Menu'),
-                        style: TextStyle(
-                          fontSize: getFont(18),
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textColor,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          Translations.of(context).text('View more'),
-                          style: TextStyle(
-                            fontSize: getFont(15),
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.iconButtonBack,
+                      SizedBox(height: getHeight(20)),
+                      Image.asset('assets/images/advertising.png'),
+                      SizedBox(height: getHeight(10)),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            Translations.of(context).text('Nearest Restaurant'),
+                            style: TextStyle(
+                              fontSize: getFont(18),
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textColor,
+                            ),
                           ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context,
+                                  RouteManager.homeAllRestaurantScreen);
+                            },
+                            child: Text(
+                              Translations.of(context).text('View more'),
+                              style: TextStyle(
+                                fontSize: getFont(15),
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.iconButtonBack,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: getHeight(185),
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return NearestRestaurant(
+                                restaurant: listRestaurant[index]);
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(width: getWidth(23)),
+                          itemCount: listRestaurant.length,
                         ),
                       ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            Translations.of(context).text('Popular Menu'),
+                            style: TextStyle(
+                              fontSize: getFont(18),
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, RouteManager.homeAllFoodScreen);
+                            },
+                            child: Text(
+                              Translations.of(context).text('View more'),
+                              style: TextStyle(
+                                fontSize: getFont(15),
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.iconButtonBack,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return PopularMenu(food: listFood[index]);
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(height: getHeight(20)),
+                        itemCount: listFood.length,
+                      ),
+                      SizedBox(height: getHeight(80)),
                     ],
                   ),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return PopularMenu(food: listFood[index]);
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        SizedBox(height: getHeight(20)),
-                    itemCount: listFood.length,
-                  ),
-                  SizedBox(height: getHeight(80)),
                 ],
               ),
             )

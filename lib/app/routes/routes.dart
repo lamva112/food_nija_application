@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/features/home_popular_screen/popular_screen.dart';
+import 'package:food_nija_application/app/features/homescreen/all_food_screen.dart';
+import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
@@ -20,7 +21,8 @@ class RouteManager {
   static const String uploadPhotoWay = '/uploadPhotoWayScreen';
   static const String uploadPhotoProfile = '/uploadPhotoProfileScreen';
   static const String signupSuccessful = '/signupSuccessful';
-  static const String homePopularScreen = '/homePopularScreen';
+  static const String homeAllRestaurantScreen = '/homeAllRestaurantScreen';
+  static const String homeAllFoodScreen = '/homeAllFoodScreen';
   static const String filterScreen = '/filterScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -91,22 +93,31 @@ class RouteManager {
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
         );
-      case homePopularScreen:
+      case homeAllRestaurantScreen:
         return PageTransition(
           child: const SafeArea(
               child: SafeArea(
-                  child: HomePopularScreen())),
+                  child: HomeAllRestaurantScreen())),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(milliseconds: 400),
         );
       case filterScreen:
+        Function(bool, String) onSelected = args as Function(bool, String);
         return PageTransition(
-          child: const SafeArea(
+          child: SafeArea(
               child: SafeArea(
-                  child: FilterScreen())),
+                  child: FilterScreen(onSelected: onSelected,))),
           type: PageTransitionType.scale,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
+        );
+      case homeAllFoodScreen:
+        return PageTransition(
+          child: const SafeArea(
+              child: SafeArea(
+                  child: HomeAllFoodScreen())),
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 400),
         );
       default:
         throw const FormatException('Route not found! Check routes again!');
