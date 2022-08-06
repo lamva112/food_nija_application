@@ -8,12 +8,15 @@ import 'package:food_nija_application/app/features/homescreen/widget/popular_men
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/restaurant.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     CustomSize().init(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
@@ -82,7 +85,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteManager.filterScreen);
+                          Navigator.pushNamed(
+                              context, RouteManager.filterScreen);
                         },
                         child: Container(
                           width: getWidth(50),
@@ -116,7 +120,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, RouteManager.homePopularScreen);
+                          Navigator.pushNamed(
+                              context, RouteManager.homePopularScreen);
                         },
                         child: Text(
                           Translations.of(context).text('View more'),
@@ -155,7 +160,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          authService.signOut();
+                        },
                         child: Text(
                           Translations.of(context).text('View more'),
                           style: TextStyle(

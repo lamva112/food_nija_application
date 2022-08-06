@@ -16,7 +16,7 @@ class AppColors {
   static const selectedNavBarColor = Color.fromRGBO(28, 185, 134, 1);
   static const unselectedNavBarColor = Color.fromRGBO(179, 178, 178, 1.0);
   static const itemChildColor = Colors.white;
-
+  static const LocationColor = Color(0xffF6F6F6F6);
   //==========================================================================//
   //LIGHT THEME
   ThemeData lightTheme = ThemeData.light().copyWith(
