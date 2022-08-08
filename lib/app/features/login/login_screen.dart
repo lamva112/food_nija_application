@@ -238,12 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await authInstance.signInWithEmailAndPassword(
             email: _email.text.toLowerCase().trim(),
             password: _password.text.trim());
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => MyBottomBar(),
-          ),
-        );
+        Navigator.pushNamed(context, RouteManager.fetchDataScreen);
         print('Succefully logged in');
       } on FirebaseException catch (error) {
         GlobalMethods.errorDialog(

@@ -1,28 +1,48 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Users {
-  late String? uid;
-  late String? username;
-  late String? alias;
-  late String? firstName;
-  late String? lastName;
-  late String? photoUrl;
+  late String uid;
+  late String username;
+  late String alias;
+  late String firstName;
+  late String lastName;
+  late String photoUrl;
   bool statusLogin;
   bool speciallyNotification;
-  late String? phoneNumber;
-  late String? paymentType;
-  late String? address;
+  late String phoneNumber;
+  late String paymentType;
+  late String address;
   Users({
-    this.uid,
-    this.username,
-    this.photoUrl,
-    this.alias,
-    this.firstName,
-    this.lastName,
+    required this.uid,
+    required this.username,
+    required this.photoUrl,
+    required this.alias,
+    required this.firstName,
+    required this.lastName,
     this.statusLogin = false,
     this.speciallyNotification = false,
-    this.phoneNumber,
-    this.paymentType,
-    this.address,
+    required this.phoneNumber,
+    required this.paymentType,
+    required this.address,
   });
+
+  static Users fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return Users(
+      username: snapshot["username"],
+      uid: snapshot["uid"],
+      alias: snapshot["alias"],
+      photoUrl: snapshot["photoUrl"],
+      firstName: snapshot["firstName"],
+      lastName: snapshot["lastName"],
+      statusLogin: snapshot["statusLogin"],
+      speciallyNotification: snapshot["speciallyNotification"],
+      phoneNumber: snapshot["phoneNumber"],
+      paymentType: snapshot["paymentType"],
+      address: snapshot["address"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "username": username,
@@ -32,6 +52,7 @@ class Users {
         "firstName": firstName,
         "lastName": lastName,
         "photoUrl": photoUrl,
+        "statusLogin": statusLogin,
         "speciallyNotification": speciallyNotification,
         "phoneNumber": phoneNumber,
         "paymentType": paymentType,
