@@ -1,7 +1,9 @@
 class TypeFood {
   String name;
+  bool isChecked;
   TypeFood({
     required this.name,
+    this.isChecked = false,
 });
 }
 

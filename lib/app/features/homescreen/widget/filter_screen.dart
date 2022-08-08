@@ -8,7 +8,8 @@ import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/type_food.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key? key}) : super(key: key);
+  final Function(bool, String) onSelected;
+  const FilterScreen({Key? key, required this.onSelected}) : super(key: key);
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -94,9 +95,11 @@ class _FilterScreenState extends State<FilterScreen> {
                     runSpacing: getHeight(20),
                     children: listTypeFood.map((e) {
                       return FilterChipCustom(
+                        onSelected: widget.onSelected,
                         title: e.name,
                         bgColor: AppColors.bgButtonBack,
                         textColor: AppColors.iconButtonBack,
+                        isChecked: e.isChecked,
                       );
                     }).toList(),
                   ),
@@ -115,9 +118,11 @@ class _FilterScreenState extends State<FilterScreen> {
                     runSpacing: getHeight(20),
                     children: listTypeFood.map((e) {
                       return FilterChipCustom(
+                        onSelected: widget.onSelected,
                         title: e.name,
                         bgColor: AppColors.bgButtonBack,
                         textColor: AppColors.iconButtonBack,
+                        isChecked: e.isChecked,
                       );
                     }).toList(),
                   ),
@@ -136,16 +141,20 @@ class _FilterScreenState extends State<FilterScreen> {
                     runSpacing: getHeight(20),
                     children: listTypeFood.map((e) {
                       return FilterChipCustom(
+                        onSelected: widget.onSelected,
                         title: e.name,
                         bgColor: AppColors.bgButtonBack,
                         textColor: AppColors.iconButtonBack,
+                        isChecked: e.isChecked,
                       );
                     }).toList(),
                   ),
                   SizedBox(height: getHeight(80)),
                   CustomButton(
                     title: Translations.of(context).text('Search'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     witdh: getWidth(500),
                     height: getHeight(57),
                     backgroundColor: AppColors.primaryColor,
