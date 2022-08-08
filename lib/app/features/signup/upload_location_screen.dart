@@ -235,7 +235,7 @@ class _UploadLocationState extends State<UploadLocation> {
     final User? user = authInstance.currentUser;
     final _uid = user!.uid;
 
-    if (location != 'Your Location') {
+    if (location != '') {
       setState(() {
         _isLoading = true;
       });

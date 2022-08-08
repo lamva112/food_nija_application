@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/features/chatscreen/chat_screen.dart';
+import 'package:food_nija_application/app/features/fetch_data_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_food_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
@@ -26,6 +28,8 @@ class RouteManager {
   static const String homeAllFoodScreen = '/homeAllFoodScreen';
   static const String filterScreen = '/filterScreen';
   static const String infoFoodScreen = '/infoFoodScreen';
+  static const String fetchDataScreen = '/fetchDataScreen';
+  static const String chatScreen = '/chatScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -79,9 +83,8 @@ class RouteManager {
         );
       case homeAllRestaurantScreen:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: HomeAllRestaurantScreen())),
+          child:
+              const SafeArea(child: SafeArea(child: HomeAllRestaurantScreen())),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(milliseconds: 400),
         );
@@ -90,24 +93,34 @@ class RouteManager {
         return PageTransition(
           child: SafeArea(
               child: SafeArea(
-                  child: FilterScreen(onSelected: onSelected,))),
+                  child: FilterScreen(
+            onSelected: onSelected,
+          ))),
           type: PageTransitionType.scale,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
         );
       case homeAllFoodScreen:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: HomeAllFoodScreen())),
+          child: const SafeArea(child: SafeArea(child: HomeAllFoodScreen())),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(milliseconds: 400),
         );
       case infoFoodScreen:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: InfoFoodScreen())),
+          child: const SafeArea(child: SafeArea(child: InfoFoodScreen())),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 400),
+        );
+      case fetchDataScreen:
+        return PageTransition(
+          child: SafeArea(child: SafeArea(child: FecthDataScreen())),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 400),
+        );
+      case chatScreen:
+        return PageTransition(
+          child: SafeArea(child: SafeArea(child: ChatScreen())),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 400),
         );

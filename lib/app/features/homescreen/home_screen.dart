@@ -10,6 +10,8 @@ import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/restaurant.dart';
 import 'package:food_nija_application/data/models/type_food.dart';
+import 'package:food_nija_application/data/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     CustomSize().init(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
@@ -68,9 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: AppColors.backgroundColor,
                         ),
-                        child: const Icon(
-                          Icons.notifications,
-                          color: AppColors.selectedNavBarColor,
+                        child: InkWell(
+                          onTap: () {},
+                          child: const Icon(
+                            Icons.notifications,
+                            color: AppColors.selectedNavBarColor,
+                          ),
                         ),
                       )
                     ],
@@ -239,11 +245,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, RouteManager.infoFoodScreen);
+                                Navigator.pushNamed(
+                                    context, RouteManager.infoFoodScreen);
                               },
                               child: PopularMenu(food: listFood[index]));
                         },
-                        separatorBuilder: (_,int i) =>
+                        separatorBuilder: (_, int i) =>
                             SizedBox(height: getHeight(20)),
                         itemCount: listFood.length,
                       ),
