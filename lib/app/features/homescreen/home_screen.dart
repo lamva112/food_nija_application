@@ -225,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return PopularMenu(food: listFood[index]);

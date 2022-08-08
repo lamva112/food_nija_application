@@ -139,7 +139,7 @@ class _UploadLocationState extends State<UploadLocation> {
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(22.0),
-                                        color: AppColors.LocationColor,
+                                        color: AppColors.locationColor,
                                       ),
                                       child: Center(
                                         child: Text(
