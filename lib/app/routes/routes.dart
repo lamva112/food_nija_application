@@ -1,15 +1,16 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/homescreen/all_food_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
+import 'package:food_nija_application/app/features/info_food/info_food_screen.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_succesfull.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
-import 'package:food_nija_application/app/routes/parameters_routes.dart';
-import 'package:food_nija_application/data/models/user.dart';
 import 'package:page_transition/page_transition.dart';
 import '../features/login/login_screen.dart';
 
@@ -24,6 +25,7 @@ class RouteManager {
   static const String homeAllRestaurantScreen = '/homeAllRestaurantScreen';
   static const String homeAllFoodScreen = '/homeAllFoodScreen';
   static const String filterScreen = '/filterScreen';
+  static const String infoFoodScreen = '/infoFoodScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -57,17 +59,17 @@ class RouteManager {
           type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 400),
         );
-      // case uploadPhotoProfile:
-      //   UploadPhotoScreen obj = args as UploadPhotoScreen;
-      //   return PageTransition(
-      //     child: SafeArea(
-      //         child: SafeArea(
-      //             child: UploadPhotoProfile(
-      //       imageFile: obj.image,
-      //     ))),
-      //     type: PageTransitionType.rightToLeft,
-      //     duration: const Duration(milliseconds: 400),
-      //   );
+      case uploadPhotoProfile:
+        Uint8List obj = args as Uint8List;
+        return PageTransition(
+          child: SafeArea(
+              child: SafeArea(
+                  child: UploadPhotoProfile(
+            imageFile: obj,
+          ))),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
+        );
       case signupSuccessful:
         return PageTransition(
           child: const SafeArea(child: SafeArea(child: SignupSuccessful())),
@@ -99,6 +101,14 @@ class RouteManager {
               child: SafeArea(
                   child: HomeAllFoodScreen())),
           type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 400),
+        );
+      case infoFoodScreen:
+        return PageTransition(
+          child: const SafeArea(
+              child: SafeArea(
+                  child: InfoFoodScreen())),
+          type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 400),
         );
       default:

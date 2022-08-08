@@ -50,4 +50,5 @@ final Map<String, String> vi_VN = {
   'Location' : 'Vị trí',
   'Food' : 'Đồ ăn',
   'Search' : 'Tìm Kiếm',
+  'Reviews' : 'Đánh giá',
 };

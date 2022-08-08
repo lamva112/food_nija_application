@@ -100,14 +100,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (!selectedItems.contains(value)) {
                                 setState(() {
                                   selectedItems.add(value);
-                                  listTypeFood.firstWhere((obj) => obj.name == value).isChecked = true;
+                                  listTypeFood
+                                      .firstWhere((obj) => obj.name == value)
+                                      .isChecked = true;
                                 });
                               }
                             } else {
                               if (selectedItems.contains(value)) {
                                 setState(() {
                                   selectedItems.remove(value);
-                                  listTypeFood.firstWhere((obj) => obj.name == value).isChecked = false;
+                                  listTypeFood
+                                      .firstWhere((obj) => obj.name == value)
+                                      .isChecked = false;
                                 });
                               }
                             }
@@ -138,14 +142,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         return FilterChipCustom(
                           onSelected: (isChecked, value) {
                             setState(() {
-                              listTypeFood.firstWhere((obj) => obj.name == value).isChecked = false;
+                              listTypeFood
+                                  .firstWhere((obj) => obj.name == value)
+                                  .isChecked = false;
                               selectedItems.remove(value);
                             });
                           },
                           title: e,
                           bgColor: AppColors.bgButtonBack,
                           textColor: AppColors.iconButtonBack,
-                          icon: const Icon(Icons.close, color: AppColors.iconButtonBack,),
+                          icon: const Icon(
+                            Icons.close,
+                            color: AppColors.iconButtonBack,
+                          ),
                         );
                       }).toList(),
                     ),
@@ -225,12 +234,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
-                          return PopularMenu(food: listFood[index]);
+                          return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, RouteManager.infoFoodScreen);
+                              },
+                              child: PopularMenu(food: listFood[index]));
                         },
-                        separatorBuilder: (BuildContext context, int index) =>
+                        separatorBuilder: (_,int i) =>
                             SizedBox(height: getHeight(20)),
                         itemCount: listFood.length,
                       ),

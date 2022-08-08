@@ -33,17 +33,14 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
           setState(() {
             _file = file;
           });
-
-          if (_file != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => UploadPhotoProfile(
-                  imageFile: _file,
-                ),
-              ),
-            );
+          if(!mounted){
+            return;
           }
+          Navigator.pushNamed(
+              context,
+              RouteManager.uploadPhotoProfile,
+              arguments: _file
+          );
         }
         break;
       case 1:

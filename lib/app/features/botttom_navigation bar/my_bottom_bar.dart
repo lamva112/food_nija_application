@@ -4,7 +4,6 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/home_screen.dart';
-import 'package:food_nija_application/app/features/info_food/info_food_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 
 class MyBottomBar extends StatefulWidget {
@@ -17,10 +16,10 @@ class MyBottomBar extends StatefulWidget {
 class _MyBottomBarState extends State<MyBottomBar> {
   int index = 0;
   List<Widget> pages = const [
-    InfoFoodScreen(),
+    HomeScreen(),
     SignupScreen(),
     HomeScreen(),
-    InfoFoodScreen(),
+    Scaffold(),
   ];
 
   @override

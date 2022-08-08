@@ -11,12 +11,11 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/loading_screen.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/user.dart';
 
 import '../../core/utils/firebase_consts.dart';
 
 class InfoSignup extends StatefulWidget {
-  InfoSignup({Key? key}) : super(key: key);
+  const InfoSignup({Key? key}) : super(key: key);
 
   @override
   State<InfoSignup> createState() => _InfoSignupState();
@@ -24,13 +23,9 @@ class InfoSignup extends StatefulWidget {
 
 class _InfoSignupState extends State<InfoSignup> {
   final _firstName = TextEditingController();
-
   final _lastName = TextEditingController();
-
   final _phoneNumber = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
   bool _isLoading = false;
 
   @override

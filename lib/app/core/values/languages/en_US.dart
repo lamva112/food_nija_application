@@ -50,4 +50,5 @@ final Map<String, String> en_US = {
   'Location' : 'Location',
   'Food' : 'Food',
   'Search' : 'Search',
+  'Reviews' : 'Reviews',
 };

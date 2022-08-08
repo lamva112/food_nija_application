@@ -1,5 +1,3 @@
-import 'package:food_nija_application/data/models/restaurant.dart';
-
 class Restaurant {
   String image;
   String resName;

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_wigets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
+import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/core/values/strings.dart';
+import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
+import 'package:food_nija_application/data/models/review.dart';
 
 class InfoFoodScreen extends StatefulWidget {
   const InfoFoodScreen({Key? key}) : super(key: key);
@@ -31,7 +35,9 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   Icons.arrow_back,
                   color: AppColors.itemChildColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
@@ -81,8 +87,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
               )),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(left: getWidth(30)),
+              padding: EdgeInsets.only(left: getWidth(25), right: getWidth(15)),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,30 +125,78 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: getHeight(10)),
+                  SizedBox(height: getHeight(20)),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const RatingBar.readOnly(
-                        filledIcon: Icons.star,
-                        emptyIcon: Icons.star_border,
-                        halfFilledIcon: Icons.star_half,
-                        filledColor: AppColors.primaryColor,
-                        initialRating: 3.5,
-                        isHalfAllowed: true,
-                        size: 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: getWidth(10)),
-                        child: Text(
-                          '3.5',
-                          style: TextStyle(
-                            fontSize: getFont(18),
-                            color: AppColors.textColor,
+                      Row(
+                        children: [
+                          const RatingBar.readOnly(
+                            filledIcon: Icons.star,
+                            emptyIcon: Icons.star_border,
+                            halfFilledIcon: Icons.star_half,
+                            filledColor: AppColors.primaryColor,
+                            initialRating: 3.5,
+                            isHalfAllowed: true,
+                            size: 20,
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(left: getWidth(10)),
+                            child: Text(
+                              '3.5',
+                              style: TextStyle(
+                                fontSize: getFont(18),
+                                color: AppColors.textColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.shopping_bag,
+                            color: AppColors.primaryColor,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: getWidth(10)),
+                            child: Text(
+                              '1000 Orders',
+                              style: TextStyle(
+                                fontSize: getFont(18),
+                                color: AppColors.textColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       )
                     ],
                   ),
+                  SizedBox(height: getHeight(20)),
+                  Text(
+                    test,
+                    style: TextStyle(
+                      fontSize: getFont(15),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(15)),
+                  Text(
+                    Translations.of(context).text('Reviews'),
+                    style: TextStyle(
+                      fontSize: getFont(20),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(15)),
+                  ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (_, int index) {
+                        return ReviewFood(review: listReview[index]);
+                      },
+                      separatorBuilder: (_, int i) =>
+                          SizedBox(height: getHeight(10)),
+                      itemCount: listReview.length)
                 ],
               ),
             ),

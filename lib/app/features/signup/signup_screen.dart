@@ -227,9 +227,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 fontSize: getFont(20),
                 textColor: AppColors.textButtonColor,
               ),
-              SizedBox(
-                height: 48,
-              ),
+              SizedBox(height: getHeight(48)),
             ],
           ),
         ),
@@ -272,7 +270,6 @@ class _SignupScreenState extends State<SignupScreen> {
             .doc(_uid)
             .set(_user.toJson());
         Navigator.pushNamed(context, RouteManager.infoSignupScreen);
-        print('Succefully registered');
       } on FirebaseException catch (error) {
         GlobalMethods.errorDialog(
             subtitle: '${error.message}', context: context);
