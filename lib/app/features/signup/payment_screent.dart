@@ -97,7 +97,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           _updateUserInfomation(card: card);
                         },
                         height: getHeight(55),
-                        witdh: getWidth(160),
+                        width: getWidth(160),
                         backgroundColor: AppColors.primaryColor,
                         fontSize: getFont(20),
                         textColor: AppColors.textButtonColor,

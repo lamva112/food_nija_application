@@ -213,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _submitFormOnLogin();
                     },
                     height: getHeight(55),
-                    witdh: getWidth(160),
+                    width: getWidth(160),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),
                     textColor: AppColors.textButtonColor,

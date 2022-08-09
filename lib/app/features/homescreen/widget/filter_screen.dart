@@ -155,7 +155,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    witdh: getWidth(500),
+                    width: getWidth(500),
                     height: getHeight(57),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),

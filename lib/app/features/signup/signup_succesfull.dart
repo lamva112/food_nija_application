@@ -55,7 +55,7 @@ class SignupSuccessful extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(context, RouteManager.loginScreen, (route) => false);
                     },
                     height: getHeight(55),
-                    witdh: getWidth(160),
+                    width: getWidth(160),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),
                     textColor: AppColors.textButtonColor,

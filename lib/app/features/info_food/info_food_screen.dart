@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_wigets/custom_button.dart';
 import 'package:food_nija_application/app/common_wigets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
@@ -190,18 +191,31 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   SizedBox(height: getHeight(15)),
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (_, int index) {
-                        return ReviewFood(review: listReview[index]);
-                      },
-                      separatorBuilder: (_, int i) =>
-                          SizedBox(height: getHeight(10)),
-                      itemCount: listReview.length)
+                    shrinkWrap: true,
+                    itemBuilder: (_, int index) {
+                      return ReviewFood(review: listReview[index]);
+                    },
+                    separatorBuilder: (_, int i) =>
+                        SizedBox(height: getHeight(10)),
+                    itemCount: listReview.length,
+                  ),
+                  SizedBox(height: getHeight(80)),
                 ],
               ),
             ),
           ),
         ],
+      ),
+      floatingActionButton: CustomButton(
+        title: Translations.of(context).text('Add To Cart'),
+        onPressed: () {
+          print('abc');
+        },
+        height: getHeight(55),
+        width: getWidth(340),
+        backgroundColor: AppColors.primaryColor,
+        fontSize: getFont(20),
+        textColor: AppColors.textButtonColor,
       ),
     );
   }
