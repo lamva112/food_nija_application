@@ -4,7 +4,8 @@ import 'package:food_nija_application/app/common_wigets/custom_bottom_navigation
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/chatscreen/chat_screen.dart';
+import 'package:food_nija_application/app/features/chat/chat_screen.dart';
+
 import 'package:food_nija_application/app/features/homescreen/home_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 
