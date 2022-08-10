@@ -7,6 +7,8 @@ import 'package:food_nija_application/app/features/homescreen/all_food_screen.da
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
 import 'package:food_nija_application/app/features/info_food/info_food_screen.dart';
+import 'package:food_nija_application/app/features/shopping_cart/confirm_order.dart';
+import 'package:food_nija_application/app/features/shopping_cart/order_successful.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
@@ -33,6 +35,8 @@ class RouteManager {
   static const String fetchDataScreen = '/fetchDataScreen';
   static const String chatScreen = '/chatScreen';
   static const String uploadLocation = '/uploadLocation';
+  static const String confirmOrder = '/confirmOrder';
+  static const String orderSuccessful = '/orderSuccessful';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -128,7 +132,7 @@ class RouteManager {
         );
       case fetchDataScreen:
         return PageTransition(
-          child: SafeArea(child: SafeArea(child: FecthDataScreen())),
+          child: const SafeArea(child: SafeArea(child: FecthDataScreen())),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 400),
         );
@@ -137,6 +141,19 @@ class RouteManager {
           child: SafeArea(child: SafeArea(child: ChatScreen())),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 400),
+        );
+      case confirmOrder:
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: ConfirmOrder())),
+          type: PageTransitionType.rightToLeft,
+          duration: const Duration(milliseconds: 400),
+        );
+      case orderSuccessful:
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: OrderSuccessful())),
+          type: PageTransitionType.scale,
+          duration: const Duration(milliseconds: 400),
+          alignment: Alignment.center,
         );
       default:
         throw const FormatException('Route not found! Check routes again!');

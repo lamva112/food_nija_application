@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/shopping_cart/widget/order_food_card.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/order.dart';
 
-class ShoppingCartScreen extends StatefulWidget {
-  const ShoppingCartScreen({Key? key}) : super(key: key);
+class ConfirmOrder extends StatelessWidget {
+  const ConfirmOrder({Key? key}) : super(key: key);
 
-  @override
-  State<ShoppingCartScreen> createState() => _ShoppingCartScreenState();
-}
-
-class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +28,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const ButtonBack(),
                   SizedBox(height: getHeight(20)),
                   Text(
-                    Translations.of(context).text('Order details'),
+                    Translations.of(context).text('Confirm Order'),
                     style: TextStyle(
                       fontSize: getFont(25),
                       fontWeight: FontWeight.bold,
@@ -45,20 +40,136 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   Container(
                     height: getHeight(410),
                     padding: EdgeInsets.symmetric(vertical: getHeight(10)),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext _, int index) {
-                        return OrderFoodCard(
-                          orderDetails: order.listOrderDetails![index],
-                          onPressed: (context) {
-                            setState(() {
-                              order.listOrderDetails
-                                  ?.remove(order.listOrderDetails![index]);
-                            });
-                          },
-                        );
-                      },
-                      itemCount: order.listOrderDetails?.length,
+                    child: Column(
+                      children: [
+                        Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(22),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getWidth(10),
+                                vertical: getHeight(15)),
+                            height: getHeight(100),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      Translations.of(context)
+                                          .text('Deliver To'),
+                                      style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: getFont(18),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        Translations.of(context).text('Edit'),
+                                        style: TextStyle(
+                                          color: AppColors.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: getFont(14),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: getHeight(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Image.asset('assets/images/PinLogo.png'),
+                                    SizedBox(width: getWidth(15)),
+                                    Text(
+                                      '4517 Washington Ave. Manchester,\nKentucky 39495',
+                                      style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: getFont(16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(22),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getWidth(10),
+                                vertical: getHeight(15)),
+                            height: getHeight(100),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      Translations.of(context)
+                                          .text('Payment method'),
+                                      style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: getFont(18),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        Translations.of(context).text('Edit'),
+                                        style: TextStyle(
+                                          color: AppColors.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: getFont(14),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: getHeight(15)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/paypal.png',
+                                      width: getWidth(90),
+                                      height: getHeight(25),
+                                    ),
+                                    SizedBox(width: getWidth(15)),
+                                    Text(
+                                      '2121 6352 8465 ****',
+                                      style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: getFont(16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(height: getHeight(20)),
@@ -170,8 +281,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           ]),
                         ),
                         InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, RouteManager.confirmOrder);
+                          onTap: () {
+                            Navigator.pushNamed(context, RouteManager.orderSuccessful);
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: getHeight(8)),
