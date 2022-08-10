@@ -55,6 +55,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   lottie: ^1.4.1
   iconsax: ^0.0.8
+  flutter_slidable: ^2.0.0
 flutter_native_splash:
   color: "#ffffff"
   color_dark: '#000000'

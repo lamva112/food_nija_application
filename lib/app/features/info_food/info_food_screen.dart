@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/core/values/strings.dart';
 import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
+import 'package:food_nija_application/data/models/food.dart';
+import 'package:food_nija_application/data/models/order.dart';
+import 'package:food_nija_application/data/models/order_detail.dart';
 import 'package:food_nija_application/data/models/review.dart';
 
 class InfoFoodScreen extends StatefulWidget {
-  const InfoFoodScreen({Key? key}) : super(key: key);
+  final Food food;
+  const InfoFoodScreen({Key? key, required this.food}) : super(key: key);
 
   @override
   State<InfoFoodScreen> createState() => _InfoFoodScreenState();
@@ -61,7 +66,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                         fit: StackFit.expand, // expand stack
                         children: [
                           Image.asset(
-                            'assets/images/bg_info_food.png',
+                            widget.food.image,
                             fit: BoxFit.cover,
                           ),
                           Positioned(
@@ -98,7 +103,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       SizedBox(
                         width: getWidth(220),
                         child: Text(
-                          'Rainbow Sandwich Sugarless',
+                          widget.food.name,
                           style: TextStyle(
                             fontSize: getFont(27),
                             color: AppColors.textColor,
@@ -159,7 +164,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                             color: AppColors.primaryColor,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: getWidth(10)),
+                            padding: EdgeInsets.only(left: getWidth(5)),
                             child: Text(
                               '1000 Orders',
                               style: TextStyle(
@@ -190,18 +195,38 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   SizedBox(height: getHeight(15)),
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (_, int index) {
-                        return ReviewFood(review: listReview[index]);
-                      },
-                      separatorBuilder: (_, int i) =>
-                          SizedBox(height: getHeight(10)),
-                      itemCount: listReview.length)
+                    shrinkWrap: true,
+                    itemBuilder: (_, int index) {
+                      return ReviewFood(review: listReview[index]);
+                    },
+                    separatorBuilder: (_, int i) =>
+                        SizedBox(height: getHeight(10)),
+                    itemCount: listReview.length,
+                  ),
+                  SizedBox(height: getHeight(80)),
                 ],
               ),
             ),
           ),
         ],
+      ),
+      floatingActionButton: CustomButton(
+        title: Translations.of(context).text('Add To Cart'),
+        onPressed: () {
+          order.listOrderDetails?.add(OrderDetails(
+              id: '1',
+              image: widget.food.image,
+              name: widget.food.name,
+              description: widget.food.description,
+              quantity: 1,
+              price: widget.food.price));
+          Navigator.pop(context);
+        },
+        height: getHeight(55),
+        width: getWidth(340),
+        backgroundColor: AppColors.primaryColor,
+        fontSize: getFont(20),
+        textColor: AppColors.textButtonColor,
       ),
     );
   }

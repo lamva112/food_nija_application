@@ -1,17 +1,13 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/button_image.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
+import 'package:food_nija_application/app/common_widgets/button_image.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
-import 'package:food_nija_application/app/routes/parameters_routes.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/user.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadPhotoWay extends StatefulWidget {
@@ -142,7 +138,7 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
                         imageSelector(context, _index);
                       },
                       height: getHeight(55),
-                      witdh: getWidth(160),
+                      width: getWidth(160),
                       backgroundColor: AppColors.primaryColor,
                       fontSize: getFont(20),
                       textColor: AppColors.textButtonColor,

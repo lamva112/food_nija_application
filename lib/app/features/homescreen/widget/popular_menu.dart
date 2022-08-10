@@ -29,16 +29,19 @@ class PopularMenu extends StatelessWidget {
               height: getWidth(65),
             ),
           ),
-          SizedBox(width: getHeight(20)),
+          SizedBox(width: getHeight(15)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                food.name,
-                style: TextStyle(
-                  fontSize: getFont(18),
-                  color: AppColors.textColor,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                width: getWidth(140),
+                child: Text(
+                  food.name,
+                  style: TextStyle(
+                    fontSize: getFont(18),
+                    color: AppColors.textColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SizedBox(height: getHeight(5)),
@@ -51,7 +54,7 @@ class PopularMenu extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: getWidth(70)),
+          SizedBox(width: getWidth(30)),
           Text(
             '\$${food.price}',
             style: TextStyle(

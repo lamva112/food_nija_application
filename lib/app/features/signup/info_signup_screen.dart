@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
-import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
@@ -110,7 +110,7 @@ class _InfoSignupState extends State<InfoSignup> {
                           );
                         },
                         height: getHeight(55),
-                        witdh: getWidth(160),
+                        width: getWidth(160),
                         backgroundColor: AppColors.primaryColor,
                         fontSize: getFont(20),
                         textColor: AppColors.textButtonColor,

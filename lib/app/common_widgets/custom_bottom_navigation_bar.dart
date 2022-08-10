@@ -118,7 +118,6 @@ class _ItemWidgetState extends State<_ItemWidget> {
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
             width: widget.isSelected ? 130 : 50,
             child: Row(
               mainAxisSize: MainAxisSize.min,

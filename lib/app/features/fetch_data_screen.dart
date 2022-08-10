@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class FecthDataScreen extends StatefulWidget {
-  FecthDataScreen({Key? key}) : super(key: key);
+  const FecthDataScreen({Key? key}) : super(key: key);
 
   @override
   State<FecthDataScreen> createState() => _FecthDataScreenState();
@@ -22,7 +22,7 @@ class _FecthDataScreenState extends State<FecthDataScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => MyBottomBar(),
+          builder: (_) => const MyBottomBar(),
         ),
       );
     });

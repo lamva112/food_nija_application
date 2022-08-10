@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -55,7 +55,7 @@ class SignupSuccessful extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(context, RouteManager.loginScreen, (route) => false);
                     },
                     height: getHeight(55),
-                    witdh: getWidth(160),
+                    width: getWidth(160),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),
                     textColor: AppColors.textButtonColor,

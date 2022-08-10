@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
@@ -13,12 +12,9 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/loading_screen.dart';
 import 'package:food_nija_application/app/features/signup/upload_location_screen.dart';
-
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/user.dart';
 import 'package:food_nija_application/data/services/auth_service.dart';
 import 'package:food_nija_application/data/services/storage_methods.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class UploadPhotoProfile extends StatefulWidget {
@@ -99,7 +95,7 @@ class _UploadPhotoProfileState extends State<UploadPhotoProfile> {
                           _updateUserImage(imageFile: widget.imageFile);
                         },
                         height: getHeight(55),
-                        witdh: getWidth(160),
+                        width: getWidth(160),
                         backgroundColor: AppColors.primaryColor,
                         fontSize: getFont(20),
                         textColor: AppColors.textButtonColor,
@@ -135,11 +131,9 @@ class _UploadPhotoProfileState extends State<UploadPhotoProfile> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
       );
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(
-          builder: (_) => UploadLocation(),
-        ),
+        RouteManager.uploadLocation,
       );
     } catch (error) {
       GlobalMethods.errorDialog(subtitle: '$error', context: context);

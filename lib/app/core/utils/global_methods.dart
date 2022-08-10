@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/text_widget.dart';
+import 'package:food_nija_application/app/common_widgets/text_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GlobalMethods {

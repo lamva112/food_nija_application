@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/change_notifies/user_provider.dart';
-import 'package:food_nija_application/app/common_wigets/custom_bottom_navigation_bar.dart';
+import 'package:food_nija_application/app/common_widgets/custom_bottom_navigation_bar.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/chat/chat_screen.dart';
 
 import 'package:food_nija_application/app/features/homescreen/home_screen.dart';
+import 'package:food_nija_application/app/features/shopping_cart/shopping_cart_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 
 class MyBottomBar extends StatefulWidget {
@@ -19,32 +19,21 @@ class MyBottomBar extends StatefulWidget {
 class _MyBottomBarState extends State<MyBottomBar> {
   int index = 0;
   List<Widget> pages = [
-    HomeScreen(),
-    SignupScreen(),
-    HomeScreen(),
+    const HomeScreen(),
+    const SignupScreen(),
+    const ShoppingCartScreen(),
     ChatScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          pages[index],
-          Positioned(
-            left: 0,
-            bottom: 0,
-            right: 0,
-            child: Container(
-              margin: EdgeInsets.symmetric(
-                  horizontal: getWidth(15), vertical: getHeight(10)),
-              child: buildBottomNavigation(),
-            ),
-          ),
-        ],
+      body: pages[index],
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(left: getWidth(30)),
+        child: buildBottomNavigation(),
       ),
     );
   }
