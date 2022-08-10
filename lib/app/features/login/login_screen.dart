@@ -7,7 +7,6 @@ import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/botttom_navigation%20bar/my_bottom_bar.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/services/auth_service.dart';

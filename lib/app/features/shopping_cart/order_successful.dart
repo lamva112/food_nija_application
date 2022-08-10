@@ -3,10 +3,9 @@ import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/routes/routes.dart';
-
-class SignupSuccessful extends StatelessWidget {
-  const SignupSuccessful({Key? key}) : super(key: key);
+import 'package:food_nija_application/app/features/homescreen/home_screen.dart';
+class OrderSuccessful extends StatelessWidget {
+  const OrderSuccessful({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class SignupSuccessful extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(35)),
                   Text(
-                    Translations.of(context).text('Congrats'),
+                    Translations.of(context).text('Order Successful'),
                     style: TextStyle(
                         fontSize: getFont(35),
                         fontWeight: FontWeight.bold,
@@ -42,16 +41,16 @@ class SignupSuccessful extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(15)),
                   Text(
-                    Translations.of(context).text('Your Account Is Ready To Use'),
+                    Translations.of(context).text('Thanks Order'),
                     style: TextStyle(
-                        fontSize: getFont(22),
-                        fontWeight: FontWeight.bold,),
+                      fontSize: getFont(22),
+                      fontWeight: FontWeight.bold,),
                   ),
                   SizedBox(height: getHeight(220)),
                   CustomButton(
                     title: Translations.of(context).text('Next'),
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, RouteManager.loginScreen, (route) => false);
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext _ ) => const HomeScreen() ), (route) => false);
                     },
                     height: getHeight(55),
                     width: getWidth(160),

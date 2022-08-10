@@ -5,16 +5,17 @@ import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/order_detail.dart';
 
 class OrderFoodCard extends StatefulWidget {
+  final Function(BuildContext)? onPressed;
   final OrderDetails orderDetails;
 
-  const OrderFoodCard({Key? key, required this.orderDetails}) : super(key: key);
+  const OrderFoodCard({Key? key, required this.orderDetails, this.onPressed}) : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
 }
 
 class _OrderFoodCardState extends State<OrderFoodCard> {
-  int count = 0;
+  late int count = widget.orderDetails.quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
           motion: const StretchMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) async {},
+              onPressed: widget.onPressed,
               backgroundColor: AppColors.priceTextColor,
               foregroundColor: Colors.white,
               icon: Icons.delete,
