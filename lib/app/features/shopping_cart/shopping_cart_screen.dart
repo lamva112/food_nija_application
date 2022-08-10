@@ -54,15 +54,6 @@ class ShoppingCartScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: CustomButton(
-        title: Translations.of(context).text('Next'),
-        onPressed: () {},
-        height: getHeight(55),
-        width: getWidth(160),
-        backgroundColor: AppColors.primaryColor,
-        fontSize: getFont(20),
-        textColor: AppColors.textButtonColor,
-      ),
     );
   }
 }
