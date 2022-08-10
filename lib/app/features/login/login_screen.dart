@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
-import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';

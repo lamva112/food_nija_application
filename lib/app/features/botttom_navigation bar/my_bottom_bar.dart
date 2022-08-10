@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/custom_bottom_navigation_bar.dart';
+import 'package:food_nija_application/app/common_widgets/custom_bottom_navigation_bar.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/home_screen.dart';
+import 'package:food_nija_application/app/features/shopping_cart/shopping_cart_screen.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
 
 class MyBottomBar extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MyBottomBarState extends State<MyBottomBar> {
   List<Widget> pages = const [
     HomeScreen(),
     SignupScreen(),
-    HomeScreen(),
+    ShoppingCartScreen(),
     Scaffold(),
   ];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/filter_chip_custom.dart';
-import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
+import 'package:food_nija_application/app/common_widgets/filter_chip_custom.dart';
+import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -239,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, RouteManager.infoFoodScreen);
+                                Navigator.pushNamed(context, RouteManager.infoFoodScreen, arguments: listFood[index]);
                               },
                               child: PopularMenu(food: listFood[index]));
                         },

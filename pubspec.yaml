@@ -53,6 +53,7 @@ dependencies:
   geocoding: ^2.0.4
   intl: ^0.17.0
   flutter_rating_bar: ^4.0.1
+  flutter_slidable: ^2.0.0
 
 flutter_native_splash:
   color: "#ffffff"

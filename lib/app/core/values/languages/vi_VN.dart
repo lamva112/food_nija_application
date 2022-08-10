@@ -52,4 +52,5 @@ final Map<String, String> vi_VN = {
   'Search' : 'Tìm Kiếm',
   'Reviews' : 'Đánh giá',
   'Add To Cart' : 'Thêm vào giỏ hàng',
+  'Order details' : 'Chi tiết đặt hàng',
 };

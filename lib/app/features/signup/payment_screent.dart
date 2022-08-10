@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/button_image.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
+import 'package:food_nija_application/app/common_widgets/button_image.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
@@ -12,7 +12,6 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/loading_screen.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/models/user.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -80,7 +79,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           onTap: () => setState(() {
                             _index = index;
                             card = checkPayment(index);
-                            print("$card");
                           }),
                         );
                       },
@@ -94,7 +92,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       child: CustomButton(
                         title: Translations.of(context).text('Next'),
                         onPressed: () {
-                          _updateUserInfomation(card: card);
+                          _updateUserInformation(card: card);
                         },
                         height: getHeight(55),
                         width: getWidth(160),
@@ -115,16 +113,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   String checkPayment(int num) {
     String card = '';
-    if (num == 0)
+    if (num == 0) {
       card = "PayPal";
-    else if (num == 1)
+    } else if (num == 1) {
       card = "Visa";
-    else
-      card = "payoneer";
+    } else {
+      card = "Payoneer";
+    }
     return card;
   }
 
-  void _updateUserInfomation({
+  void _updateUserInformation({
     required String card,
   }) async {
     FocusScope.of(context).unfocus();
