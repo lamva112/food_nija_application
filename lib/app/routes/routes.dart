@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/features/chatscreen/chat_screen.dart';
+import 'package:food_nija_application/app/features/chat/chat_screen.dart';
+
 import 'package:food_nija_application/app/features/fetch_data_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_food_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
