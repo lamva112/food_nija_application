@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
-import 'package:food_nija_application/app/common_wigets/filter_chip_custom.dart';
-import 'package:food_nija_application/app/common_wigets/text_form_field.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/filter_chip_custom.dart';
+import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -155,7 +155,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    witdh: getWidth(500),
+                    width: getWidth(500),
                     height: getHeight(57),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),

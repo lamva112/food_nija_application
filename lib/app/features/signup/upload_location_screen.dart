@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:food_nija_application/app/common_wigets/button_back.dart';
-import 'package:food_nija_application/app/common_wigets/custom_button.dart';
+import 'package:food_nija_application/app/common_widgets/button_back.dart';
+import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
@@ -25,7 +25,7 @@ class _UploadLocationState extends State<UploadLocation> {
   bool onTapRegister = false;
   bool _isLoading = false;
   String location = 'Your Location';
-  String Address = 'search';
+  String address = 'search';
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _UploadLocationState extends State<UploadLocation> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(22.0),
                             color: Colors.white,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.white24,
                                 blurRadius: 2.0,
@@ -94,13 +94,11 @@ class _UploadLocationState extends State<UploadLocation> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 20,
+                                height: getHeight(20),
                               ),
                               Row(
                                 children: [
-                                  SizedBox(
-                                    height: 11,
-                                  ),
+                                  SizedBox(height: getHeight(15)),
                                   SizedBox(
                                     width: getWidth(33),
                                     height: getWidth(33),
@@ -108,10 +106,10 @@ class _UploadLocationState extends State<UploadLocation> {
                                         'assets/images/PinLogo.png'),
                                   ),
                                   SizedBox(
-                                    width: 14,
+                                    width: getWidth(15)
                                   ),
                                   Text(
-                                    '${Address}',
+                                    address,
                                     style: TextStyle(
                                       fontSize: getFont(15),
                                       fontWeight: FontWeight.bold,
@@ -120,7 +118,7 @@ class _UploadLocationState extends State<UploadLocation> {
                                 ],
                               ),
                               SizedBox(
-                                height: 33,
+                                height: getHeight(33)
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +129,7 @@ class _UploadLocationState extends State<UploadLocation> {
                                           await _getGeoLocationPosition();
                                       location =
                                           'Lat: ${position.latitude} , Long: ${position.longitude}';
-                                      GetAddressFromLatLong(position);
+                                      getAddressFromLatLong(position);
                                     },
                                     child: Container(
                                       height: 57,
@@ -164,10 +162,10 @@ class _UploadLocationState extends State<UploadLocation> {
                       child: CustomButton(
                         title: Translations.of(context).text('Next'),
                         onPressed: () async {
-                          _updateLocation(address: Address);
+                          _updateLocation(address: address);
                         },
                         height: getHeight(55),
-                        witdh: getWidth(160),
+                        width: getWidth(160),
                         backgroundColor: AppColors.primaryColor,
                         fontSize: getFont(20),
                         textColor: AppColors.textButtonColor,
@@ -218,13 +216,12 @@ class _UploadLocationState extends State<UploadLocation> {
         desiredAccuracy: LocationAccuracy.high);
   }
 
-  Future<void> GetAddressFromLatLong(Position position) async {
+  Future<void> getAddressFromLatLong(Position position) async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     print(placemarks);
     Placemark place = placemarks[0];
-    Address =
-        '${place.street}, ${place.subLocality}, ${place.locality},  ${place.country}';
+    address = '${place.street}, ${place.subLocality}, ${place.locality},  ${place.country}';
     setState(() {});
   }
 
