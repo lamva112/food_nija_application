@@ -3,10 +3,6 @@ import 'package:food_nija_application/app/common_widgets/text_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GlobalMethods {
-  static navigateTo({required BuildContext ctx, required String routeName}) {
-    Navigator.pushNamed(ctx, routeName);
-  }
-
   static Future<void> warningDialog({
     required String title,
     required String subtitle,

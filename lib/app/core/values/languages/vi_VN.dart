@@ -64,4 +64,5 @@ final Map<String, String> vi_VN = {
   'Edit' : 'Chỉnh sửa',
   'Order Successful' : 'Đặt hàng thành công',
   'Thanks Order' : 'Chúc bạn mua sắm vui vẻ',
+  'Favorite' : 'Yêu thích',
 };

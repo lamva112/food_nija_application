@@ -63,4 +63,5 @@ final Map<String, String> en_US = {
   'Edit' : 'Edit',
   'Order Successful' : 'Order Successful',
   'Thanks Order' : 'Wishing you a happy shopping',
+  'Favorite' : 'Favorite',
 };

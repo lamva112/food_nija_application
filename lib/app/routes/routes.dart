@@ -7,6 +7,7 @@ import 'package:food_nija_application/app/features/homescreen/all_food_screen.da
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
 import 'package:food_nija_application/app/features/info_food/info_food_screen.dart';
+import 'package:food_nija_application/app/features/profile/profile_screen.dart';
 import 'package:food_nija_application/app/features/shopping_cart/confirm_order.dart';
 import 'package:food_nija_application/app/features/shopping_cart/order_successful.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
@@ -37,6 +38,7 @@ class RouteManager {
   static const String uploadLocation = '/uploadLocation';
   static const String confirmOrder = '/confirmOrder';
   static const String orderSuccessful = '/orderSuccessful';
+  static const String profileScreen = '/profileScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -154,6 +156,12 @@ class RouteManager {
           type: PageTransitionType.scale,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
+        );
+      case profileScreen:
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: ProfileScreen())),
+          type: PageTransitionType.rotate,
+          duration: const Duration(milliseconds: 400),
         );
       default:
         throw const FormatException('Route not found! Check routes again!');

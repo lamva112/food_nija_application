@@ -51,7 +51,6 @@ class Users {
         "photoUrl": photoUrl,
         "firstName": firstName,
         "lastName": lastName,
-        "photoUrl": photoUrl,
         "statusLogin": statusLogin,
         "speciallyNotification": speciallyNotification,
         "phoneNumber": phoneNumber,

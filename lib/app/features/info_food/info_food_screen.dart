@@ -25,7 +25,6 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    CustomSize().init(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [

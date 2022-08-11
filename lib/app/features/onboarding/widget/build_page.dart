@@ -44,7 +44,6 @@ class _BuildPageState extends State<BuildPage>
 
   @override
   Widget build(BuildContext context) {
-    CustomSize().init(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
