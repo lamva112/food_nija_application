@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/order_detail.dart';
 
 class OrderFoodCard extends StatefulWidget {
   final Function(BuildContext)? onPressed;
   final OrderDetails orderDetails;
+  final Food food;
 
-  const OrderFoodCard({Key? key, required this.orderDetails, this.onPressed}) : super(key: key);
+  const OrderFoodCard({Key? key, required this.orderDetails, this.onPressed, required this.food}) : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
@@ -44,7 +46,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
           padding: EdgeInsets.symmetric(vertical: getHeight(10)),
           child: ListTile(
             leading: Image.asset(
-              widget.orderDetails.image,
+              widget.food.image,
               width: getWidth(65),
               height: getWidth(65),
             ),
@@ -52,7 +54,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.orderDetails.name,
+                  widget.food.name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(16),
@@ -61,7 +63,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   ),
                 ),
                 Text(
-                  widget.orderDetails.description,
+                  widget.food.description,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(15),
@@ -72,7 +74,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               ],
             ),
             subtitle: Text(
-              '\$ ${widget.orderDetails.price}',
+              '\$ ${widget.food.price}',
               style: TextStyle(
                 fontSize: getFont(17),
                 color: AppColors.primaryColor,

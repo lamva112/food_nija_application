@@ -239,11 +239,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, RouteManager.infoFoodScreen, arguments: listFood[index]);
+                                Navigator.pushNamed(
+                                    context, RouteManager.infoFoodScreen,
+                                    arguments: listFood[index]);
                               },
                               child: PopularMenu(food: listFood[index]));
                         },
-                        separatorBuilder: (_,int i) =>
+                        separatorBuilder: (_, int i) =>
                             SizedBox(height: getHeight(20)),
                         itemCount: listFood.length,
                       ),

@@ -3,7 +3,8 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/shopping_cart/widget/order_bill.dart';
-import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/app/features/shopping_cart/widget/order_food_card.dart';
+import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/order.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
@@ -48,8 +49,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (BuildContext _, int index) {
+                        var orderFood = order.listOrderDetails![index];
                         return OrderFoodCard(
-                          orderDetails: order.listOrderDetails![index],
+                          orderDetails: orderFood,
+                          food: listFood.firstWhere((obj) => obj.id == orderFood.foodId),
                           onPressed: (context) {
                             setState(() {
                               order.listOrderDetails

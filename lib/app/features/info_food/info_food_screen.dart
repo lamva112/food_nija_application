@@ -7,12 +7,14 @@ import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/core/values/strings.dart';
 import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
 import 'package:food_nija_application/data/models/food.dart';
+import 'package:food_nija_application/data/models/interest_food.dart';
 import 'package:food_nija_application/data/models/order.dart';
 import 'package:food_nija_application/data/models/order_detail.dart';
 import 'package:food_nija_application/data/models/review.dart';
 
 class InfoFoodScreen extends StatefulWidget {
   final Food food;
+
   const InfoFoodScreen({Key? key, required this.food}) : super(key: key);
 
   @override
@@ -115,6 +117,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                           setState(() {
                             isFavourite = !isFavourite;
                           });
+                          listInterestFood.add(InterestFood(foodId: widget.food.id));
                         },
                         color: const Color(0xffFBE8E3),
                         padding: EdgeInsets.all(getWidth(10)),
@@ -213,12 +216,9 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
         title: Translations.of(context).text('Add To Cart'),
         onPressed: () {
           order.listOrderDetails?.add(OrderDetails(
-              id: '1',
-              image: widget.food.image,
-              name: widget.food.name,
-              description: widget.food.description,
-              quantity: 1,
-              price: widget.food.price));
+            quantity: 1,
+            foodId: widget.food.id,
+          ));
           Navigator.pop(context);
         },
         height: getHeight(55),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_widgets/food_process.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/data/models/food.dart';
+import 'package:food_nija_application/data/models/interest_food.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -107,18 +110,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Icon(Icons.drive_file_rename_outline,
-                          color: AppColors.primaryColor, size: getWidth(30)),
+                      Icon(
+                        Icons.drive_file_rename_outline,
+                        color: AppColors.primaryColor,
+                        size: getWidth(30),
+                      ),
                     ],
                   ),
                   SizedBox(height: getHeight(5)),
-                  Text(
-                    'phong46037@gmail.con',
-                    style: TextStyle(
-                      fontSize: getFont(17),
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.w200,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'phong46037@gmail.con',
+                        style: TextStyle(
+                          fontSize: getFont(17),
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.w200,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+
+                        },
+                        child: Icon(
+                          Icons.exit_to_app,
+                          color: Colors.grey,
+                          size: getWidth(30),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: getHeight(35)),
                   Card(
@@ -128,7 +149,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     elevation: 10,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: getHeight(10), horizontal: getWidth(10)),
+                      padding: EdgeInsets.symmetric(
+                          vertical: getHeight(10), horizontal: getWidth(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -161,8 +183,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(height: getHeight(15)),
-
-                  SizedBox(height: getHeight(80)),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (BuildContext context, int index) {
+                      String id = listInterestFood[index].foodId;
+                      return FoodProcessCard(
+                        food: listFood.firstWhere((obj) => obj.id == id),
+                        titleTrailing:
+                            Translations.of(context).text('Buy Again'),
+                      );
+                    },
+                    itemCount: listInterestFood.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                  ),
+                  SizedBox(height: getHeight(90)),
                 ],
               ),
             ),
