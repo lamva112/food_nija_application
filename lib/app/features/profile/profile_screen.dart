@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/common_widgets/food_process.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/interest_food.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -48,8 +51,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Stack(
                         fit: StackFit.expand, // expand stack
                         children: [
-                          Image.asset(
-                            'assets/images/image_profile.png',
+                          Image.network(
+                            userProvider.getUser.photoUrl,
                             fit: BoxFit.cover,
                           ),
                           Positioned(
@@ -103,7 +106,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Lê Hải Phong',
+                        userProvider.getUser.firstName +
+                            ' ' +
+                            userProvider.getUser.lastName,
                         style: TextStyle(
                           fontSize: getFont(27),
                           color: AppColors.textColor,
@@ -122,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'phong46037@gmail.con',
+                        userProvider.getUser.userEmail,
                         style: TextStyle(
                           fontSize: getFont(17),
                           color: AppColors.textColor,
@@ -130,9 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: Icon(
                           Icons.exit_to_app,
                           color: Colors.grey,

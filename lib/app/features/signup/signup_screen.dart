@@ -263,6 +263,7 @@ class _SignupScreenState extends State<SignupScreen> {
           paymentType: '',
           photoUrl: '',
           address: '',
+          userEmail: _email.text.toLowerCase().trim(),
         );
 
         await FirebaseFirestore.instance
