@@ -12,6 +12,7 @@ class Users {
   late String phoneNumber;
   late String paymentType;
   late String address;
+  late String userEmail;
   Users({
     required this.uid,
     required this.username,
@@ -24,6 +25,7 @@ class Users {
     required this.phoneNumber,
     required this.paymentType,
     required this.address,
+    required this.userEmail,
   });
 
   static Users fromSnap(DocumentSnapshot snap) {
@@ -41,6 +43,7 @@ class Users {
       phoneNumber: snapshot["phoneNumber"],
       paymentType: snapshot["paymentType"],
       address: snapshot["address"],
+      userEmail: snapshot["userEmail"],
     );
   }
 
@@ -56,5 +59,6 @@ class Users {
         "phoneNumber": phoneNumber,
         "paymentType": paymentType,
         "address": address,
+        "userEmail": userEmail,
       };
 }
