@@ -55,7 +55,7 @@ class HomeAllFoodScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                           color: AppColors.backgroundColor,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
                         ),
@@ -71,7 +71,7 @@ class HomeAllFoodScreen extends StatelessWidget {
                         child: TextInputWidget(
                           hintText: Translations.of(context)
                               .text('What do you want to order?'),
-                          prefixIcon: const Icon(
+                          prefixIcon: Icon(
                             Icons.search_outlined,
                             color: AppColors.iconButtonBack,
                           ),
@@ -89,7 +89,7 @@ class HomeAllFoodScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             color: AppColors.bgButtonBack,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.toc,
                             color: AppColors.iconButtonBack,
                           ),

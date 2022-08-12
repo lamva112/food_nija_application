@@ -1,22 +1,61 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primaryColor = Color.fromARGB(255, 99, 199, 131);
-  static const secondaryColor = Color.fromRGBO(179, 178, 178, 1.0);
-  static const backgroundColor = Color(0xffffffff);
-  static const backgroundLoginColor = Color(0xFFF4F4F4);
-  static const textButtonColor = Color(0xffffffff);
-  static const textColor = Colors.black;
-  static const textFormFieldColor = Colors.white;
-  static Color bgButtonBack = const Color(0xffF9A84D).withOpacity(0.15);
-  static const iconButtonBack = Color(0xffDA6317);
-  static const bgLocationIcon = Color(0XFFFFE14D);
-  static const priceTextColor = Color(0xffFEAD1D);
-  static const bgLocationButton = Color(0XFFF6F6F6);
-  static const selectedNavBarColor = Color.fromRGBO(28, 185, 134, 1);
-  static const unselectedNavBarColor = Color.fromRGBO(179, 178, 178, 1.0);
-  static const itemChildColor = Colors.white;
-  static const locationColor = Color(0xF6F6F6F6);
+  static Color primaryColor = Colors.transparent;
+  static Color secondaryColor = Colors.transparent;
+  static Color backgroundColor = Colors.transparent;
+  static Color backgroundItemColor = Colors.transparent;
+  static Color backgroundLoginColor = Colors.transparent;
+  static Color textColor = Colors.transparent;
+  static Color textFormFieldColor = Colors.transparent;
+  static Color bgButtonBack = Colors.transparent;
+  static Color iconButtonBack = Colors.transparent;
+  static Color bgLocationIcon = Colors.transparent;
+  static Color priceTextColor = Colors.transparent;
+  static Color bgLocationButton = Colors.transparent;
+  static Color selectedNavBarColor = Colors.transparent;
+  static Color unselectedNavBarColor = Colors.transparent;
+  static Color itemChildColor = Colors.transparent;
+  static Color locationColor = Colors.transparent;
+
+  void changeColor(bool darkMode) {
+    if( darkMode == true ) {
+      primaryColor = const Color.fromARGB(255, 99, 199, 131);
+      secondaryColor = const Color.fromRGBO(179, 178, 178, 1.0);
+      backgroundColor = const Color(0xffffffff);
+      backgroundItemColor = Colors.white;
+      backgroundLoginColor = const Color(0xFFF4F4F4);
+      textColor = Colors.black;
+      textFormFieldColor = Colors.white;
+      bgButtonBack = const Color(0xffF9A84D).withOpacity(0.15);
+      iconButtonBack = const Color(0xffDA6317);
+      bgLocationIcon = const Color(0XFFFFE14D);
+      priceTextColor = const Color(0xffFEAD1D);
+      bgLocationButton = const Color(0XFFF6F6F6);
+      selectedNavBarColor = const Color.fromRGBO(28, 185, 134, 1);
+      unselectedNavBarColor = const Color.fromRGBO(179, 178, 178, 1.0);
+      itemChildColor = Colors.white;
+      locationColor = const Color(0xF6F6F6F6);
+    }
+    else{
+      primaryColor = const Color.fromARGB(255, 99, 199, 131);
+      secondaryColor = const Color.fromRGBO(179, 178, 178, 1.0);
+      backgroundColor = Colors.black;
+      backgroundItemColor = const Color(0xfff4f4f4).withOpacity(0.2);
+      backgroundLoginColor = Colors.black;
+      textColor = Colors.white;
+      textFormFieldColor = const Color(0xfff4f4f4).withOpacity(0.2);
+      bgButtonBack = const Color(0xfff4f4f4).withOpacity(0.2);
+      iconButtonBack = Colors.white;
+      bgLocationIcon = const Color(0XFFFFE14D);
+      priceTextColor = const Color(0xffFEAD1D);
+      bgLocationButton = const Color(0XFFF6F6F6);
+      selectedNavBarColor = const Color.fromRGBO(28, 185, 134, 1);
+      unselectedNavBarColor = const Color.fromRGBO(179, 178, 178, 1.0);
+      itemChildColor = Colors.white;
+      locationColor = const Color(0xF6F6F6F6);
+    }
+  }
   //==========================================================================//
   //LIGHT THEME
   ThemeData lightTheme = ThemeData.light().copyWith(
@@ -24,7 +63,7 @@ class AppColors {
           bodyColor: textColor,
         ),
     scaffoldBackgroundColor: backgroundColor,
-    colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
+    colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
     hintColor: secondaryColor,
     appBarTheme: const AppBarTheme(
       elevation: 0,
@@ -42,8 +81,8 @@ class AppColors {
     textTheme: ThemeData.dark().textTheme.apply(
           bodyColor: textColor,
         ),
-    scaffoldBackgroundColor: Colors.black,
-    colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
+    scaffoldBackgroundColor: backgroundColor,
+    colorScheme: ColorScheme.light(primary: AppColors.primaryColor),
     hintColor: secondaryColor,
     appBarTheme: const AppBarTheme(
       elevation: 0,

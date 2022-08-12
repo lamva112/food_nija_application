@@ -66,9 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: getHeight(45),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: AppColors.backgroundColor,
+                          color: AppColors.backgroundItemColor,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
                         ),
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: TextInputWidget(
                           hintText: Translations.of(context)
                               .text('What do you want to order?'),
-                          prefixIcon: const Icon(
+                          prefixIcon: Icon(
                             Icons.search_outlined,
                             color: AppColors.iconButtonBack,
                           ),
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(15),
                             color: AppColors.bgButtonBack,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.toc,
                             color: AppColors.iconButtonBack,
                           ),
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           title: e,
                           bgColor: AppColors.bgButtonBack,
                           textColor: AppColors.iconButtonBack,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.close,
                             color: AppColors.iconButtonBack,
                           ),

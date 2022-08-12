@@ -141,7 +141,7 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
                       width: getWidth(160),
                       backgroundColor: AppColors.primaryColor,
                       fontSize: getFont(20),
-                      textColor: AppColors.textButtonColor,
+                      textColor: Colors.white,
                     ),
                   ),
                 ],

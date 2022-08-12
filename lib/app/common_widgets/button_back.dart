@@ -17,7 +17,7 @@ class ButtonBack extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           color: AppColors.bgButtonBack,
         ),
-        child: const Center(
+        child: Center(
           child: Icon(
             Icons.arrow_back_ios_new,
             color: AppColors.iconButtonBack,

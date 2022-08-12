@@ -33,9 +33,35 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  Brightness? _brightness;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    _brightness = WidgetsBinding.instance.window.platformBrightness;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    if (mounted) {
+      setState(() {
+        _brightness = WidgetsBinding.instance.window.platformBrightness;
+      });
+    }
+    super.didChangePlatformBrightness();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _brightness == Brightness.light ? AppColors().changeColor(true) : AppColors().changeColor(false);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageChangeProvider()),
@@ -56,7 +82,7 @@ class _MyAppState extends State<MyApp> {
             Locale('en'),
             Locale('vi'),
           ],
-          theme: AppColors().lightTheme,
+          theme: _brightness == Brightness.dark ? AppColors().darkTheme : AppColors().lightTheme,
           debugShowCheckedModeBanner: false,
           home: SafeArea(
             child: isViewed != 0 ? const OnBoarding() : const LoginScreen(),

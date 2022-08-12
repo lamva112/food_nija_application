@@ -37,7 +37,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
               backgroundColor: bgColor,
               elevation: 0.0,
               leading: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back,
                   color: AppColors.itemChildColor,
                 ),
@@ -138,7 +138,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                     children: [
                       Row(
                         children: [
-                          const RatingBar.readOnly(
+                          RatingBar.readOnly(
                             filledIcon: Icons.star,
                             emptyIcon: Icons.star_border,
                             halfFilledIcon: Icons.star_half,
@@ -161,7 +161,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       ),
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.shopping_bag,
                             color: AppColors.primaryColor,
                           ),
@@ -225,7 +225,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
         width: getWidth(340),
         backgroundColor: AppColors.primaryColor,
         fontSize: getFont(20),
-        textColor: AppColors.textButtonColor,
+        textColor: Colors.white,
       ),
     );
   }

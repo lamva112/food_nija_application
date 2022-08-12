@@ -52,12 +52,12 @@ class TextInputWidget extends StatelessWidget {
         fillColor: fillColor ?? AppColors.textFormFieldColor,
         enabledBorder: OutlineInputBorder(
           borderSide:
-              const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
+              BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
           borderRadius: BorderRadius.circular(15.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:
-              const BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
+              BorderSide(width: 0.0, color: AppColors.textFormFieldColor),
           borderRadius: BorderRadius.circular(15.0),
         ),
         errorBorder: OutlineInputBorder(
