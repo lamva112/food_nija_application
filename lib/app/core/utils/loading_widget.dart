@@ -11,7 +11,7 @@ class LoadingWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           SpinKitSpinningLines(
             color: AppColors.selectedNavBarColor,
             size: 50.0,
