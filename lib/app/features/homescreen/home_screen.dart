@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_widgets/filter_chip_custom.dart';
 import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
+import 'package:food_nija_application/app/core/utils/loading_widget.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -194,15 +196,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(
                         height: getHeight(185),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            return NearestRestaurant(
-                                restaurant: listRestaurant[index]);
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('restaurants')
+                              .orderBy("time", descending: false)
+                              .snapshots(),
+                          builder: (context,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const LoadingWidget();
+                            }
+                            return ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return NearestRestaurant(
+                                  snap: snapshot.data!.docs[index].data(),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      SizedBox(width: getWidth(23)),
+                              itemCount: snapshot.data!.docs.length,
+                            );
                           },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              SizedBox(width: getWidth(23)),
-                          itemCount: listRestaurant.length,
                         ),
                       ),
                       Row(
