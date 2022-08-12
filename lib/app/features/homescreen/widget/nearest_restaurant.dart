@@ -19,7 +19,7 @@ class _NearestRestaurantState extends State<NearestRestaurant> {
       width: getWidth(150),
       margin: const EdgeInsets.all(1.7),
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor,
+        color: AppColors.backgroundItemColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

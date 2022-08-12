@@ -61,7 +61,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: AppColors.backgroundColor,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
                         ),
@@ -73,7 +73,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: TextInputWidget(
                       hintText: Translations.of(context)
                           .text('What do you want to order?'),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.search_outlined,
                         color: AppColors.iconButtonBack,
                       ),
@@ -159,7 +159,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     height: getHeight(57),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),
-                    textColor: AppColors.textButtonColor,
+                    textColor: Colors.white,
                   ),
                 ],
               ),

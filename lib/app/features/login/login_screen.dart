@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextInputWidget(
                       textEditingController: _email,
                       hintText: Translations.of(context).text('Email'),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.mail,
                         color: AppColors.primaryColor,
                       ),
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextInputWidget(
                       textEditingController: _password,
                       hintText: Translations.of(context).text('Password'),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.lock,
                         color: AppColors.primaryColor,
                       ),
@@ -123,8 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           Translations.of(context).text('Password Validator'),
                       obscureText: obscureText,
                       suffixIcon: obscureText
-                          ? const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off),
+                          ? Icon(Icons.visibility, color: AppColors.primaryColor)
+                          : Icon(Icons.visibility_off, color: AppColors.primaryColor),
                       onTapSuffixIcon: () {
                         setState(() {
                           obscureText = !obscureText;
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: getWidth(160),
                     backgroundColor: AppColors.primaryColor,
                     fontSize: getFont(20),
-                    textColor: AppColors.textButtonColor,
+                    textColor: Colors.white,
                   ),
             SizedBox(height: getHeight(48)),
           ],

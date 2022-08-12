@@ -111,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextInputWidget(
                         textEditingController: _name,
                         hintText: Translations.of(context).text('person'),
-                        prefixIcon: const Icon(
+                        prefixIcon: Icon(
                           Icons.person,
                           color: AppColors.primaryColor,
                         ),
@@ -122,7 +122,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextInputWidget(
                         textEditingController: _email,
                         hintText: Translations.of(context).text('Email'),
-                        prefixIcon: const Icon(
+                        prefixIcon: Icon(
                           Icons.mail,
                           color: AppColors.primaryColor,
                         ),
@@ -133,7 +133,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextInputWidget(
                         textEditingController: _password,
                         hintText: Translations.of(context).text('Password'),
-                        prefixIcon: const Icon(
+                        prefixIcon: Icon(
                           Icons.lock,
                           color: AppColors.primaryColor,
                         ),
@@ -225,7 +225,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 width: getWidth(160),
                 backgroundColor: AppColors.primaryColor,
                 fontSize: getFont(20),
-                textColor: AppColors.textButtonColor,
+                textColor: Colors.white,
               ),
               SizedBox(height: getHeight(48)),
             ],

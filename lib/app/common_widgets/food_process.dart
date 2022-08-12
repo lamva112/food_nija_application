@@ -73,7 +73,7 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
               child: Text(
                 widget.titleTrailing,
                 style: TextStyle(
-                  color: AppColors.textButtonColor,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: getFont(15),
                 ),

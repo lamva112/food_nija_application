@@ -113,7 +113,7 @@ class _InfoSignupState extends State<InfoSignup> {
                         width: getWidth(160),
                         backgroundColor: AppColors.primaryColor,
                         fontSize: getFont(20),
-                        textColor: AppColors.textButtonColor,
+                        textColor: Colors.white,
                       ),
                     ),
                   ],

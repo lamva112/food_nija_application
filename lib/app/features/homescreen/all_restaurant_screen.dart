@@ -65,7 +65,7 @@ class _HomeAllRestaurantScreenState extends State<HomeAllRestaurantScreen> {
                           borderRadius: BorderRadius.circular(15),
                           color: AppColors.backgroundColor,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.notifications,
                           color: AppColors.selectedNavBarColor,
                         ),
@@ -78,6 +78,7 @@ class _HomeAllRestaurantScreenState extends State<HomeAllRestaurantScreen> {
                     children: [
                       Container(
                         width: getWidth(270),
+
                         height: getHeight(50),
                         decoration: BoxDecoration(
                           color: AppColors.bgButtonBack,
@@ -102,6 +103,7 @@ class _HomeAllRestaurantScreenState extends State<HomeAllRestaurantScreen> {
                               });
                               print(_);
                             },
+
                           ),
                         ),
                       ),
@@ -119,7 +121,7 @@ class _HomeAllRestaurantScreenState extends State<HomeAllRestaurantScreen> {
                             borderRadius: BorderRadius.circular(15),
                             color: AppColors.bgButtonBack,
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.toc,
                             color: AppColors.iconButtonBack,
                           ),
