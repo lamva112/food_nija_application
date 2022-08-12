@@ -18,7 +18,7 @@ class _FecthDataScreenState extends State<FecthDataScreen> {
   @override
   void initState() {
     addData();
-    Future.delayed(const Duration(microseconds: 1000000), () async {
+    Future.delayed(const Duration(microseconds: 10000000), () async {
       Navigator.push(
         context,
         MaterialPageRoute(
