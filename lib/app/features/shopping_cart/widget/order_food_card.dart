@@ -10,7 +10,12 @@ class OrderFoodCard extends StatefulWidget {
   final OrderDetails orderDetails;
   final Food food;
 
-  const OrderFoodCard({Key? key, required this.orderDetails, this.onPressed, required this.food}) : super(key: key);
+  const OrderFoodCard(
+      {Key? key,
+      required this.orderDetails,
+      this.onPressed,
+      required this.food})
+      : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
@@ -46,7 +51,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
           padding: EdgeInsets.symmetric(vertical: getHeight(10)),
           child: ListTile(
             leading: Image.asset(
-              widget.food.image,
+              widget.food.imageURL,
               width: getWidth(65),
               height: getWidth(65),
             ),
@@ -99,8 +104,8 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                     elevation: 0,
                     height: getWidth(15),
                     minWidth: getWidth(15),
-                    child:
-                        Icon(Icons.remove, color: AppColors.primaryColor, size: getWidth(15)),
+                    child: Icon(Icons.remove,
+                        color: AppColors.primaryColor, size: getWidth(15)),
                   ),
                   SizedBox(width: getWidth(4.5)),
                   Text(
@@ -125,8 +130,8 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                     elevation: 0,
                     height: getWidth(15),
                     minWidth: getWidth(15),
-                    child:
-                    Icon(Icons.add, color: AppColors.itemChildColor, size: getWidth(15)),
+                    child: Icon(Icons.add,
+                        color: AppColors.itemChildColor, size: getWidth(15)),
                   ),
                 ],
               ),

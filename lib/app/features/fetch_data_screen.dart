@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -17,8 +18,10 @@ class FecthDataScreen extends StatefulWidget {
 class _FecthDataScreenState extends State<FecthDataScreen> {
   @override
   void initState() {
-    addData();
-    Future.delayed(const Duration(microseconds: 10000000), () async {
+    Future.delayed(const Duration(microseconds: 5), () async {
+      addData();
+      final foodsProvider = Provider.of<FoodsProvider>(context, listen: false);
+      await foodsProvider.fetchProducts();
       Navigator.push(
         context,
         MaterialPageRoute(

@@ -7,7 +7,8 @@ class FoodProcessCard extends StatefulWidget {
   final Food food;
   final String titleTrailing;
 
-  const FoodProcessCard({Key? key, required this.food, required this.titleTrailing})
+  const FoodProcessCard(
+      {Key? key, required this.food, required this.titleTrailing})
       : super(key: key);
 
   @override
@@ -26,7 +27,7 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
         padding: EdgeInsets.symmetric(vertical: getHeight(10)),
         child: ListTile(
           leading: Image.asset(
-            widget.food.image,
+            widget.food.imageURL,
             width: getWidth(65),
             height: getWidth(65),
           ),
