@@ -1,12 +1,16 @@
 import 'package:food_nija_application/data/models/food.dart';
 
-class OrderDetails{
-  final int quantity;
+class Cart {
+  final String userId;
   final String foodId;
+  int quantity;
   final Food food;
-  const OrderDetails({
-    required this.quantity,
+
+  Cart({
+    required this.userId,
     required this.foodId,
+    this.quantity = 0,
     required this.food,
-});
+  });
 }
+List<Cart> listCart = [];

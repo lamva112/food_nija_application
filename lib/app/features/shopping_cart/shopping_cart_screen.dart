@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/shopping_cart/widget/my_cart.dart';
+import 'package:food_nija_application/app/features/shopping_cart/widget/my_carts.dart';
+import 'package:food_nija_application/app/features/shopping_cart/widget/my_orders.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);
@@ -54,10 +55,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> with TickerProv
       body: TabBarView(
         controller: _tabController,
         children: const [
-          MyCart(),
-          Center(
-            child: Text('ahhi'),
-          ),
+          MyCarts(),
+          MyOrders(),
         ],
       ),
     );

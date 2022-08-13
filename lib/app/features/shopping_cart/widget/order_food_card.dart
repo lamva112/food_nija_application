@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/data/models/food.dart';
-import 'package:food_nija_application/data/models/order_detail.dart';
+import 'package:food_nija_application/data/models/cart.dart';
 
 class OrderFoodCard extends StatefulWidget {
   final Function(BuildContext)? onPressed;
-  final OrderDetails orderDetails;
-  final Food food;
+  final Cart cart;
 
-  const OrderFoodCard({Key? key, required this.orderDetails, this.onPressed, required this.food}) : super(key: key);
+  const OrderFoodCard({Key? key, required this.cart, this.onPressed}) : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
 }
 
 class _OrderFoodCardState extends State<OrderFoodCard> {
-  late int count = widget.orderDetails.quantity;
+  late final Cart _cart = widget.cart;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
           padding: EdgeInsets.symmetric(vertical: getHeight(10)),
           child: ListTile(
             leading: Image.asset(
-              widget.food.image,
+              _cart.food.image,
               width: getWidth(65),
               height: getWidth(65),
             ),
@@ -54,7 +52,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.food.name,
+                  _cart.food.name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(16),
@@ -63,7 +61,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   ),
                 ),
                 Text(
-                  widget.food.description,
+                  _cart.food.description,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(15),
@@ -74,7 +72,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               ],
             ),
             subtitle: Text(
-              '\$ ${widget.food.price}',
+              '\$ ${_cart.food.price}',
               style: TextStyle(
                 fontSize: getFont(17),
                 color: AppColors.primaryColor,
@@ -88,7 +86,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        count--;
+                        _cart.quantity--;
                       });
                     },
                     color: AppColors.primaryColor.withOpacity(0.1),
@@ -104,7 +102,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   ),
                   SizedBox(width: getWidth(4.5)),
                   Text(
-                    count.toString(),
+                    _cart.quantity.toString(),
                     style: TextStyle(
                       color: AppColors.textColor,
                       fontSize: getFont(16),
@@ -114,7 +112,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        count++;
+                        _cart.quantity++;
                       });
                     },
                     color: AppColors.primaryColor,

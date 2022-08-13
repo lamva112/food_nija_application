@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
-import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/features/shopping_cart/widget/order_bill.dart';
 import 'package:food_nija_application/app/features/shopping_cart/widget/order_food_card.dart';
-import 'package:food_nija_application/data/models/food.dart';
-import 'package:food_nija_application/data/models/order.dart';
+import 'package:food_nija_application/data/models/cart.dart';
 
-class MyCart extends StatefulWidget {
-  const MyCart({Key? key}) : super(key: key);
+class MyCarts extends StatefulWidget {
+  const MyCarts({Key? key}) : super(key: key);
 
   @override
-  State<MyCart> createState() => _MyCartState();
+  State<MyCarts> createState() => _MyCartsState();
 }
 
-class _MyCartState extends State<MyCart> {
+class _MyCartsState extends State<MyCarts> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,19 +28,17 @@ class _MyCartState extends State<MyCart> {
               child: ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext _, int index) {
-                  var orderFood = order.listOrderDetails![index];
+                  var orderFood = listCart[index];
                   return OrderFoodCard(
-                    orderDetails: orderFood,
-                    food: listFood.firstWhere((obj) => obj.id == orderFood.foodId),
+                    cart: orderFood,
                     onPressed: (context) {
                       setState(() {
-                        order.listOrderDetails
-                            ?.remove(order.listOrderDetails![index]);
+                        listCart.remove(listCart[index]);
                       });
                     },
                   );
                 },
-                itemCount: order.listOrderDetails?.length,
+                itemCount: listCart.length,
               ),
             ),
             SizedBox(height: getHeight(20)),

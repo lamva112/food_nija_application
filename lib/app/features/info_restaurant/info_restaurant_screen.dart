@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_widgets/custom_button.dart';
-import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
-import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/core/values/strings.dart';
-import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
-import 'package:food_nija_application/data/models/cart.dart';
-import 'package:food_nija_application/data/models/food.dart';
-import 'package:food_nija_application/data/models/interest_food.dart';
-import 'package:food_nija_application/data/models/review.dart';
 
-class InfoFoodScreen extends StatefulWidget {
-  final Food food;
-
-  const InfoFoodScreen({Key? key, required this.food}) : super(key: key);
+class InfoRestaurantScreen extends StatefulWidget {
+  const InfoRestaurantScreen({Key? key}) : super(key: key);
 
   @override
-  State<InfoFoodScreen> createState() => _InfoFoodScreenState();
+  State<InfoRestaurantScreen> createState() => _InfoRestaurantScreenState();
 }
 
-class _InfoFoodScreenState extends State<InfoFoodScreen> {
+class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
   Color? bgColor = AppColors.backgroundColor;
   bool isFavourite = false;
 
@@ -49,14 +38,14 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   double top = constraints.biggest.height;
                   Future.delayed(
                       Duration.zero,
-                      () => {
-                            if (top <= 80.0)
-                              {
-                                setState(() {
-                                  bgColor = null;
-                                })
-                              }
-                          });
+                          () => {
+                        if (top <= 80.0)
+                          {
+                            setState(() {
+                              bgColor = null;
+                            })
+                          }
+                      });
                   return FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
                     centerTitle: true,
@@ -116,8 +105,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                           setState(() {
                             isFavourite = !isFavourite;
                           });
-                          listInterestFood
-                              .add(InterestFood(foodId: widget.food.id));
+                          listInterestFood.add(InterestFood(foodId: widget.food.id));
                         },
                         color: const Color(0xffFBE8E3),
                         padding: EdgeInsets.all(getWidth(10)),
@@ -125,9 +113,9 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                         elevation: 0,
                         child: isFavourite
                             ? const Icon(
-                                Icons.favorite,
-                                color: Colors.redAccent,
-                              )
+                          Icons.favorite,
+                          color: Colors.redAccent,
+                        )
                             : const Icon(Icons.favorite_border),
                       ),
                     ],
@@ -215,14 +203,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
       floatingActionButton: CustomButton(
         title: Translations.of(context).text('Add To Cart'),
         onPressed: () {
-          listCart.add(
-            Cart(
-              userId: '',
-              foodId: widget.food.id,
-              quantity: 1,
-              food: widget.food,
-            ),
-          );
+          order.listOrderDetails?.add(OrderDetails(
+            quantity: 1,
+            foodId: widget.food.id,
+          ));
           Navigator.pop(context);
         },
         height: getHeight(55),

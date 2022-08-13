@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
+import 'package:food_nija_application/data/models/order.dart';
 
 class OrderBill extends StatelessWidget {
   const OrderBill({Key? key}) : super(key: key);
@@ -118,6 +119,7 @@ class OrderBill extends StatelessWidget {
           ),
           InkWell(
             onTap: (){
+              Order order = Order(listOrderDetails: )
               Navigator.pushNamed(context, RouteManager.confirmOrder);
             },
             child: Container(
