@@ -52,7 +52,6 @@ final Map<String, String> vi_VN = {
   'Search' : 'Tìm Kiếm',
   'Reviews' : 'Đánh giá',
   'Add To Cart' : 'Thêm vào giỏ hàng',
-  'Order details' : 'Chi tiết đặt hàng',
   'Sub-Total' : 'Tổng tiền sản phầm',
   'Delivery Charge' : 'Phí vận chuyển',
   'Discount' : 'Giảm giá',
@@ -67,4 +66,6 @@ final Map<String, String> vi_VN = {
   'Favorite' : 'Yêu thích',
   'Buy Again' : 'Mua lại',
   'Process' : 'Đang xử lý',
+  'My Cart' : 'GIỎ HÀNG',
+  'My Orders' : 'ĐƠN HÀNG',
 };

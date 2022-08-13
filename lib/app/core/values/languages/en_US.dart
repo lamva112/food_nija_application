@@ -52,7 +52,6 @@ final Map<String, String> en_US = {
   'Search' : 'Search',
   'Reviews' : 'Reviews',
   'Add To Cart' : 'Add To Cart',
-  'Order details' : 'Order details',
   'Sub-Total' : 'Sub-Total',
   'Delivery Charge' : 'Delivery Charge',
   'Discount' : 'Discount',
@@ -66,4 +65,6 @@ final Map<String, String> en_US = {
   'Favorite' : 'Favorite',
   'Buy Again' : 'Buy Again',
   'Process' : 'Process',
+  'My Cart' : 'MY CART',
+  'My Orders' : 'MY ORDERS',
 };
