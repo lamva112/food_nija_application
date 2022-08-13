@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_nija_application/app/change_notifies/change_notifies.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -61,13 +62,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    _brightness == Brightness.light ? AppColors().changeColor(true) : AppColors().changeColor(false);
+    _brightness == Brightness.light
+        ? AppColors().changeColor(true)
+        : AppColors().changeColor(false);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageChangeProvider()),
         Provider<AuthService>(create: (_) => AuthService()),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FoodsProvider(),
         ),
       ],
       builder: (context, child) {
@@ -82,7 +88,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             Locale('en'),
             Locale('vi'),
           ],
-          theme: _brightness == Brightness.dark ? AppColors().darkTheme : AppColors().lightTheme,
+          theme: _brightness == Brightness.dark
+              ? AppColors().darkTheme
+              : AppColors().lightTheme,
           debugShowCheckedModeBanner: false,
           home: SafeArea(
             child: isViewed != 0 ? const OnBoarding() : const LoginScreen(),

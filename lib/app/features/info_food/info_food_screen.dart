@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
@@ -11,11 +12,14 @@ import 'package:food_nija_application/data/models/interest_food.dart';
 import 'package:food_nija_application/data/models/order.dart';
 import 'package:food_nija_application/data/models/order_detail.dart';
 import 'package:food_nija_application/data/models/review.dart';
+import 'package:provider/provider.dart';
 
 class InfoFoodScreen extends StatefulWidget {
-  final Food food;
-
-  const InfoFoodScreen({Key? key, required this.food}) : super(key: key);
+  final String foodId;
+  const InfoFoodScreen({
+    Key? key,
+    required this.foodId,
+  }) : super(key: key);
 
   @override
   State<InfoFoodScreen> createState() => _InfoFoodScreenState();
@@ -27,6 +31,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final foodsProvider = Provider.of<FoodsProvider>(context);
+    final getCurrFoods = foodsProvider.findProdById(widget.foodId);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -66,8 +72,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       child: Stack(
                         fit: StackFit.expand, // expand stack
                         children: [
-                          Image.asset(
-                            widget.food.image,
+                          Image.network(
+                            getCurrFoods.imageURL,
                             fit: BoxFit.cover,
                           ),
                           Positioned(
@@ -104,7 +110,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       SizedBox(
                         width: getWidth(220),
                         child: Text(
-                          widget.food.name,
+                          getCurrFoods.name,
                           style: TextStyle(
                             fontSize: getFont(27),
                             color: AppColors.textColor,
@@ -117,7 +123,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                           setState(() {
                             isFavourite = !isFavourite;
                           });
-                          listInterestFood.add(InterestFood(foodId: widget.food.id));
+                          // listInterestFood
+                          //     .add(InterestFood(foodId: widget.food.id));
                         },
                         color: const Color(0xffFBE8E3),
                         padding: EdgeInsets.all(getWidth(10)),
@@ -181,7 +188,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   ),
                   SizedBox(height: getHeight(20)),
                   Text(
-                    test,
+                    getCurrFoods.description,
                     style: TextStyle(
                       fontSize: getFont(15),
                     ),
@@ -215,10 +222,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
       floatingActionButton: CustomButton(
         title: Translations.of(context).text('Add To Cart'),
         onPressed: () {
-          order.listOrderDetails?.add(OrderDetails(
-            quantity: 1,
-            foodId: widget.food.id,
-          ));
+          // order.listOrderDetails?.add(OrderDetails(
+          //   quantity: 1,
+          //   foodId: widget.food.id,
+          // ));
           Navigator.pop(context);
         },
         height: getHeight(55),
