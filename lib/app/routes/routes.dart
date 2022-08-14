@@ -109,12 +109,12 @@ class RouteManager {
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.center,
         );
-      // case homeAllFoodScreen:
-      //   return PageTransition(
-      //     child: const SafeArea(child: SafeArea(child: HomeAllFoodScreen())),
-      //     type: PageTransitionType.bottomToTop,
-      //     duration: const Duration(milliseconds: 400),
-      //   );
+      case homeAllFoodScreen:
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: HomeAllFoodScreen())),
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 400),
+        );
       case infoFoodScreen:
         String obj = args as String;
         return PageTransition(

@@ -241,9 +241,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              // Navigator.pushNamed(
-                              //     context, RouteManager.homeAllFoodScreen);
-                              print(allProducts.length);
+                              Navigator.pushNamed(
+                                  context, RouteManager.homeAllFoodScreen);
                             },
                             child: Text(
                               Translations.of(context).text('View more'),
