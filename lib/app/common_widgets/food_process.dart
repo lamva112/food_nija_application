@@ -62,21 +62,18 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
             ),
           ),
           trailing: Container(
-            padding: EdgeInsets.symmetric(horizontal: getWidth(5)),
-            width: getWidth(80),
+            padding: EdgeInsets.symmetric(horizontal: getWidth(7), vertical: getHeight(7)),
             height: getHeight(30),
             decoration: BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Center(
-              child: Text(
-                widget.titleTrailing,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: getFont(15),
-                ),
+            child: Text(
+              widget.titleTrailing,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: getFont(14),
               ),
             ),
           ),

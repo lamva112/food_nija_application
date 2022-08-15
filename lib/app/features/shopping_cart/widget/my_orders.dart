@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/common_widgets/food_process.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
-import 'package:food_nija_application/app/features/shopping_cart/widget/order_bill.dart';
-import 'package:food_nija_application/app/features/shopping_cart/widget/order_food_card.dart';
-import 'package:food_nija_application/data/models/cart.dart';
+import 'package:food_nija_application/app/core/utils/translations.dart';
+import 'package:food_nija_application/data/models/order.dart';
+import 'package:food_nija_application/data/models/order_detail.dart';
 
 class MyOrders extends StatelessWidget {
   const MyOrders({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<OrderDetails> listOrderFood = [];
+    for (var obj in listOrder) {
+      listOrderFood.addAll(obj.listOrderDetails!);
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -18,22 +23,23 @@ class MyOrders extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: getHeight(410),
               padding: EdgeInsets.symmetric(vertical: getHeight(10)),
               child: ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext _, int index) {
-                  var orderFood = listCart[index];
-                  return OrderFoodCard(
-                    cart: orderFood,
-                    onPressed: (context) {},
+                  return FoodProcessCard(
+                    food: listOrderFood[index].food,
+                    titleTrailing:
+                        listOrderFood[index].status == StatusType.arriving
+                            ? Translations.of(context).text('Arriving')
+                            : Translations.of(context).text('Completed'),
                   );
                 },
-                itemCount: listCart.length,
+                itemCount: listOrderFood.length,
+                physics: const NeverScrollableScrollPhysics(),
               ),
             ),
-            SizedBox(height: getHeight(20)),
-            const OrderBill(),
+            SizedBox(height: getHeight(60)),
           ],
         ),
       ),

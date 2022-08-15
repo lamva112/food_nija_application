@@ -5,7 +5,6 @@ class Cart {
   final String foodId;
   int quantity;
   final Food food;
-
   Cart({
     required this.userId,
     required this.foodId,

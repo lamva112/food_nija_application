@@ -65,7 +65,8 @@ final Map<String, String> vi_VN = {
   'Thanks Order' : 'Chúc bạn mua sắm vui vẻ',
   'Favorite' : 'Yêu thích',
   'Buy Again' : 'Mua lại',
-  'Process' : 'Đang xử lý',
   'My Cart' : 'GIỎ HÀNG',
   'My Orders' : 'ĐƠN HÀNG',
+  'Arriving' : 'Đang vận chuyển',
+  'Completed' : 'Hoàn thành',
 };

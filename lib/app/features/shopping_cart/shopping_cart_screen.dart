@@ -37,6 +37,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> with TickerProv
         bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.textColor,
+          indicatorColor: AppColors.primaryColor,
           labelStyle: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w600,
