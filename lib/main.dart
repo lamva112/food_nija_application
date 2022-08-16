@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/change_notifies.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
@@ -74,6 +75,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         ChangeNotifierProvider(
           create: (_) => FoodsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
         ),
       ],
       builder: (context, child) {

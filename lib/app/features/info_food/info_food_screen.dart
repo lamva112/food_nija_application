@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -33,6 +36,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
   Widget build(BuildContext context) {
     final foodsProvider = Provider.of<FoodsProvider>(context);
     final getCurrFoods = foodsProvider.findProdById(widget.foodId);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool? _isInCart = cartProvider.getCartItems.containsKey(widget.foodId);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -220,13 +225,20 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
         ],
       ),
       floatingActionButton: CustomButton(
-        title: Translations.of(context).text('Add To Cart'),
-        onPressed: () {
-          // order.listOrderDetails?.add(OrderDetails(
-          //   quantity: 1,
-          //   foodId: widget.food.id,
-          // ));
-          Navigator.pop(context);
+        title: _isInCart ? 'In cart' : 'Add to cart',
+        onPressed: () async {
+          if (_isInCart) {
+            await Fluttertoast.showToast(
+              msg: "Item has been added to your cart",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+            );
+          } else {
+            await GlobalMethods.addToCart(
+                productId: widget.foodId, quantity: 1, context: context);
+            await cartProvider.fetchCart();
+            Navigator.pop(context);
+          }
         },
         height: getHeight(55),
         width: getWidth(340),
