@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -6,6 +7,7 @@ import 'package:food_nija_application/app/features/shopping_cart/widget/order_bi
 import 'package:food_nija_application/app/features/shopping_cart/widget/order_food_card.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/order.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);
@@ -17,6 +19,9 @@ class ShoppingCartScreen extends StatefulWidget {
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItemsList =
+        cartProvider.getCartItems.values.toList().reversed.toList();
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -49,19 +54,14 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (BuildContext _, int index) {
-                        var orderFood = order.listOrderDetails![index];
-                        return OrderFoodCard(
-                          orderDetails: orderFood,
-                          food: listFood.firstWhere((obj) => obj.id == orderFood.foodId),
-                          onPressed: (context) {
-                            setState(() {
-                              order.listOrderDetails
-                                  ?.remove(order.listOrderDetails![index]);
-                            });
-                          },
+                        return ChangeNotifierProvider.value(
+                          value: cartItemsList[index],
+                          child: OrderFoodCard(
+                            q: cartItemsList[index].quantity,
+                          ),
                         );
                       },
-                      itemCount: order.listOrderDetails?.length,
+                      itemCount: cartItemsList.length,
                     ),
                   ),
                   SizedBox(height: getHeight(20)),
