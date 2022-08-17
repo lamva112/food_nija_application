@@ -14,9 +14,11 @@ class FoodProcessCard extends StatefulWidget {
   final Color color;
   final bool? completed;
 
-
-  const FoodProcessCard({Key? key, required this.titleTrailing})
-
+  const FoodProcessCard(
+      {Key? key,
+      required this.titleTrailing,
+      required this.color,
+      this.completed})
       : super(key: key);
 
   @override
@@ -36,7 +38,6 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
         borderRadius: BorderRadius.circular(22),
       ),
       elevation: 3,
-
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: getHeight(10)),
         child: ListTile(
@@ -74,69 +75,68 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
               fontSize: getFont(17),
               color: AppColors.primaryColor,
               fontWeight: FontWeight.bold,
-=======
-      
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: getHeight(10)),
-            child: ListTile(
-              leading: Image.asset(
-                widget.food.image,
-                width: getWidth(65),
-                height: getWidth(65),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.food.name,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: getFont(16),
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    widget.food.description,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: getFont(15),
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  )
-                ],
-              ),
-              subtitle: Text(
-                '\$ ${widget.food.price}',
-                style: TextStyle(
-                  fontSize: getFont(17),
-                  color: AppColors.primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getWidth(7), vertical: getHeight(7)),
-                height: getHeight(30),
-                decoration: BoxDecoration(
-                  color: widget.color,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Text(
-                  widget.titleTrailing,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: getFont(14),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+          // Padding(
+          //   padding: EdgeInsets.symmetric(vertical: getHeight(10)),
+          //   child: ListTile(
+          //     leading: Image.asset(
+          //       widget.food.image,
+          //       width: getWidth(65),
+          //       height: getWidth(65),
+          //     ),
+          //     title: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Text(
+          //           widget.food.name,
+          //           overflow: TextOverflow.ellipsis,
+          //           style: TextStyle(
+          //             fontSize: getFont(16),
+          //             color: AppColors.textColor,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //         Text(
+          //           widget.food.description,
+          //           overflow: TextOverflow.ellipsis,
+          //           style: TextStyle(
+          //             fontSize: getFont(15),
+          //             color: AppColors.textColor,
+          //             fontWeight: FontWeight.w300,
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //     subtitle: Text(
+          //       '\$ ${widget.food.price}',
+          //       style: TextStyle(
+          //         fontSize: getFont(17),
+          //         color: AppColors.primaryColor,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //     trailing: Container(
+          //       padding: EdgeInsets.symmetric(
+          //           horizontal: getWidth(7), vertical: getHeight(7)),
+          //       height: getHeight(30),
+          //       decoration: BoxDecoration(
+          //         color: widget.color,
+          //         borderRadius: BorderRadius.circular(18),
+          //       ),
+          //       child: Text(
+          //         widget.titleTrailing,
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //           fontSize: getFont(14),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // ],
+        ),
       ),
     );
   }
