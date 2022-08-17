@@ -28,17 +28,18 @@ class MyOrders extends StatelessWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext _, int index) {
-                  return FoodProcessCard(
-                    food: listOrderFood[index].food,
-                    titleTrailing:
-                        listOrderFood[index].status == StatusType.arriving
-                            ? Translations.of(context).text('Arriving')
-                            : Translations.of(context).text('Completed'),
-                    color: listOrderFood[index].status == StatusType.arriving
-                        ? Colors.red[600]!
-                        : AppColors.primaryColor,
-                    completed: listOrderFood[index].status == StatusType.completed,
-                  );
+                  return Container();
+                  // return FoodProcessCard(
+                  //   food: listOrderFood[index].food,
+                  //   titleTrailing:
+                  //       listOrderFood[index].status == StatusType.arriving
+                  //           ? Translations.of(context).text('Arriving')
+                  //           : Translations.of(context).text('Completed'),
+                  //   color: listOrderFood[index].status == StatusType.arriving
+                  //       ? Colors.red[600]!
+                  //       : AppColors.primaryColor,
+                  //   completed: listOrderFood[index].status == StatusType.completed,
+                  // );
                 },
                 itemCount: listOrderFood.length,
                 physics: const NeverScrollableScrollPhysics(),

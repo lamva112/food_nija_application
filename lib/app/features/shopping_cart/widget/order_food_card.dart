@@ -8,7 +8,8 @@ class OrderFoodCard extends StatefulWidget {
   final Function(BuildContext)? onPressed;
   final Cart cart;
 
-  const OrderFoodCard({Key? key, required this.cart, this.onPressed}) : super(key: key);
+  const OrderFoodCard({Key? key, required this.cart, this.onPressed})
+      : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
@@ -43,11 +44,11 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: getHeight(10)),
           child: ListTile(
-            leading: Image.asset(
-              _cart.food.image,
-              width: getWidth(65),
-              height: getWidth(65),
-            ),
+            // leading: Image.asset(
+            //   _cart.food.image,
+            //   width: getWidth(65),
+            //   height: getWidth(65),
+            // ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -97,8 +98,8 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                     elevation: 0,
                     height: getWidth(15),
                     minWidth: getWidth(15),
-                    child:
-                        Icon(Icons.remove, color: AppColors.primaryColor, size: getWidth(15)),
+                    child: Icon(Icons.remove,
+                        color: AppColors.primaryColor, size: getWidth(15)),
                   ),
                   SizedBox(width: getWidth(4.5)),
                   Text(
@@ -123,8 +124,8 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                     elevation: 0,
                     height: getWidth(15),
                     minWidth: getWidth(15),
-                    child:
-                    Icon(Icons.add, color: AppColors.itemChildColor, size: getWidth(15)),
+                    child: Icon(Icons.add,
+                        color: AppColors.itemChildColor, size: getWidth(15)),
                   ),
                 ],
               ),
