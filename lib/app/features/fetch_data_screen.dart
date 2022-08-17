@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
+import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/botttom_navigation%20bar/my_bottom_bar.dart';
@@ -23,8 +24,11 @@ class _FecthDataScreenState extends State<FecthDataScreen> {
       addData();
       final foodsProvider = Provider.of<FoodsProvider>(context, listen: false);
       final cartProvider = Provider.of<CartProvider>(context, listen: false);
+      final wishlistProvider =
+          Provider.of<WishlistProvider>(context, listen: false);
       await foodsProvider.fetchProducts();
       await cartProvider.fetchCart();
+      await wishlistProvider.fetchWishlist();
       Navigator.push(
         context,
         MaterialPageRoute(

@@ -264,6 +264,8 @@ class _SignupScreenState extends State<SignupScreen> {
           photoUrl: '',
           address: '',
           userEmail: _email.text.toLowerCase().trim(),
+          userCart: [],
+          userWish: [],
         );
 
         await FirebaseFirestore.instance

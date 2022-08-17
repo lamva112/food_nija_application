@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
 
 class Users {
   late String uid;
@@ -13,6 +14,8 @@ class Users {
   late String paymentType;
   late String address;
   late String userEmail;
+  var userCart = [];
+  var userWish = [];
   Users({
     required this.uid,
     required this.username,
@@ -26,6 +29,8 @@ class Users {
     required this.paymentType,
     required this.address,
     required this.userEmail,
+    required this.userCart,
+    required this.userWish,
   });
 
   static Users fromSnap(DocumentSnapshot snap) {
@@ -44,6 +49,8 @@ class Users {
       paymentType: snapshot["paymentType"],
       address: snapshot["address"],
       userEmail: snapshot["userEmail"],
+      userCart: snapshot['userCart'],
+      userWish: snapshot['userWish'],
     );
   }
 
@@ -60,5 +67,7 @@ class Users {
         "paymentType": paymentType,
         "address": address,
         "userEmail": userEmail,
+        "userCart": userCart,
+        "userWish": userWish,
       };
 }
