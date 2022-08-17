@@ -25,8 +25,6 @@ class TextInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late String text;
-    CustomSize().init(context);
     return TextFormField(
       obscureText: obscureText,
       initialValue: null,
@@ -69,7 +67,6 @@ class TextInputWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
-      onChanged: (value) => text = value,
       validator: (value) => (value?.isEmpty ?? true) ? validatorText : null,
     );
   }

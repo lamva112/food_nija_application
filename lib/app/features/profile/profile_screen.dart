@@ -194,12 +194,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     itemBuilder: (BuildContext context, int index) {
+
                       return ChangeNotifierProvider.value(
                         value: wishlistItemsList[index],
                         child: FoodProcessCard(
                           titleTrailing:
                               Translations.of(context).text('Buy Again'),
                         ),
+                      
                       );
                     },
                     itemCount: wishlistItemsList.length,

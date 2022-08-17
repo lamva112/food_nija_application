@@ -2,10 +2,10 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/routes/routes.dart';
 
 class OrderBill extends StatelessWidget {
-  const OrderBill({Key? key}) : super(key: key);
+  final Function()? onTap;
+  const OrderBill({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,7 @@ class OrderBill extends StatelessWidget {
         children: [
           SizedBox(height: getHeight(15)),
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: getWidth(30)),
+            padding: EdgeInsets.symmetric(horizontal: getWidth(30)),
             child: Column(children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,8 +51,7 @@ class OrderBill extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    Translations.of(context)
-                        .text('Delivery Charge'),
+                    Translations.of(context).text('Delivery Charge'),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: getFont(18),
@@ -117,9 +115,7 @@ class OrderBill extends StatelessWidget {
             ]),
           ),
           InkWell(
-            onTap: (){
-              Navigator.pushNamed(context, RouteManager.confirmOrder);
-            },
+            onTap: onTap,
             child: Container(
               margin: EdgeInsets.only(top: getHeight(8)),
               height: getHeight(50),

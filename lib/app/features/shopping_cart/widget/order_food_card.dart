@@ -1,45 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
-import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/data/models/cart_model.dart';
-import 'package:food_nija_application/data/models/food.dart';
-import 'package:food_nija_application/data/models/order_detail.dart';
-import 'package:provider/provider.dart';
+import 'package:food_nija_application/data/models/cart.dart';
 
 class OrderFoodCard extends StatefulWidget {
-  final int q;
+  final Function(BuildContext)? onPressed;
+  final Cart cart;
 
-  const OrderFoodCard({Key? key, required this.q}) : super(key: key);
+  const OrderFoodCard({Key? key, required this.cart, this.onPressed}) : super(key: key);
 
   @override
   State<OrderFoodCard> createState() => _OrderFoodCardState();
 }
 
 class _OrderFoodCardState extends State<OrderFoodCard> {
-  final _quantityTextController = TextEditingController();
-  @override
-  void initState() {
-    _quantityTextController.text = widget.q.toString();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _quantityTextController.dispose();
-    super.dispose();
-  }
+  late final Cart _cart = widget.cart;
 
   @override
   Widget build(BuildContext context) {
-    final foodsProvider = Provider.of<FoodsProvider>(context);
-    final cartModel = Provider.of<CartModel>(context);
-    final getCurrfood = foodsProvider.findProdById(cartModel.productId);
-    final cartProvider = Provider.of<CartProvider>(context);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
@@ -52,13 +31,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
           motion: const StretchMotion(),
           children: [
             SlidableAction(
-              onPressed: ((context) async => {
-                    await cartProvider.removeOneItem(
-                      cartId: cartModel.id,
-                      productId: cartModel.productId,
-                      quantity: cartModel.quantity,
-                    ),
-                  }),
+              onPressed: widget.onPressed,
               backgroundColor: AppColors.priceTextColor,
               foregroundColor: Colors.white,
               icon: Icons.delete,
@@ -70,8 +43,8 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: getHeight(10)),
           child: ListTile(
-            leading: Image.network(
-              getCurrfood.imageURL,
+            leading: Image.asset(
+              _cart.food.image,
               width: getWidth(65),
               height: getWidth(65),
             ),
@@ -79,7 +52,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  getCurrfood.name,
+                  _cart.food.name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(16),
@@ -88,7 +61,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   ),
                 ),
                 Text(
-                  getCurrfood.resName,
+                  _cart.food.description,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: getFont(15),
@@ -99,7 +72,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               ],
             ),
             subtitle: Text(
-              '\$ ${getCurrfood.price}',
+              '\$ ${_cart.food.price}',
               style: TextStyle(
                 fontSize: getFont(17),
                 color: AppColors.primaryColor,
@@ -110,99 +83,50 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
               width: getWidth(110),
               child: Row(
                 children: [
-                  _quantityController(
-                    fct: () {
-                      if (_quantityTextController.text == '1') {
-                        return;
-                      } else {
-                        cartProvider.reduceQuantityByOne(cartModel.productId);
-                        setState(() {
-                          _quantityTextController.text =
-                              (int.parse(_quantityTextController.text) - 1)
-                                  .toString();
-                        });
-                      }
-                    },
-                    color: Colors.red,
-                    icon: Icons.remove,
-                    isLeft: true,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: TextField(
-                      controller: _quantityTextController,
-                      keyboardType: TextInputType.number,
-                      maxLines: 1,
-                      decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(),
-                        ),
-                      ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp('[0-9]'),
-                        ),
-                      ],
-                      onChanged: (v) {
-                        setState(() {
-                          if (v.isEmpty) {
-                            _quantityTextController.text = '1';
-                          } else {
-                            return;
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                  _quantityController(
-                    fct: () {
-                      cartProvider.increaseQuantityByOne(cartModel.productId);
+                  MaterialButton(
+                    onPressed: () {
                       setState(() {
-                        _quantityTextController.text =
-                            (int.parse(_quantityTextController.text) + 1)
-                                .toString();
+                        _cart.quantity--;
                       });
                     },
-                    color: Colors.green,
-                    icon: Icons.add,
-                    isLeft: false,
-                  )
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                    padding: EdgeInsets.all(getWidth(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 0,
+                    height: getWidth(15),
+                    minWidth: getWidth(15),
+                    child:
+                        Icon(Icons.remove, color: AppColors.primaryColor, size: getWidth(15)),
+                  ),
+                  SizedBox(width: getWidth(4.5)),
+                  Text(
+                    _cart.quantity.toString(),
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: getFont(16),
+                    ),
+                  ),
+                  SizedBox(width: getWidth(4.5)),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        _cart.quantity++;
+                      });
+                    },
+                    color: AppColors.primaryColor,
+                    padding: EdgeInsets.all(getWidth(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 0,
+                    height: getWidth(15),
+                    minWidth: getWidth(15),
+                    child:
+                    Icon(Icons.add, color: AppColors.itemChildColor, size: getWidth(15)),
+                  ),
                 ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _quantityController({
-    required Function fct,
-    required IconData icon,
-    required Color color,
-    required bool isLeft,
-  }) {
-    return Flexible(
-      flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Material(
-          color: isLeft
-              ? AppColors.primaryColor.withOpacity(0.1)
-              : AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(12),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(12),
-            onTap: () {
-              fct();
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Icon(
-                icon,
-                color:
-                    isLeft ? AppColors.primaryColor : AppColors.itemChildColor,
-                size: getWidth(15),
               ),
             ),
           ),
