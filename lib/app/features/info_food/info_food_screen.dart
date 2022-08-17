@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
+import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
@@ -9,6 +10,7 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/core/values/strings.dart';
+import 'package:food_nija_application/app/features/info_food/widget/heart_btn.dart';
 import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/interest_food.dart';
@@ -37,7 +39,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
     final foodsProvider = Provider.of<FoodsProvider>(context);
     final getCurrFoods = foodsProvider.findProdById(widget.foodId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
     bool? _isInCart = cartProvider.getCartItems.containsKey(widget.foodId);
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(widget.foodId);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -123,24 +128,9 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                           ),
                         ),
                       ),
-                      MaterialButton(
-                        onPressed: () {
-                          setState(() {
-                            isFavourite = !isFavourite;
-                          });
-                          // listInterestFood
-                          //     .add(InterestFood(foodId: widget.food.id));
-                        },
-                        color: const Color(0xffFBE8E3),
-                        padding: EdgeInsets.all(getWidth(10)),
-                        shape: const CircleBorder(),
-                        elevation: 0,
-                        child: isFavourite
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Colors.redAccent,
-                              )
-                            : const Icon(Icons.favorite_border),
+                      HeartBTN(
+                        productId: widget.foodId,
+                        isInWishlist: _isInWishlist,
                       ),
                     ],
                   ),
