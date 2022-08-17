@@ -118,19 +118,19 @@ class RouteManager {
           duration: const Duration(milliseconds: 400),
         );
       case infoFoodScreen:
-        Food food = args as Food;
+        String obj = args as String;
         return PageTransition(
           child: SafeArea(
               child: SafeArea(
-                  child: InfoFoodScreen(food: food,))),
+                  child: InfoFoodScreen(
+            foodId: obj,
+          ))),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 400),
         );
       case uploadLocation:
         return PageTransition(
-          child: const SafeArea(
-              child: SafeArea(
-                  child: UploadLocation())),
+          child: const SafeArea(child: SafeArea(child: UploadLocation())),
           type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 400),
         );

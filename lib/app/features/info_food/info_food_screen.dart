@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/core/values/strings.dart';
 import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
-import 'package:food_nija_application/data/models/cart.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/interest_food.dart';
+import 'package:food_nija_application/data/models/order.dart';
+import 'package:food_nija_application/data/models/order_detail.dart';
 import 'package:food_nija_application/data/models/review.dart';
+import 'package:provider/provider.dart';
 
 class InfoFoodScreen extends StatefulWidget {
-  final Food food;
-
-  const InfoFoodScreen({Key? key, required this.food}) : super(key: key);
+  final String foodId;
+  const InfoFoodScreen({
+    Key? key,
+    required this.foodId,
+  }) : super(key: key);
 
   @override
   State<InfoFoodScreen> createState() => _InfoFoodScreenState();
@@ -26,6 +34,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final foodsProvider = Provider.of<FoodsProvider>(context);
+    final getCurrFoods = foodsProvider.findProdById(widget.foodId);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool? _isInCart = cartProvider.getCartItems.containsKey(widget.foodId);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -65,8 +77,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       child: Stack(
                         fit: StackFit.expand, // expand stack
                         children: [
-                          Image.asset(
-                            widget.food.image,
+                          Image.network(
+                            getCurrFoods.imageURL,
                             fit: BoxFit.cover,
                           ),
                           Positioned(
@@ -103,7 +115,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       SizedBox(
                         width: getWidth(220),
                         child: Text(
-                          widget.food.name,
+                          getCurrFoods.name,
                           style: TextStyle(
                             fontSize: getFont(27),
                             color: AppColors.textColor,
@@ -116,8 +128,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                           setState(() {
                             isFavourite = !isFavourite;
                           });
-                          listInterestFood
-                              .add(InterestFood(foodId: widget.food.id));
+                          // listInterestFood
+                          //     .add(InterestFood(foodId: widget.food.id));
                         },
                         color: const Color(0xffFBE8E3),
                         padding: EdgeInsets.all(getWidth(10)),
@@ -181,7 +193,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                   ),
                   SizedBox(height: getHeight(20)),
                   Text(
-                    test,
+                    getCurrFoods.description,
                     style: TextStyle(
                       fontSize: getFont(15),
                     ),
@@ -213,17 +225,20 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
         ],
       ),
       floatingActionButton: CustomButton(
-        title: Translations.of(context).text('Add To Cart'),
-        onPressed: () {
-          listCart.add(
-            Cart(
-              userId: '',
-              foodId: widget.food.id,
-              quantity: 1,
-              food: widget.food,
-            ),
-          );
-          Navigator.pop(context);
+        title: _isInCart ? 'In cart' : 'Add to cart',
+        onPressed: () async {
+          if (_isInCart) {
+            await Fluttertoast.showToast(
+              msg: "Item has been added to your cart",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+            );
+          } else {
+            await GlobalMethods.addToCart(
+                productId: widget.foodId, quantity: 1, context: context);
+            await cartProvider.fetchCart();
+            Navigator.pop(context);
+          }
         },
         height: getHeight(55),
         width: getWidth(340),

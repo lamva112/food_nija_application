@@ -4,61 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_nija_application/app/common_widgets/text_widget.dart';
 import 'package:food_nija_application/app/core/utils/firebase_consts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class GlobalMethods {
-  static Future<void> warningDialog({
-    required String title,
-    required String subtitle,
-    required Function fct,
-    required BuildContext context,
-  }) async {
-    await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Row(children: [
-              Image.asset(
-                'assets/images/warning-sign.png',
-                height: 20,
-                width: 20,
-                fit: BoxFit.fill,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(title),
-            ]),
-            content: Text(subtitle),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: TextWidget(
-                  color: Colors.cyan,
-                  text: 'Cancel',
-                  textSize: 18,
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  fct();
-                },
-                child: TextWidget(
-                  color: Colors.red,
-                  text: 'OK',
-                  textSize: 18,
-                ),
-              ),
-            ],
-          );
-        });
-  }
-
   static Future<void> errorDialog({
     required String subtitle,
     required BuildContext context,
@@ -106,19 +54,15 @@ class GlobalMethods {
     final _uid = user!.uid;
     final cartId = const Uuid().v4();
     try {
-      FirebaseFirestore.instance.collection('users').doc(_uid).update(
-        {
-          'userCart': FieldValue.arrayUnion(
-            [
-              {
-                'cartId': cartId,
-                'productId': productId,
-                'quantity': quantity,
-              }
-            ],
-          ),
-        },
-      );
+      FirebaseFirestore.instance.collection('users').doc(_uid).update({
+        'userCart': FieldValue.arrayUnion([
+          {
+            'cartId': cartId,
+            'productId': productId,
+            'quantity': quantity,
+          }
+        ])
+      });
       await Fluttertoast.showToast(
         msg: "Item has been added to your cart",
         toastLength: Toast.LENGTH_SHORT,
@@ -128,13 +72,4 @@ class GlobalMethods {
       errorDialog(subtitle: error.toString(), context: context);
     }
   }
-}
-
-pickImage(ImageSource source) async {
-  final ImagePicker imagePicker = ImagePicker();
-  XFile? file = await imagePicker.pickImage(source: source);
-  if (file != null) {
-    return await file.readAsBytes();
-  }
-  print('No Image Selected');
 }

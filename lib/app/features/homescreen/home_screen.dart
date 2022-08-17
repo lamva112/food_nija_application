@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/filter_chip_custom.dart';
 import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/loading_widget.dart';
@@ -11,6 +12,7 @@ import 'package:food_nija_application/app/features/homescreen/widget/popular_men
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/type_food.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
+    final foodsProviders = Provider.of<FoodsProvider>(context);
+    List<Food> allProducts = foodsProviders.getfoods;
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -255,16 +259,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RouteManager.infoFoodScreen,
-                                    arguments: listFood[index]);
-                              },
-                              child: PopularMenu(food: listFood[index]));
+                            child: ChangeNotifierProvider.value(
+                              value: allProducts[index],
+                              child: PopularMenu(),
+                            ),
+                          );
                         },
                         separatorBuilder: (_, int i) =>
                             SizedBox(height: getHeight(20)),
-                        itemCount: listFood.length,
+                        itemCount: allProducts.length,
                       ),
                       SizedBox(height: getHeight(80)),
                     ],

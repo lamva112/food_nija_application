@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/text_form_field.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
@@ -6,13 +7,28 @@ import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
+import 'package:provider/provider.dart';
 
-class HomeAllFoodScreen extends StatelessWidget {
+class HomeAllFoodScreen extends StatefulWidget {
   const HomeAllFoodScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeAllFoodScreen> createState() => _HomeAllFoodScreenState();
+}
+
+class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
+  @override
+  void initState() {
+    // final productsProvider = Provider.of<FoodsProvider>(context, listen: false);
+    // productsProvider.fetchProducts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
+    final foodsProvider = Provider.of<FoodsProvider>(context);
+    List<Food> allProducts = foodsProvider.getfoods;
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -80,7 +96,8 @@ class HomeAllFoodScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteManager.filterScreen);
+                          Navigator.pushNamed(
+                              context, RouteManager.filterScreen);
                         },
                         child: Container(
                           width: getWidth(50),
@@ -108,13 +125,19 @@ class HomeAllFoodScreen extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(15)),
                   ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
-                      return PopularMenu(food: listFood[index]);
+                      return InkWell(
+                        child: ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: PopularMenu(),
+                        ),
+                      );
                     },
-                    separatorBuilder: (BuildContext context, int index) =>
+                    separatorBuilder: (_, int i) =>
                         SizedBox(height: getHeight(20)),
-                    itemCount: listFood.length,
+                    itemCount: allProducts.length,
                   ),
                   SizedBox(height: getHeight(80)),
                 ],
