@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
+import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/common_widgets/food_process.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
@@ -21,6 +22,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    final wishlistItemsList =
+        wishlistProvider.getWishlistItems.values.toList().reversed.toList();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -190,14 +194,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     itemBuilder: (BuildContext context, int index) {
-                      String id = listInterestFood[index].foodId;
-                      return FoodProcessCard(
-                        food: listFood.firstWhere((obj) => obj.id == id),
-                        titleTrailing:
-                            Translations.of(context).text('Buy Again'),
+                      return ChangeNotifierProvider.value(
+                        value: wishlistItemsList[index],
+                        child: FoodProcessCard(
+                          titleTrailing:
+                              Translations.of(context).text('Buy Again'),
+                        ),
                       );
                     },
-                    itemCount: listInterestFood.length,
+                    itemCount: wishlistItemsList.length,
                     physics: const NeverScrollableScrollPhysics(),
                   ),
                   SizedBox(height: getHeight(90)),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
+import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/food.dart';
+import 'package:food_nija_application/data/models/wishlist_model.dart';
+import 'package:provider/provider.dart';
 
 class FoodProcessCard extends StatefulWidget {
-  final Food food;
   final String titleTrailing;
 
-  const FoodProcessCard(
-      {Key? key, required this.food, required this.titleTrailing})
+  const FoodProcessCard({Key? key, required this.titleTrailing})
       : super(key: key);
 
   @override
@@ -18,6 +20,11 @@ class FoodProcessCard extends StatefulWidget {
 class _FoodProcessCardState extends State<FoodProcessCard> {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<FoodsProvider>(context);
+    final wishlistModel = Provider.of<WishlistModel>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    final getCurrProduct =
+        productProvider.findProdById(wishlistModel.productId);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
@@ -26,8 +33,8 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: getHeight(10)),
         child: ListTile(
-          leading: Image.asset(
-            widget.food.imageURL,
+          leading: Image.network(
+            getCurrProduct.imageURL,
             width: getWidth(65),
             height: getWidth(65),
           ),
@@ -35,7 +42,7 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.food.name,
+                getCurrProduct.name,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: getFont(16),
@@ -44,7 +51,7 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
                 ),
               ),
               Text(
-                widget.food.description,
+                getCurrProduct.resName,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: getFont(15),
@@ -55,7 +62,7 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
             ],
           ),
           subtitle: Text(
-            '\$ ${widget.food.price}',
+            '\$${getCurrProduct.price.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: getFont(17),
               color: AppColors.primaryColor,
