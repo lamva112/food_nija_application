@@ -5,6 +5,7 @@ import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/change_notifies.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
+import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/login/login_screen.dart';
@@ -78,6 +79,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         ChangeNotifierProvider(
           create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WishlistProvider(),
         ),
       ],
       builder: (context, child) {
