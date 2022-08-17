@@ -195,6 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         food: listFood.firstWhere((obj) => obj.id == id),
                         titleTrailing:
                             Translations.of(context).text('Buy Again'),
+                        color: AppColors.primaryColor,
                       );
                     },
                     itemCount: listInterestFood.length,

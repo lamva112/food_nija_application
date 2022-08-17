@@ -51,6 +51,7 @@ final Map<String, String> en_US = {
   'Food' : 'Food',
   'Search' : 'Search',
   'Reviews' : 'Reviews',
+  'Review' : 'Review',
   'Add To Cart' : 'Add To Cart',
   'Sub-Total' : 'Sub-Total',
   'Delivery Charge' : 'Delivery Charge',
@@ -68,4 +69,5 @@ final Map<String, String> en_US = {
   'My Orders' : 'MY ORDERS',
   'Arriving' : 'Arriving',
   'Completed' : 'Completed',
+  'Thank you' : 'Thank you!',
 };

@@ -53,7 +53,7 @@ class _MyCartsState extends State<MyCarts> {
                     quantity: obj.quantity,
                     foodId: obj.foodId,
                     food: obj.food,
-                    status: StatusType.arriving,
+                    status: StatusType.completed,
                   ),
                 );
               }

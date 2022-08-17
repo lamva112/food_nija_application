@@ -10,7 +10,6 @@ import 'package:food_nija_application/app/features/homescreen/widget/nearest_res
 import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
-import 'package:food_nija_application/data/models/restaurant.dart';
 import 'package:food_nija_application/data/models/type_food.dart';
 
 class HomeScreen extends StatefulWidget {

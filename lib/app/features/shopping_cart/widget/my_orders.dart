@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/common_widgets/food_process.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
+import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/order.dart';
 import 'package:food_nija_application/data/models/order_detail.dart';
 
@@ -33,6 +34,10 @@ class MyOrders extends StatelessWidget {
                         listOrderFood[index].status == StatusType.arriving
                             ? Translations.of(context).text('Arriving')
                             : Translations.of(context).text('Completed'),
+                    color: listOrderFood[index].status == StatusType.arriving
+                        ? Colors.red[600]!
+                        : AppColors.primaryColor,
+                    completed: listOrderFood[index].status == StatusType.completed,
                   );
                 },
                 itemCount: listOrderFood.length,
