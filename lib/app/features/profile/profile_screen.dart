@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/common_widgets/food_process.dart';
+import 'package:food_nija_application/app/common_widgets/food_wishlist.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
@@ -196,11 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ChangeNotifierProvider.value(
                         value: wishlistItemsList[index],
-                        child: Container(),
-                        // child: FoodProcessCard(
-                        //   titleTrailing:
-                        //       Translations.of(context).text('Buy Again'),
-                        // ),
+                        child: WishListCard(),
                       );
                     },
                     itemCount: wishlistItemsList.length,
