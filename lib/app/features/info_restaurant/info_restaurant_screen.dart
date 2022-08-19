@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_nija_application/app/common_widgets/custom_button.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
+import 'package:food_nija_application/data/models/food.dart';
+import 'package:provider/provider.dart';
 
 class InfoRestaurantScreen extends StatefulWidget {
   const InfoRestaurantScreen({Key? key}) : super(key: key);
@@ -18,11 +21,13 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final foodsProviders = Provider.of<FoodsProvider>(context);
+    List<Food> allProducts = foodsProviders.getfoods;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-              expandedHeight: getHeight(400),
+              expandedHeight: getHeight(300),
               pinned: true,
               forceElevated: true,
               backgroundColor: bgColor,
@@ -57,10 +62,10 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                       child: Stack(
                         fit: StackFit.expand, // expand stack
                         children: [
-                          // Image.asset(
-                          //   widget.food.image,
-                          //   fit: BoxFit.cover,
-                          // ),
+                          Image.asset(
+                            'assets/images/image_res_1.png',
+                            fit: BoxFit.cover,
+                          ),
                           Positioned(
                             bottom: -1,
                             left: 0,
@@ -92,14 +97,20 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: getWidth(220),
-                        child: Text(
-                          "hu tieu",
-                          style: TextStyle(
-                            fontSize: getFont(27),
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: getWidth(15), vertical: getHeight(10)),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                        child: Center(
+                          child: Text(
+                            Translations.of(context).text('Popular'),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primaryColor,
+                              fontSize: getFont(15),
+                            ),
                           ),
                         ),
                       ),
@@ -123,25 +134,32 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: getHeight(10)),
+                  SizedBox(
+                    width: getWidth(220),
+                    child: Text(
+                      "Hu tieu",
+                      style: TextStyle(
+                        fontSize: getFont(27),
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: getHeight(20)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          RatingBar.readOnly(
-                            filledIcon: Icons.star,
-                            emptyIcon: Icons.star_border,
-                            halfFilledIcon: Icons.star_half,
-                            filledColor: AppColors.primaryColor,
-                            initialRating: 3.5,
-                            isHalfAllowed: true,
-                            size: 20,
+                          Icon(
+                            Icons.location_pin,
+                            color: AppColors.primaryColor,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: getWidth(10)),
+                            padding: EdgeInsets.only(left: getWidth(5)),
                             child: Text(
-                              '3.5',
+                              '19 Km',
                               style: TextStyle(
                                 fontSize: getFont(18),
                                 color: AppColors.textColor,
@@ -150,16 +168,23 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(width: getWidth(15)),
                       Row(
                         children: [
-                          Icon(
-                            Icons.shopping_bag,
-                            color: AppColors.primaryColor,
+                          RatingBar.readOnly(
+                            filledIcon: Icons.star,
+                            emptyIcon: Icons.star_border,
+                            halfFilledIcon: Icons.star_half,
+                            filledColor: AppColors.primaryColor,
+                            initialRating: 0.5,
+                            isHalfAllowed: true,
+                            size: 20,
+                            maxRating: 1,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: getWidth(5)),
+                            padding: EdgeInsets.only(left: getWidth(10)),
                             child: Text(
-                              '1000 Orders',
+                              '3.5 Rating',
                               style: TextStyle(
                                 fontSize: getFont(18),
                                 color: AppColors.textColor,
@@ -167,35 +192,58 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                   SizedBox(height: getHeight(20)),
-                  Text(
-                    "test",
-                    style: TextStyle(
-                      fontSize: getFont(15),
+                  SizedBox(
+                    height: getHeight(100),
+                    child: Text(
+                      "test",
+                      style: TextStyle(
+                        fontSize: getFont(15),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   SizedBox(height: getHeight(15)),
-                  Text(
-                    Translations.of(context).text('Reviews'),
-                    style: TextStyle(
-                      fontSize: getFont(20),
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        Translations.of(context).text('Popular Menu'),
+                        style: TextStyle(
+                          fontSize: getFont(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          Translations.of(context).text('View more'),
+                          style: TextStyle(
+                            color: AppColors.priceTextColor,
+                            fontWeight: FontWeight.w400,
+                            fontSize: getFont(16),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: getHeight(15)),
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (_, int index) {
-                      return Container();
-                      // return ReviewFood(review: listReview[index]);
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        child: ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: PopularMenu(),
+                        ),
+                      );
                     },
                     separatorBuilder: (_, int i) =>
-                        SizedBox(height: getHeight(10)),
-                    itemCount: 1,
+                        SizedBox(height: getHeight(20)),
+                    itemCount: allProducts.length,
                   ),
                   SizedBox(height: getHeight(80)),
                 ],
@@ -203,21 +251,6 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: CustomButton(
-        title: Translations.of(context).text('Add To Cart'),
-        onPressed: () {
-          // order.listOrderDetails?.add(OrderDetails(
-          //   quantity: 1,
-          //   foodId: widget.food.id,
-          // ));
-          Navigator.pop(context);
-        },
-        height: getHeight(55),
-        width: getWidth(340),
-        backgroundColor: AppColors.primaryColor,
-        fontSize: getFont(20),
-        textColor: Colors.white,
       ),
     );
   }

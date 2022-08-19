@@ -121,7 +121,6 @@ class _UploadPhotoWayState extends State<UploadPhotoWay> {
                         ),
                         onTap: () => setState(() {
                           _index = index;
-                          print("tap tap");
                         }),
                       );
                     },

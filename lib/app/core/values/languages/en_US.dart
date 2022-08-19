@@ -73,4 +73,5 @@ final Map<String, String> en_US = {
   'Rate' : 'Please rate your order',
   'Feedback' : 'Leave Feedback',
   'Submit' : 'Submit',
+  'Popular' : 'Popular',
 };

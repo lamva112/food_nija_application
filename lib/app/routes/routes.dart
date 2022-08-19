@@ -18,7 +18,6 @@ import 'package:food_nija_application/app/features/signup/signup_succesfull.dart
 import 'package:food_nija_application/app/features/signup/upload_location_screen.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
-import 'package:food_nija_application/data/models/food.dart';
 import 'package:page_transition/page_transition.dart';
 import '../features/login/login_screen.dart';
 

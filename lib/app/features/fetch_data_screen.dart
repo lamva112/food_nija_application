@@ -32,7 +32,7 @@ class _FecthDataScreenState extends State<FecthDataScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => const MyBottomBar(),
+          builder: (_) => SafeArea(child: const MyBottomBar()),
         ),
       );
     });

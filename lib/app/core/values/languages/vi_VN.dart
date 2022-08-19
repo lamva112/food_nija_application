@@ -74,4 +74,5 @@ final Map<String, String> vi_VN = {
   'Rate' : 'Vui lòng đánh giá sản phẩm của bạn',
   'Feedback' : 'Phản hồi',
   'Submit' : 'Gửi',
+  'Popular' : 'Phổ biến'
 };

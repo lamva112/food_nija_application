@@ -29,7 +29,7 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
 
   @override
   void dispose() {
-    _searchTextController!.dispose();
+    _searchTextController.dispose();
     _searchTextFocusNode.dispose();
     super.dispose();
   }
@@ -175,7 +175,7 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         child: ChangeNotifierProvider.value(
-                          value: _searchTextController!.text.isNotEmpty
+                          value: _searchTextController.text.isNotEmpty
                               ? listProdcutSearch[index]
                               : allProducts[index],
                           child: PopularMenu(),
@@ -184,7 +184,7 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
                     },
                     separatorBuilder: (_, int i) =>
                         SizedBox(height: getHeight(20)),
-                    itemCount: _searchTextController!.text.isNotEmpty
+                    itemCount: _searchTextController.text.isNotEmpty
                         ? listProdcutSearch.length
                         : allProducts.length,
                   ),
