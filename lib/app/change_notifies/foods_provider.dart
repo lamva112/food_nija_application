@@ -38,24 +38,14 @@ class FoodsProvider with ChangeNotifier {
     return _foodsList.firstWhere((element) => element.id == productId);
   }
 
-  // List<Food> findByCategory(String categoryName) {
-  //   List<Food> _categoryList = _foodsList
-  //       .where((element) => element.productCategoryName
-  //           .toLowerCase()
-  //           .contains(categoryName.toLowerCase()))
-  //       .toList();
-  //   return _categoryList;
-  // }
-
-  // List<ProductModel> searchQuery(String searchText) {
-  //   List<ProductModel> _searchList = _productsList
-  //       .where(
-  //         (element) => element.title.toLowerCase().contains(
-  //               searchText.toLowerCase(),
-  //             ),
-  //       )
-  //       .toList();
-  //   return _searchList;
-  // }
-
+  List<Food> searchQuery(String searchText) {
+    List<Food> _searchList = _foodsList
+        .where(
+          (element) => element.name.toLowerCase().contains(
+                searchText.toLowerCase(),
+              ),
+        )
+        .toList();
+    return _searchList;
+  }
 }

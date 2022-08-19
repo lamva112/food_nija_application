@@ -17,6 +17,9 @@ class HomeAllFoodScreen extends StatefulWidget {
 }
 
 class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
+  final TextEditingController _searchTextController = TextEditingController();
+  final FocusNode _searchTextFocusNode = FocusNode();
+  bool isSearching = false;
   @override
   void initState() {
     // final productsProvider = Provider.of<FoodsProvider>(context, listen: false);
@@ -25,10 +28,20 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
   }
 
   @override
+  void dispose() {
+    _searchTextController!.dispose();
+    _searchTextFocusNode.dispose();
+    super.dispose();
+  }
+
+  List<Food> listProdcutSearch = [];
+
+  @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
     final foodsProvider = Provider.of<FoodsProvider>(context);
     List<Food> allProducts = foodsProvider.getfoods;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -82,22 +95,54 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
+                      Container(
                         width: getWidth(270),
-                        child: TextInputWidget(
-                          hintText: Translations.of(context)
-                              .text('What do you want to order?'),
-                          prefixIcon: Icon(
-                            Icons.search_outlined,
-                            color: AppColors.iconButtonBack,
+                        height: getHeight(50),
+                        decoration: BoxDecoration(
+                          color: AppColors.bgButtonBack,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: TextFormField(
+                            controller: _searchTextController,
+                            focusNode: _searchTextFocusNode,
+                            decoration: InputDecoration(
+                              hintText: Translations.of(context)
+                                  .text('What do you want to order?'),
+                              prefixIcon: Icon(
+                                Icons.search_outlined,
+                                color: AppColors.iconButtonBack,
+                              ),
+                              fillColor: Colors.transparent,
+                              border: InputBorder.none,
+                              suffix: IconButton(
+                                onPressed: () {
+                                  _searchTextController.clear();
+                                  _searchTextFocusNode.unfocus();
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  color: _searchTextFocusNode.hasFocus
+                                      ? Colors.red
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                            onChanged: (valuee) {
+                              setState(() {
+                                listProdcutSearch =
+                                    foodsProvider.searchQuery(valuee);
+                              });
+                            },
                           ),
-                          fillColor: AppColors.bgButtonBack,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
-                              context, RouteManager.filterScreen);
+                            context,
+                            RouteManager.filterScreen,
+                          );
                         },
                         child: Container(
                           width: getWidth(50),
@@ -130,14 +175,18 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         child: ChangeNotifierProvider.value(
-                          value: allProducts[index],
+                          value: _searchTextController!.text.isNotEmpty
+                              ? listProdcutSearch[index]
+                              : allProducts[index],
                           child: PopularMenu(),
                         ),
                       );
                     },
                     separatorBuilder: (_, int i) =>
                         SizedBox(height: getHeight(20)),
-                    itemCount: allProducts.length,
+                    itemCount: _searchTextController!.text.isNotEmpty
+                        ? listProdcutSearch.length
+                        : allProducts.length,
                   ),
                   SizedBox(height: getHeight(80)),
                 ],

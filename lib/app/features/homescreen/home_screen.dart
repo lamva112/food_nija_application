@@ -9,6 +9,7 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/nearest_restaurant.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
+import 'package:food_nija_application/app/features/info_restaurant/info_restaurant_screen.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/type_food.dart';
@@ -214,8 +215,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (BuildContext context, int index) {
-                                return NearestRestaurant(
-                                  snap: snapshot.data!.docs[index].data(),
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => InfoRestaurantScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: NearestRestaurant(
+                                    snap: snapshot.data!.docs[index].data(),
+                                  ),
                                 );
                               },
                               separatorBuilder:
@@ -269,7 +279,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(height: getHeight(20)),
                         itemCount: allProducts.length,
                       ),
-                      SizedBox(height: getHeight(80)),
+                      SizedBox(
+                        height: getHeight(80),
+                      ),
                     ],
                   ),
                 ],
