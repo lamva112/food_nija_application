@@ -146,20 +146,16 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                   ),
                   _quantityController(
                     fct: () {
-                      if (_quantityTextController.text == '1') {
-                        return;
-                      } else {
-                        cartProvider.reduceQuantityByOne(cartModel.productId);
-                        setState(() {
-                          _quantityTextController.text =
-                              (int.parse(_quantityTextController.text) - 1)
-                                  .toString();
-                        });
-                      }
+                      cartProvider.increaseQuantityByOne(cartModel.productId);
+                      setState(() {
+                        _quantityTextController.text =
+                            (int.parse(_quantityTextController.text) + 1)
+                                .toString();
+                      });
                     },
                     color: Colors.red,
-                    icon: Icons.remove,
-                    isLeft: true,
+                    icon: Icons.add,
+                    isLeft: false,
                   ),
                 ],
               ),

@@ -1,7 +1,10 @@
+import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
+import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class OrderBill extends StatelessWidget {
   final Function()? onTap;
@@ -9,6 +12,18 @@ class OrderBill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final productProvider = Provider.of<FoodsProvider>(context);
+
+    double total = 0.0;
+    double deliveryFee = 20;
+    double discount = 25;
+    double bill = 0.0;
+    cartProvider.getCartItems.forEach((key, value) {
+      final getCurrProduct = productProvider.findProdById(value.productId);
+      total += getCurrProduct.price * value.quantity;
+      bill += getCurrProduct.price * value.quantity + deliveryFee - discount;
+    });
     return Container(
       height: getHeight(190),
       decoration: BoxDecoration(
@@ -37,7 +52,7 @@ class OrderBill extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '120 \$',
+                    '${total.toStringAsFixed(2)}\$',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: getFont(18),
@@ -59,7 +74,7 @@ class OrderBill extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '20 \$',
+                    '${deliveryFee} \$',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: getFont(18),
@@ -81,7 +96,7 @@ class OrderBill extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '150 \$',
+                    '${discount} \$',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: getFont(18),
@@ -103,7 +118,7 @@ class OrderBill extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '150 \$',
+                    '${bill} \$',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: getFont(20),
