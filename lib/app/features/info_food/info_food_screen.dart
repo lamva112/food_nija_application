@@ -10,6 +10,7 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/core/values/strings.dart';
+import 'package:food_nija_application/app/features/info_food/post_cmt_screen.dart';
 import 'package:food_nija_application/app/features/info_food/widget/heart_btn.dart';
 import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
 import 'package:food_nija_application/data/models/food.dart';
@@ -47,66 +48,67 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-              expandedHeight: getHeight(400),
-              pinned: true,
-              forceElevated: true,
-              backgroundColor: bgColor,
-              elevation: 0.0,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.itemChildColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+            expandedHeight: getHeight(400),
+            pinned: true,
+            forceElevated: true,
+            backgroundColor: bgColor,
+            elevation: 0.0,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: AppColors.itemChildColor,
               ),
-              flexibleSpace: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  double top = constraints.biggest.height;
-                  Future.delayed(
-                      Duration.zero,
-                      () => {
-                            if (top <= 80.0)
-                              {
-                                setState(() {
-                                  bgColor = null;
-                                })
-                              }
-                          });
-                  return FlexibleSpaceBar(
-                    collapseMode: CollapseMode.pin,
-                    centerTitle: true,
-                    background: Container(
-                      color: Colors.white,
-                      child: Stack(
-                        fit: StackFit.expand, // expand stack
-                        children: [
-                          Image.network(
-                            getCurrFoods.imageURL,
-                            fit: BoxFit.cover,
-                          ),
-                          Positioned(
-                            bottom: -1,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              height: 30,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(50),
-                                ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            flexibleSpace: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                double top = constraints.biggest.height;
+                Future.delayed(
+                    Duration.zero,
+                    () => {
+                          if (top <= 80.0)
+                            {
+                              setState(() {
+                                bgColor = null;
+                              })
+                            }
+                        });
+                return FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  centerTitle: true,
+                  background: Container(
+                    color: Colors.white,
+                    child: Stack(
+                      fit: StackFit.expand, // expand stack
+                      children: [
+                        Image.network(
+                          getCurrFoods.imageURL,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                          bottom: -1,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: 30,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(50),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              )),
+                  ),
+                );
+              },
+            ),
+          ),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(left: getWidth(25), right: getWidth(15)),
@@ -189,12 +191,34 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                     ),
                   ),
                   SizedBox(height: getHeight(15)),
-                  Text(
-                    Translations.of(context).text('Reviews'),
-                    style: TextStyle(
-                      fontSize: getFont(20),
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        Translations.of(context).text('Reviews'),
+                        style: TextStyle(
+                          fontSize: getFont(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PostCmtScreen(
+                                foodId: widget.foodId,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.add_comment,
+                          color: AppColors.primaryColor,
+                          size: getWidth(20),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: getHeight(15)),
                   ListView.separated(
