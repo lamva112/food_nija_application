@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
@@ -34,6 +35,14 @@ class InfoFoodScreen extends StatefulWidget {
 class _InfoFoodScreenState extends State<InfoFoodScreen> {
   Color? bgColor = AppColors.backgroundColor;
   bool isFavourite = false;
+  double total = 0;
+  List<double> ratingList = [];
+  double everage_rating = 0;
+  @override
+  void initState() {
+    getRating(widget.foodId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +53,12 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
     bool? _isInCart = cartProvider.getCartItems.containsKey(widget.foodId);
     bool? _isInWishlist =
         wishlistProvider.getWishlistItems.containsKey(widget.foodId);
+    ratingList.forEach((num e) {
+      total += e;
+    });
+    ratingList.length == 0
+        ? everage_rating = 0
+        : everage_rating = total / ratingList.length;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -147,14 +162,14 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                             emptyIcon: Icons.star_border,
                             halfFilledIcon: Icons.star_half,
                             filledColor: AppColors.primaryColor,
-                            initialRating: 3.5,
+                            initialRating: everage_rating,
                             isHalfAllowed: true,
                             size: 20,
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: getWidth(10)),
                             child: Text(
-                              '3.5',
+                              "${everage_rating.toStringAsPrecision(3)}",
                               style: TextStyle(
                                 fontSize: getFont(18),
                                 color: AppColors.textColor,
@@ -203,14 +218,16 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       Spacer(),
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => PostCmtScreen(
-                                foodId: widget.foodId,
-                              ),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (_) => PostCmtScreen(
+                          //       foodId: widget.foodId,
+                          //     ),
+                          //   ),
+                          // );
+                          print(ratingList);
+                          print(total);
                         },
                         icon: Icon(
                           Icons.add_comment,
@@ -221,15 +238,34 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(15)),
-                  ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (_, int index) {
-                      return ReviewFood(review: listReview[index]);
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('foods')
+                        .doc(widget.foodId)
+                        .collection('reviews')
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      return ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ReviewFood(
+                            snap: snapshot.data!.docs[index].data(),
+                          );
+                        },
+                        separatorBuilder: (_, int i) =>
+                            SizedBox(height: getHeight(10)),
+                        itemCount: snapshot.data!.docs.length,
+                      );
                     },
-                    separatorBuilder: (_, int i) =>
-                        SizedBox(height: getHeight(10)),
-                    itemCount: listReview.length,
                   ),
                   SizedBox(height: getHeight(80)),
                 ],
@@ -261,5 +297,20 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
         textColor: Colors.white,
       ),
     );
+  }
+
+  Future getRating(String foodId) async {
+    ratingList = [];
+    await FirebaseFirestore.instance
+        .collection('foods')
+        .doc(foodId)
+        .collection('reviews')
+        .get()
+        .then((QuerySnapshot productSnapshot) {
+      productSnapshot.docs.forEach((element) {
+        ratingList.add(element.get('rating'));
+      });
+    });
+    setState(() {});
   }
 }
