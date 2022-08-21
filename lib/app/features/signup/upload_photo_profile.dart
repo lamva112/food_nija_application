@@ -11,7 +11,6 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/loading_screen.dart';
-import 'package:food_nija_application/app/features/signup/upload_location_screen.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/services/auth_service.dart';
 import 'package:food_nija_application/data/services/storage_methods.dart';

@@ -67,16 +67,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: AppColors.textColor,
                         ),
                       ),
-                      Container(
-                        width: getWidth(45),
-                        height: getHeight(45),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.backgroundItemColor,
-                        ),
-                        child: Icon(
-                          Icons.notifications,
-                          color: AppColors.selectedNavBarColor,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteManager.notificationScreen);
+                        },
+                        child: Container(
+                          width: getWidth(45),
+                          height: getHeight(45),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.backgroundItemColor,
+                          ),
+                          child: Icon(
+                            Icons.notifications,
+                            color: AppColors.selectedNavBarColor,
+                          ),
                         ),
                       )
                     ],
@@ -219,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (_) => InfoRestaurantScreen(),
+                                        builder: (_) => SafeArea(child: InfoRestaurantScreen()),
                                       ),
                                     );
                                   },

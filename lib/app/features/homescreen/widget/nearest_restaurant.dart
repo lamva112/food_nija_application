@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/data/models/restaurant.dart';
 
 class NearestRestaurant extends StatefulWidget {
   final snap;
@@ -14,7 +13,6 @@ class NearestRestaurant extends StatefulWidget {
 class _NearestRestaurantState extends State<NearestRestaurant> {
   @override
   Widget build(BuildContext context) {
-    CustomSize().init(context);
     return Container(
       width: getWidth(150),
       margin: const EdgeInsets.all(1.7),

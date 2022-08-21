@@ -71,7 +71,10 @@ final Map<String, String> vi_VN = {
   'Arriving' : 'Đang vận chuyển',
   'Completed' : 'Hoàn thành',
   'Thank you' : 'Cảm ơn!',
-  'Rate' : 'Vui lòng đánh giá sản phẩm của bạn',
+  'Rate Food' : 'Vui lòng đánh giá đồ ăn của bạn',
+  'Rate Restaurant' : 'Vui lòng đánh giá nhà hàng của bạn',
   'Feedback' : 'Phản hồi',
   'Submit' : 'Gửi',
+  'Popular' : 'Phổ biến',
+  'Notification' : 'Thông báo',
 };

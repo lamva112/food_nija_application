@@ -1,16 +1,16 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/features/chat/chat_screen.dart';
-
 import 'package:food_nija_application/app/features/fetch_data_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_food_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/all_restaurant_screen.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/filter_screen.dart';
 import 'package:food_nija_application/app/features/info_food/info_food_screen.dart';
+import 'package:food_nija_application/app/features/notification/notification_screen.dart';
 import 'package:food_nija_application/app/features/profile/profile_screen.dart';
 import 'package:food_nija_application/app/features/shopping_cart/confirm_order.dart';
 import 'package:food_nija_application/app/features/shopping_cart/order_successful.dart';
-import 'package:food_nija_application/app/features/shopping_cart/review_screen.dart';
+import 'package:food_nija_application/app/features/shopping_cart/review_food_screen.dart';
 import 'package:food_nija_application/app/features/signup/info_signup_screen.dart';
 import 'package:food_nija_application/app/features/signup/payment_screent.dart';
 import 'package:food_nija_application/app/features/signup/signup_screen.dart';
@@ -18,7 +18,6 @@ import 'package:food_nija_application/app/features/signup/signup_succesfull.dart
 import 'package:food_nija_application/app/features/signup/upload_location_screen.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_profile.dart';
 import 'package:food_nija_application/app/features/signup/upload_photo_way.dart';
-import 'package:food_nija_application/data/models/food.dart';
 import 'package:page_transition/page_transition.dart';
 import '../features/login/login_screen.dart';
 
@@ -41,6 +40,7 @@ class RouteManager {
   static const String orderSuccessful = '/orderSuccessful';
   static const String profileScreen = '/profileScreen';
   static const String reviewScreen = '/reviewScreen';
+  static const String notificationScreen = '/notificationScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -167,10 +167,16 @@ class RouteManager {
         );
       case reviewScreen:
         return PageTransition(
-          child: const SafeArea(child: SafeArea(child: ReviewScreen())),
+          child: const SafeArea(child: SafeArea(child: ReviewFoodScreen())),
           type: PageTransitionType.scale,
           duration: const Duration(milliseconds: 400),
           alignment: Alignment.centerRight,
+        );
+      case notificationScreen:
+        return PageTransition(
+          child: const SafeArea(child: SafeArea(child: NotificationScreen())),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 400),
         );
       default:
         throw const FormatException('Route not found! Check routes again!');

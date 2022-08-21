@@ -6,8 +6,8 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 
-class ReviewScreen extends StatelessWidget {
-  const ReviewScreen({Key? key}) : super(key: key);
+class ReviewFoodScreen extends StatelessWidget {
+  const ReviewFoodScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class ReviewScreen extends StatelessWidget {
                     ),
                     SizedBox(height: getHeight(30)),
                     Text(
-                      Translations.of(context).text('Rate'),
+                      Translations.of(context).text('Rate Restaurant'),
                       style: TextStyle(
                         fontSize: getFont(20),
                         fontWeight: FontWeight.w400,
@@ -88,7 +88,7 @@ class ReviewScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsets.symmetric(vertical: getHeight(10)),
+                              EdgeInsets.symmetric(vertical: getHeight(10)),
                               child: ListTile(
                                 leading: Image.asset(
                                   'assets/images/image_popular_1.png',
@@ -129,7 +129,7 @@ class ReviewScreen extends StatelessWidget {
                                   left: getWidth(20), right: getWidth(15)),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context).text('Total'),
@@ -159,16 +159,16 @@ class ReviewScreen extends StatelessWidget {
                             RatingBar.builder(
                               itemBuilder: (BuildContext context, int index) =>
                                   Icon(
-                                Icons.star,
-                                color: AppColors.priceTextColor,
-                              ),
+                                    Icons.star,
+                                    color: AppColors.priceTextColor,
+                                  ),
                               onRatingUpdate: (double value) {},
                               initialRating: 0,
                               minRating: 0,
                               allowHalfRating: true,
                               maxRating: 5,
                               itemPadding:
-                                  EdgeInsets.symmetric(horizontal: getWidth(8)),
+                              EdgeInsets.symmetric(horizontal: getWidth(8)),
                             ),
                             SizedBox(height: getHeight(10)),
                             Padding(
@@ -177,7 +177,7 @@ class ReviewScreen extends StatelessWidget {
                               child: TextInputWidget(
                                 textEditingController: note,
                                 hintText:
-                                    Translations.of(context).text('Feedback'),
+                                Translations.of(context).text('Feedback'),
                                 prefixIcon: const Icon(Icons.edit_note),
                               ),
                             ),

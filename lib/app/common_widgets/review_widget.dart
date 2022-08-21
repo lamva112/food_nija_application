@@ -4,23 +4,13 @@ import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/models/review.dart';
 import 'package:intl/intl.dart';
 
-class ReviewFood extends StatefulWidget {
-  final snap;
+class ReviewWidget extends StatelessWidget {
+  final Review review;
+  const ReviewWidget({Key? key, required this.review}) : super(key: key);
 
-  const ReviewFood({
-    Key? key,
-    this.snap,
-  }) : super(key: key);
-
-  @override
-  State<ReviewFood> createState() => _ReviewFoodState();
-}
-
-class _ReviewFoodState extends State<ReviewFood> {
   @override
   Widget build(BuildContext context) {
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
-    CustomSize().init(context);
     return Card(
       color: AppColors.backgroundColor,
       shape: RoundedRectangleBorder(
@@ -35,8 +25,8 @@ class _ReviewFoodState extends State<ReviewFood> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                widget.snap['profilePic'],
+              child: Image.asset(
+                review.imagePerson,
                 fit: BoxFit.cover,
                 width: getWidth(65),
                 height: getWidth(65),
@@ -49,7 +39,7 @@ class _ReviewFoodState extends State<ReviewFood> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.snap['name'],
+                      review.name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: getFont(18),
@@ -57,7 +47,7 @@ class _ReviewFoodState extends State<ReviewFood> {
                       ),
                     ),
                     Text(
-                      widget.snap['dateRV'],
+                      dateFormat.format(review.createAt),
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
                         fontSize: getFont(15),
@@ -68,7 +58,7 @@ class _ReviewFoodState extends State<ReviewFood> {
                     SizedBox(
                       width: getWidth(215),
                       child: Text(
-                        widget.snap['review'],
+                        review.description,
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: getFont(16),
@@ -97,7 +87,9 @@ class _ReviewFoodState extends State<ReviewFood> {
                           size: getWidth(27),
                         ),
                         Text(
-                          widget.snap['rating'].toString(),
+                          review.rating % 1 == 0
+                              ? review.rating.toInt().toString()
+                              : review.rating.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: AppColors.primaryColor,
