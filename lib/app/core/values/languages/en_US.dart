@@ -70,8 +70,10 @@ final Map<String, String> en_US = {
   'Arriving' : 'Arriving',
   'Completed' : 'Completed',
   'Thank you' : 'Thank you!',
-  'Rate' : 'Please rate your order',
+  'Rate Food' : 'Please rate your Food',
+  'Rate Restaurant' : 'Please rate your Restaurant',
   'Feedback' : 'Leave Feedback',
   'Submit' : 'Submit',
   'Popular' : 'Popular',
+  'Notification' : 'Notification',
 };
