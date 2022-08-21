@@ -277,7 +277,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     shrinkWrap: true,
                     itemBuilder: (_, int index) {
                       //Đổi lại thành reivew restaurant nha
-                      return ReviewWidget(review: listReview[index]);
+                      return ReviewWidget(snap: listReview[index]);
                     },
                     separatorBuilder: (_, int i) =>
                         SizedBox(height: getHeight(10)),

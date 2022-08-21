@@ -30,7 +30,6 @@ class _InfoSignupState extends State<InfoSignup> {
 
   @override
   Widget build(BuildContext context) {
-    CustomSize().init(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: LoadingManager(

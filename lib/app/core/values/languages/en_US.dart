@@ -10,7 +10,7 @@ final Map<String, String> en_US = {
   'Login To Your Screen' : 'Login To Your Screen',
   'Password' : 'Password',
   'or': 'Or Login with',
-  'Forgot password' : 'Forgot Your Password?',
+  'Forgot password' : 'Forgot Password?',
   'Login': 'Login',
   'Sign up' : 'Sign up?',
   'Sign up free' : 'Sign Up For Free',
@@ -76,4 +76,6 @@ final Map<String, String> en_US = {
   'Submit' : 'Submit',
   'Popular' : 'Popular',
   'Notification' : 'Notification',
+  'Enter Email Reset' : 'Please enter your email address to reset your password',
+  'Send Email Reset' : 'A password reset email is sent to\nhelp you set up a new one.',
 };

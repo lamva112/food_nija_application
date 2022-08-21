@@ -77,4 +77,6 @@ final Map<String, String> vi_VN = {
   'Submit' : 'Gửi',
   'Popular' : 'Phổ biến',
   'Notification' : 'Thông báo',
+  'Enter Email Reset' : 'Vui lòng nhập địa chỉ email của bạn để khôi phục mật khẩu',
+  'Send Email Reset' : 'Một email đặt lại mật khẩu sẽ được gửi\nđể giúp bạn thiết lập mật khẩu mới.',
 };

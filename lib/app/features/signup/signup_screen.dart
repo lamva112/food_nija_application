@@ -21,12 +21,12 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   late User user;
-
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool statusLogin = false;
   bool speciallyNotification = false;
+  bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
@@ -131,6 +131,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: getHeight(20)),
                       TextInputWidget(
                         textEditingController: _password,
+                        obscureText: obscureText,
                         hintText: Translations.of(context).text('Password'),
                         prefixIcon: Icon(
                           Icons.lock,
@@ -138,6 +139,14 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         validatorText:
                             Translations.of(context).text('Password Validator'),
+                        onTapSuffixIcon: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        suffixIcon: obscureText
+                            ? Icon(Icons.visibility, color: AppColors.primaryColor)
+                            : Icon(Icons.visibility_off, color: AppColors.primaryColor),
                       ),
                     ],
                   ),

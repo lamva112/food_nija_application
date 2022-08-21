@@ -9,8 +9,6 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/login/widget/login_with_item.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
-import 'package:food_nija_application/data/services/auth_service.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -36,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     CustomSize().init(context);
-    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundLoginColor,
       body: SingleChildScrollView(
@@ -189,8 +186,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: getHeight(50),
+            SizedBox(height: getHeight(20)),
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, RouteManager.resetPasswordScreen);
+              },
               child: Center(
                 child: Text(
                   Translations.of(context).text('Forgot password'),
@@ -203,6 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            SizedBox(height: getHeight(10)),
             SizedBox(height: getHeight(10)),
             onTapLogin
                 ? const CircularProgressIndicator()
@@ -238,7 +239,6 @@ class _LoginScreenState extends State<LoginScreen> {
             email: _email.text.toLowerCase().trim(),
             password: _password.text.trim());
         Navigator.pushNamed(context, RouteManager.fetchDataScreen);
-        print('Succefully logged in');
       } on FirebaseException catch (error) {
         GlobalMethods.errorDialog(
             subtitle: '${error.message}', context: context);
