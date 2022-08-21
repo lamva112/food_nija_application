@@ -5,12 +5,12 @@ import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/common_widgets/review_widget.dart';
 import 'package:food_nija_application/app/core/utils/global_methods.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/info_food/widget/heart_btn.dart';
-import 'package:food_nija_application/app/features/info_food/widget/review_food.dart';
 import 'package:food_nija_application/data/models/review.dart';
 import 'package:provider/provider.dart';
 
@@ -196,7 +196,7 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (_, int index) {
-                      return ReviewFood(review: listReview[index]);
+                      return ReviewWidget(review: listReview[index]);
                     },
                     separatorBuilder: (_, int i) =>
                         SizedBox(height: getHeight(10)),

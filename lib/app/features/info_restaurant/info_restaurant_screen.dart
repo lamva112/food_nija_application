@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/common_widgets/review_widget.dart';
+import 'package:food_nija_application/app/core/utils/loading_widget.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
-import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
+import 'package:food_nija_application/app/features/info_restaurant/widget/popular_menu.dart';
 import 'package:food_nija_application/data/models/food.dart';
+import 'package:food_nija_application/data/models/review.dart';
 import 'package:provider/provider.dart';
 
 class InfoRestaurantScreen extends StatefulWidget {
@@ -98,7 +102,8 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: getWidth(15), vertical: getHeight(10)),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getWidth(15), vertical: getHeight(10)),
                         decoration: BoxDecoration(
                           color: AppColors.primaryColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(22),
@@ -135,15 +140,12 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(10)),
-                  SizedBox(
-                    width: getWidth(220),
-                    child: Text(
-                      "Hu tieu",
-                      style: TextStyle(
-                        fontSize: getFont(27),
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    "Hu tieu",
+                    style: TextStyle(
+                      fontSize: getFont(27),
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: getHeight(20)),
@@ -196,15 +198,12 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(20)),
-                  SizedBox(
-                    height: getHeight(100),
-                    child: Text(
-                      "test",
-                      style: TextStyle(
-                        fontSize: getFont(15),
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                  Text(
+                    "test",
+                    style: TextStyle(
+                      fontSize: getFont(15),
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: getHeight(15)),
                   Row(
@@ -230,22 +229,60 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(15)),
+                  SizedBox(
+                    height: getHeight(185),
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('restaurants')
+                          .orderBy("time", descending: false)
+                          .snapshots(),
+                      builder: (context,
+                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                              snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const LoadingWidget();
+                        }
+                        return ListView.separated(
+                          padding: EdgeInsets.only(bottom: getHeight(5)),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () {
+                                //Ấn vô chuyển sang info food
+                              },
+                              child: PopularMenuRestaurant(
+                                snap: snapshot.data!.docs[index].data(),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(width: getWidth(15)),
+                          itemCount: snapshot.data!.docs.length,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: getHeight(15)),
+                  Text(
+                    Translations.of(context).text('Reviews'),
+                    style: TextStyle(
+                      fontSize: getFont(20),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(15)),
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        child: ChangeNotifierProvider.value(
-                          value: allProducts[index],
-                          child: PopularMenu(),
-                        ),
-                      );
+                    itemBuilder: (_, int index) {
+                      //Đổi lại thành reivew restaurant nha
+                      return ReviewWidget(review: listReview[index]);
                     },
                     separatorBuilder: (_, int i) =>
-                        SizedBox(height: getHeight(20)),
-                    itemCount: allProducts.length,
+                        SizedBox(height: getHeight(10)),
+                    itemCount: listReview.length,
                   ),
-                  SizedBox(height: getHeight(80)),
                 ],
               ),
             ),
