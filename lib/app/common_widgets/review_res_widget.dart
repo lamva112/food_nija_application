@@ -3,15 +3,15 @@ import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:intl/intl.dart';
 
-class ReviewWidget extends StatefulWidget {
+class ReviewResWidget extends StatefulWidget {
   final snap;
-  const ReviewWidget({Key? key, required this.snap}) : super(key: key);
+  const ReviewResWidget({Key? key, required this.snap}) : super(key: key);
 
   @override
-  State<ReviewWidget> createState() => _ReviewWidgetState();
+  State<ReviewResWidget> createState() => _ReviewResWidgetState();
 }
 
-class _ReviewWidgetState extends State<ReviewWidget> {
+class _ReviewResWidgetState extends State<ReviewResWidget> {
   @override
   Widget build(BuildContext context) {
     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
