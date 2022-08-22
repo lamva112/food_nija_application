@@ -302,6 +302,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(15)),
+
                   StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('restaurants')
@@ -328,6 +329,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                             SizedBox(height: getHeight(10)),
                         itemCount: snapshot.data!.docs.length,
                       );
+
                     },
                   ),
                   SizedBox(height: getHeight(80)),
