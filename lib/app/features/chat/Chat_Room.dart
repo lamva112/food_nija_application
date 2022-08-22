@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/change_notifies/user_provider.dart';
+import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
@@ -132,29 +133,70 @@ class _ChatRoomState extends State<ChatRoom> {
               color: AppColors.primaryColor,
             ),
           ),
-          Container(
-            // scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      padding: EdgeInsets.only(left: 12),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Iconsax.back_square,
-                        size: 28,
-                        color: Colors.black,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: getHeight(40)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    padding: EdgeInsets.only(left: 12),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Iconsax.back_square,
+                      size: 28,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: AnimatedContainer(
+                        alignment: Alignment.center,
+                        duration: Duration(milliseconds: 300),
+                        height: 32,
+                        width: 32,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.25),
+                              spreadRadius: 0,
+                              blurRadius: 64,
+                              offset: Offset(8, 8),
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Iconsax.call,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
-                    Spacer(),
-                    Container(
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(right: 28),
                       alignment: Alignment.center,
                       child: GestureDetector(
                         onTap: () {},
@@ -185,179 +227,132 @@ class _ChatRoomState extends State<ChatRoom> {
                             padding: EdgeInsets.zero,
                             alignment: Alignment.center,
                             child: Icon(
-                              Iconsax.call,
+                              Iconsax.video,
                               size: 18,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                      ),
+                      )),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 12,
+                  ),
+                  AnimatedContainer(
+                    alignment: Alignment.center,
+                    duration: Duration(milliseconds: 300),
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(24),
                     ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(right: 28),
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: AnimatedContainer(
-                            alignment: Alignment.center,
-                            duration: Duration(milliseconds: 300),
-                            height: 32,
-                            width: 32,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.25),
-                                  spreadRadius: 0,
-                                  blurRadius: 64,
-                                  offset: Offset(8, 8),
-                                ),
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  spreadRadius: 0,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.zero,
-                              alignment: Alignment.center,
-                              child: Icon(
-                                Iconsax.video,
-                                size: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        )),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 12,
-                    ),
-                    AnimatedContainer(
-                      alignment: Alignment.center,
-                      duration: Duration(milliseconds: 300),
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      width: 48,
+                      height: 48,
                       child: Container(
-                        alignment: Alignment.bottomCenter,
-                        width: 48,
-                        height: 48,
-                        child: Container(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(24),
-                            child: Image.network(
-                              widget.contactphotoURl,
-                              fit: BoxFit.cover,
-                              width: 48,
-                              height: 48,
-                            ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: Image.network(
+                            widget.contactphotoURl,
+                            fit: BoxFit.cover,
+                            width: 48,
+                            height: 48,
                           ),
                         ),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
+                      ),
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
                     ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 8),
+                    child: Text(
+                      widget.contactname,
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                height: getHeight(662),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(36.0),
+                    topRight: Radius.circular(36.0),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
                     Container(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Text(
-                        widget.contactname,
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600),
+                      height: 672,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 32),
+                            Container(
+                              height: size.height,
+                              width: size.width,
+                              padding: EdgeInsets.only(left: 24, right: 24),
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection('messages')
+                                    .doc(widget.messagesId)
+                                    .collection('chats')
+                                    .orderBy("time", descending: false)
+                                    .snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+
+                                  return ListView.separated(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.zero,
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) =>
+                                            SizedBox(height: 16),
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      Map<String, dynamic> map =
+                                          snapshot.data!.docs[index].data()
+                                              as Map<String, dynamic>;
+                                      return messages(size, map, context,
+                                          userProvider.getUser.username);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 32),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  height: 672,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(36.0),
-                      topRight: Radius.circular(36.0),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 672,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(height: 32),
-                              Container(
-                                height: size.height,
-                                width: size.width,
-                                padding: EdgeInsets.only(left: 24, right: 24),
-                                child: StreamBuilder<QuerySnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('messages')
-                                      .doc(widget.messagesId)
-                                      .collection('chats')
-                                      .orderBy("time", descending: false)
-                                      .snapshots(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    }
-
-                                    return ListView.separated(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      padding: EdgeInsets.zero,
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      separatorBuilder:
-                                          (BuildContext context, int index) =>
-                                              SizedBox(height: 16),
-                                      itemCount: snapshot.data!.docs.length,
-                                      itemBuilder: (context, index) {
-                                        Map<String, dynamic> map =
-                                            snapshot.data!.docs[index].data()
-                                                as Map<String, dynamic>;
-                                        return messages(size, map, context,
-                                            userProvider.getUser.username);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: 32),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           )
         ],
       ),
