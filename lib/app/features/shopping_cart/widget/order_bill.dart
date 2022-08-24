@@ -1,20 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
+import 'package:food_nija_application/app/change_notifies/orders_provider.dart';
+import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/data/services/common_methods.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class OrderBill extends StatelessWidget {
-  final Function()? onTap;
-  const OrderBill({Key? key, required this.onTap}) : super(key: key);
+  const OrderBill({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final productProvider = Provider.of<FoodsProvider>(context);
-
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final ordersProvider = Provider.of<OrdersProvider>(context);
     double total = 0.0;
     double deliveryFee = 20;
     double discount = 25;
@@ -130,7 +136,46 @@ class OrderBill extends StatelessWidget {
             ]),
           ),
           InkWell(
-            onTap: onTap,
+            onTap: () {
+              final productProvider =
+                  Provider.of<FoodsProvider>(context, listen: false);
+              cartProvider.getCartItems.forEach((key, value) async {
+                final getCurrProduct = productProvider.findProdById(
+                  value.productId,
+                );
+                try {
+                  final orderId = const Uuid().v4();
+                  await FirebaseFirestore.instance
+                      .collection('orders')
+                      .doc(orderId)
+                      .set({
+                    'orderId': orderId,
+                    'resName': getCurrProduct.resName,
+                    'Name': getCurrProduct.name,
+                    'userId': userProvider.getUser.uid,
+                    'productId': value.productId,
+                    'price': getCurrProduct.price,
+                    'totalPrice': total,
+                    'quantity': value.quantity,
+                    'imageUrl': getCurrProduct.imageURL,
+                    'userName': userProvider.getUser.firstName,
+                    'orderDate': Timestamp.now(),
+                    'status': "Process"
+                  });
+                } catch (error) {
+                  GlobalMethods.errorDialog(
+                      subtitle: error.toString(), context: context);
+                } finally {
+                  await cartProvider.clearOnlineCart().then((value) => null);
+                  cartProvider.clearLocalCart();
+                  await Fluttertoast.showToast(
+                    msg: "Your order has been placed",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                  );
+                }
+              });
+            },
             child: Container(
               margin: EdgeInsets.only(top: getHeight(8)),
               height: getHeight(50),
