@@ -15,6 +15,7 @@ import 'package:food_nija_application/data/services/auth_service.dart';
 import 'package:food_nija_application/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'app/change_notifies/orders_provider.dart';
 import 'app/core/utils/translations.dart';
 
 int? isViewed;
@@ -82,6 +83,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         ChangeNotifierProvider(
           create: (_) => WishlistProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OrdersProvider(),
         ),
       ],
       builder: (context, child) {

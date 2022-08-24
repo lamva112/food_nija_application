@@ -50,7 +50,7 @@ class _OrderFoodCardState extends State<OrderFoodCard> {
                     ),
                   }),
               backgroundColor: AppColors.priceTextColor,
-              foregroundColor: Colors.white,
+              foregroundColor: Color.fromARGB(255, 92, 56, 56),
               icon: Icons.delete,
               spacing: 2,
               borderRadius: BorderRadius.circular(22),
