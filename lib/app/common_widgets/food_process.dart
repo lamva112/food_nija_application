@@ -24,6 +24,7 @@ class FoodProcessCard extends StatefulWidget {
 class _FoodProcessCardState extends State<FoodProcessCard> {
   @override
   Widget build(BuildContext context) {
+    String status = widget.snap['status'];
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
@@ -45,7 +46,8 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: getFont(16),
-                  color: AppColors.textColor,
+                  color:
+                      status == "Complete" ? Colors.grey : AppColors.textColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -54,7 +56,8 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: getFont(15),
-                  color: AppColors.textColor,
+                  color:
+                      status == "Complete" ? Colors.grey : AppColors.textColor,
                   fontWeight: FontWeight.w300,
                 ),
               )
@@ -64,7 +67,8 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
             '\$${widget.snap['price']}',
             style: TextStyle(
               fontSize: getFont(17),
-              color: AppColors.primaryColor,
+              color:
+                  status == "Complete" ? Colors.grey : AppColors.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -89,7 +93,8 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
                   horizontal: getWidth(7), vertical: getHeight(7)),
               height: getHeight(30),
               decoration: BoxDecoration(
-                color: AppColors.primaryColor,
+                color:
+                    status == "Complete" ? Colors.grey : AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
@@ -107,6 +112,3 @@ class _FoodProcessCardState extends State<FoodProcessCard> {
     );
   }
 }
-
-
-//FoodProcessCard

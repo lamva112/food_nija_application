@@ -9,12 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/data/services/common_methods.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-class OrderBill extends StatelessWidget {
+class OrderBill extends StatefulWidget {
   const OrderBill({Key? key}) : super(key: key);
 
+  @override
+  State<OrderBill> createState() => _OrderBillState();
+}
+
+class _OrderBillState extends State<OrderBill> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
@@ -175,6 +183,11 @@ class OrderBill extends StatelessWidget {
                   );
                 }
               });
+              _Addnotification(
+                userId: userProvider.getUser.uid,
+                foodPic:
+                    "https://firebasestorage.googleapis.com/v0/b/food-ninja-app-66fcd.appspot.com/o/notification%2Ftopup.png?alt=media&token=df3f1bec-4b7e-4b8f-985b-fa349d317b01",
+              );
             },
             child: Container(
               margin: EdgeInsets.only(top: getHeight(8)),
@@ -199,5 +212,29 @@ class OrderBill extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _Addnotification({
+    required String userId,
+    required String foodPic,
+  }) async {
+    try {
+      String NotificationId = const Uuid().v1();
+      _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('noti')
+          .doc(NotificationId)
+          .set({
+        'profilePic': foodPic,
+        'userId': userId,
+        'title': "Your order has been placed",
+        "time": FieldValue.serverTimestamp(),
+        "lasttime": DateFormat('hh:mm a').format(DateTime.now()),
+        'date': DateFormat('yMMMMd').format(date),
+      });
+    } catch (error) {
+      GlobalMethods.errorDialog(subtitle: '$error', context: context);
+    } finally {}
   }
 }

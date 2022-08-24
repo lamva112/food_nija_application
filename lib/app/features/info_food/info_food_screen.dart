@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_nija_application/app/change_notifies/cart_provider.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
+import 'package:food_nija_application/app/change_notifies/user_provider.dart';
 import 'package:food_nija_application/app/change_notifies/wishlist_provider.dart';
 import 'package:food_nija_application/app/common_widgets/custom_button.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
@@ -15,7 +16,9 @@ import 'package:food_nija_application/app/core/values/strings.dart';
 import 'package:food_nija_application/app/features/info_food/post_cmt_screen.dart';
 import 'package:food_nija_application/app/features/info_food/widget/heart_btn.dart';
 import 'package:food_nija_application/data/models/review.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class InfoFoodScreen extends StatefulWidget {
   final String foodId;
@@ -34,6 +37,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
   double total = 0;
   List<double> ratingList = [];
   double everage_rating = 0;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DateTime date = DateTime.now();
   @override
   void initState() {
     getRating(widget.foodId);
@@ -55,6 +60,8 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
     ratingList.length == 0
         ? everage_rating = 0
         : everage_rating = total / ratingList.length;
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -282,6 +289,10 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
             await GlobalMethods.addToCart(
                 productId: widget.foodId, quantity: 1, context: context);
             await cartProvider.fetchCart();
+            _Addnotification(
+                userId: userProvider.getUser.uid,
+                foodPic: getCurrFoods.imageURL,
+                foodName: getCurrFoods.name);
             Navigator.pop(context);
           }
         },
@@ -307,5 +318,30 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
       });
     });
     setState(() {});
+  }
+
+  Future<void> _Addnotification({
+    required String userId,
+    required String foodPic,
+    required String foodName,
+  }) async {
+    try {
+      String NotificationId = const Uuid().v1();
+      _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('noti')
+          .doc(NotificationId)
+          .set({
+        'profilePic': foodPic,
+        'userId': userId,
+        'title': "${foodName} has been add to cart",
+        "time": FieldValue.serverTimestamp(),
+        "lasttime": DateFormat('hh:mm a').format(DateTime.now()),
+        'date': DateFormat('yMMMMd').format(date),
+      });
+    } catch (error) {
+      GlobalMethods.errorDialog(subtitle: '$error', context: context);
+    } finally {}
   }
 }
