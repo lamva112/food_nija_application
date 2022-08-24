@@ -8,6 +8,7 @@ import 'package:food_nija_application/app/core/utils/loading_widget.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/app/features/info_restaurant/all_food_res_screen.dart';
 import 'package:food_nija_application/app/features/info_restaurant/widget/popular_menu.dart';
 import 'package:food_nija_application/app/features/info_restaurant/widget/post_review_restaurans_screen.dart';
 import 'package:food_nija_application/data/models/food.dart';
@@ -236,7 +237,14 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print(allProducts.length);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => RestaurantAllFoodScreen(
+                                ResId: widget.snap['id'],
+                              ),
+                            ),
+                          );
                         },
                         child: Text(
                           Translations.of(context).text('View more'),
@@ -302,7 +310,6 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                     ],
                   ),
                   SizedBox(height: getHeight(15)),
-
                   StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('restaurants')
@@ -329,7 +336,6 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                             SizedBox(height: getHeight(10)),
                         itemCount: snapshot.data!.docs.length,
                       );
-
                     },
                   ),
                   SizedBox(height: getHeight(80)),

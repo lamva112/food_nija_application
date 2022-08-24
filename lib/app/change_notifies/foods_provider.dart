@@ -49,6 +49,17 @@ class FoodsProvider with ChangeNotifier {
     return _searchList;
   }
 
+  List<Food> searchQueryFoods(List<Food> foodsList, String searchText) {
+    List<Food> _searchList = foodsList
+        .where(
+          (element) => element.name.toLowerCase().contains(
+                searchText.toLowerCase(),
+              ),
+        )
+        .toList();
+    return _searchList;
+  }
+
   List<Food> searchFoodByResId(String resId) {
     List<Food> _searchList =
         _foodsList.where((element) => element.resId == resId).toList();
