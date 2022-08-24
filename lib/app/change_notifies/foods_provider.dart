@@ -48,4 +48,10 @@ class FoodsProvider with ChangeNotifier {
         .toList();
     return _searchList;
   }
+
+  List<Food> searchFoodByResId(String resId) {
+    List<Food> _searchList =
+        _foodsList.where((element) => element.resId == resId).toList();
+    return _searchList;
+  }
 }

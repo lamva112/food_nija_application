@@ -2,18 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/change_notifies/foods_provider.dart';
 import 'package:food_nija_application/app/common_widgets/rating_bar_custom.dart';
+import 'package:food_nija_application/app/common_widgets/review_res_widget.dart';
 import 'package:food_nija_application/app/common_widgets/review_widget.dart';
 import 'package:food_nija_application/app/core/utils/loading_widget.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/info_restaurant/widget/popular_menu.dart';
+import 'package:food_nija_application/app/features/info_restaurant/widget/post_review_restaurans_screen.dart';
 import 'package:food_nija_application/data/models/food.dart';
 import 'package:food_nija_application/data/models/review.dart';
 import 'package:provider/provider.dart';
 
 class InfoRestaurantScreen extends StatefulWidget {
-  const InfoRestaurantScreen({Key? key}) : super(key: key);
+  final snap;
+  const InfoRestaurantScreen({Key? key, required this.snap}) : super(key: key);
 
   @override
   State<InfoRestaurantScreen> createState() => _InfoRestaurantScreenState();
@@ -22,11 +25,26 @@ class InfoRestaurantScreen extends StatefulWidget {
 class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
   Color? bgColor = AppColors.backgroundColor;
   bool isFavourite = false;
+  double total = 0;
+  List<double> ratingList = [];
+  double everage_rating = 0;
+  @override
+  void initState() {
+    getRating(widget.snap["id"]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final foodsProviders = Provider.of<FoodsProvider>(context);
-    List<Food> allProducts = foodsProviders.getfoods;
+    List<Food> allProducts =
+        foodsProviders.searchFoodByResId(widget.snap['id']);
+    ratingList.forEach((num e) {
+      total += e;
+    });
+    ratingList.length == 0
+        ? everage_rating = 0
+        : everage_rating = total / ratingList.length;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -66,8 +84,8 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                       child: Stack(
                         fit: StackFit.expand, // expand stack
                         children: [
-                          Image.asset(
-                            'assets/images/image_res_1.png',
+                          Image.network(
+                            widget.snap['imageUrl'],
                             fit: BoxFit.cover,
                           ),
                           Positioned(
@@ -141,7 +159,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                   ),
                   SizedBox(height: getHeight(10)),
                   Text(
-                    "Hu tieu",
+                    widget.snap['resName'],
                     style: TextStyle(
                       fontSize: getFont(27),
                       color: AppColors.textColor,
@@ -161,7 +179,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                           Padding(
                             padding: EdgeInsets.only(left: getWidth(5)),
                             child: Text(
-                              '19 Km',
+                              widget.snap['km'] + 'Km',
                               style: TextStyle(
                                 fontSize: getFont(18),
                                 color: AppColors.textColor,
@@ -186,7 +204,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                           Padding(
                             padding: EdgeInsets.only(left: getWidth(10)),
                             child: Text(
-                              '3.5 Rating',
+                              "${everage_rating.toStringAsPrecision(3)} Rating",
                               style: TextStyle(
                                 fontSize: getFont(18),
                                 color: AppColors.textColor,
@@ -199,7 +217,7 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                   ),
                   SizedBox(height: getHeight(20)),
                   Text(
-                    "test",
+                    widget.snap['des'],
                     style: TextStyle(
                       fontSize: getFont(15),
                     ),
@@ -217,6 +235,9 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          print(allProducts.length);
+                        },
                         child: Text(
                           Translations.of(context).text('View more'),
                           style: TextStyle(
@@ -231,58 +252,87 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
                   SizedBox(height: getHeight(15)),
                   SizedBox(
                     height: getHeight(185),
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('restaurants')
-                          .orderBy("time", descending: false)
-                          .snapshots(),
-                      builder: (context,
-                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                              snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const LoadingWidget();
-                        }
-                        return ListView.separated(
-                          padding: EdgeInsets.only(bottom: getHeight(5)),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                //Ấn vô chuyển sang info food
-                              },
-                              child: PopularMenuRestaurant(
-                                snap: snapshot.data!.docs[index].data(),
-                              ),
-                            );
+                    child: ListView.separated(
+                      padding: EdgeInsets.only(bottom: getHeight(5)),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            //Ấn vô chuyển sang info food
                           },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              SizedBox(width: getWidth(15)),
-                          itemCount: snapshot.data!.docs.length,
+                          child: ChangeNotifierProvider.value(
+                            value: allProducts[index],
+                            child: PopularMenuRestaurant(),
+                          ),
                         );
                       },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(width: getWidth(15)),
+                      itemCount: allProducts.length,
                     ),
                   ),
                   SizedBox(height: getHeight(15)),
-                  Text(
-                    Translations.of(context).text('Reviews'),
-                    style: TextStyle(
-                      fontSize: getFont(20),
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        Translations.of(context).text('Reviews'),
+                        style: TextStyle(
+                          fontSize: getFont(20),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PostReviewRestaurantScreen(
+                                resId: widget.snap['id'],
+                              ),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.add_comment,
+                          color: AppColors.primaryColor,
+                          size: getWidth(20),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: getHeight(15)),
-                  ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (_, int index) {
-                      //Đổi lại thành reivew restaurant nha
-                      return ReviewWidget(snap: listReview[index]);
+
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('restaurants')
+                        .doc(widget.snap['id'])
+                        .collection('reviews')
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ReviewResWidget(
+                            snap: snapshot.data!.docs[index].data(),
+                          );
+                        },
+                        separatorBuilder: (_, int i) =>
+                            SizedBox(height: getHeight(10)),
+                        itemCount: snapshot.data!.docs.length,
+                      );
+
                     },
-                    separatorBuilder: (_, int i) =>
-                        SizedBox(height: getHeight(10)),
-                    itemCount: listReview.length,
                   ),
+                  SizedBox(height: getHeight(80)),
                 ],
               ),
             ),
@@ -290,5 +340,20 @@ class _InfoRestaurantScreenState extends State<InfoRestaurantScreen> {
         ],
       ),
     );
+  }
+
+  Future getRating(String foodId) async {
+    ratingList = [];
+    await FirebaseFirestore.instance
+        .collection('restaurants')
+        .doc(foodId)
+        .collection('reviews')
+        .get()
+        .then((QuerySnapshot productSnapshot) {
+      productSnapshot.docs.forEach((element) {
+        ratingList.add(element.get('rating'));
+      });
+    });
+    setState(() {});
   }
 }

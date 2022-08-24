@@ -9,6 +9,7 @@ import 'package:food_nija_application/app/core/utils/translations.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/nearest_restaurant.dart';
 import 'package:food_nija_application/app/features/homescreen/widget/popular_menu.dart';
+
 import 'package:food_nija_application/app/features/info_restaurant/info_restaurant_screen.dart';
 import 'package:food_nija_application/app/routes/routes.dart';
 import 'package:food_nija_application/data/models/food.dart';
@@ -69,7 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteManager.notificationScreen);
+                          Navigator.pushNamed(
+                              context, RouteManager.notificationScreen);
                         },
                         child: Container(
                           width: getWidth(45),
@@ -208,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('restaurants')
-                              .orderBy("time", descending: false)
+                              .orderBy("time", descending: true)
                               .snapshots(),
                           builder: (context,
                               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
@@ -224,7 +226,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (_) => SafeArea(child: InfoRestaurantScreen()),
+                                        builder: (_) => SafeArea(
+                                          child: InfoRestaurantScreen(
+                                            snap: snapshot.data!.docs[index]
+                                                .data(),
+                                          ),
+                                        ),
                                       ),
                                     );
                                   },
@@ -273,16 +280,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            child: ChangeNotifierProvider.value(
-                              value: allProducts[index],
-                              child: PopularMenu(),
-                            ),
+                          return ChangeNotifierProvider.value(
+                            value: allProducts[index],
+                            child: PopularMenu(),
                           );
                         },
                         separatorBuilder: (_, int i) =>
                             SizedBox(height: getHeight(20)),
-                        itemCount: allProducts.length,
+                        itemCount: allProducts.length < 5
+                            ? allProducts.length // length 3
+                            : 5,
                       ),
                       SizedBox(
                         height: getHeight(80),

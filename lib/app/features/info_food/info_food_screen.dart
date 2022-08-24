@@ -214,14 +214,14 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                       Spacer(),
                       IconButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (_) => PostCmtScreen(
-                          //       foodId: widget.foodId,
-                          //     ),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PostCmtScreen(
+                                foodId: widget.foodId,
+                              ),
+                            ),
+                          );
                           print(ratingList);
                           print(total);
                         },

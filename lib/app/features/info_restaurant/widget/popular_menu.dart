@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_nija_application/app/core/utils/size_config.dart';
 import 'package:food_nija_application/app/core/values/app_colors.dart';
+import 'package:food_nija_application/data/models/food.dart';
+import 'package:provider/provider.dart';
 
 class PopularMenuRestaurant extends StatefulWidget {
-  final snap;
-  const PopularMenuRestaurant({Key? key, required this.snap}) : super(key: key);
+  const PopularMenuRestaurant({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<PopularMenuRestaurant> createState() => _PopularMenuRestaurant();
@@ -13,6 +16,7 @@ class PopularMenuRestaurant extends StatefulWidget {
 class _PopularMenuRestaurant extends State<PopularMenuRestaurant> {
   @override
   Widget build(BuildContext context) {
+    final FoodsModel = Provider.of<Food>(context);
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
@@ -31,13 +35,13 @@ class _PopularMenuRestaurant extends State<PopularMenuRestaurant> {
           children: [
             SizedBox(height: getHeight(18)),
             Image.network(
-              widget.snap['imageUrl'].toString(),
+              FoodsModel.imageURL,
               width: getWidth(90),
               height: getHeight(75),
             ),
             SizedBox(height: getHeight(15)),
             Text(
-              widget.snap['resName'].toString(),
+              FoodsModel.name,
               style: TextStyle(
                 fontSize: getFont(18),
                 color: AppColors.textColor,
@@ -46,7 +50,7 @@ class _PopularMenuRestaurant extends State<PopularMenuRestaurant> {
             ),
             SizedBox(height: getHeight(5)),
             Text(
-              '12 \$',
+              '${FoodsModel.price} \$',
               style: TextStyle(
                 fontSize: getFont(15),
                 color: AppColors.textColor,
