@@ -229,8 +229,6 @@ class _InfoFoodScreenState extends State<InfoFoodScreen> {
                               ),
                             ),
                           );
-                          print(ratingList);
-                          print(total);
                         },
                         icon: Icon(
                           Icons.add_comment,
